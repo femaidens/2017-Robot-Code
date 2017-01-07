@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		driveJoystick = new Joystick(RobotMap.driveJoyPort);
+		Drivetrain.encoder.reset();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
 	}

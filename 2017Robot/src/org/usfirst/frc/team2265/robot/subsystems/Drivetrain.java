@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  *
@@ -26,6 +27,9 @@ public class Drivetrain extends Subsystem {
 	// Initialize solenoids
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+	
+	//Initializing encoder 
+	public static Encoder encoder = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 
 	public Drivetrain() {
 	}
@@ -44,7 +48,14 @@ public class Drivetrain extends Subsystem {
 		frontLeft.set(l);
 		rearLeft.set(l);
 	}
-
+	//straight
+	public void driveStraight(){
+		double leftVal = Robot.driveJoystick.getRawAxis(1);
+		double rightVal = Robot.driveJoystick.getRawAxis(5);
+		double driveVal = (leftVal + rightVal)/2;
+		tankDrive.tankDrive(driveVal, driveVal);
+		
+	}
 	public void shiftToSpeed() {
 		gearShifter.set(DoubleSolenoid.Value.kReverse);
 	}
