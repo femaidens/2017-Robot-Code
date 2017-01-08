@@ -2,9 +2,11 @@ package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
+import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
-import edu.wpi.first.wpilibj.Talon;
+import com.ctre.CANTalon;
+//import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,12 +20,12 @@ public class Drivetrain extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	// Initialize talons
-	public static Talon frontLeft = new Talon(RobotMap.frontLeftPort);
-	public static Talon rearLeft = new Talon(RobotMap.rearLeftPort);
-	public static Talon frontRight = new Talon(RobotMap.frontRightPort);
-	public static Talon rearRight = new Talon(RobotMap.rearRightPort);
-
+	// Initialize CANTalons
+	public static CANTalon frontLeft = new CANTalon(RobotMap.frontLeftPort);
+	public static CANTalon rearLeft = new CANTalon(RobotMap.rearLeftPort);
+	public static CANTalon frontRight = new CANTalon(RobotMap.frontRightPort);
+	public static CANTalon rearRight = new CANTalon(RobotMap.rearRightPort);
+	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 	// Initialize solenoids
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
@@ -36,8 +38,8 @@ public class Drivetrain extends Subsystem {
 
 	// Teleop
 	public void drive() {
-		double leftVal = Robot.driveJoystick.getRawAxis(1);
-		double rightVal = Robot.driveJoystick.getRawAxis(5);
+		double leftVal = OI.driveJoystick.getRawAxis(1);
+		double rightVal = OI.driveJoystick.getRawAxis(5);
 		tankDrive.tankDrive(leftVal, rightVal);
 	}
 
@@ -50,8 +52,8 @@ public class Drivetrain extends Subsystem {
 	}
 	//straight
 	public void driveStraight(){
-		double leftVal = Robot.driveJoystick.getRawAxis(1);
-		double rightVal = Robot.driveJoystick.getRawAxis(5);
+		double leftVal = OI.driveJoystick.getRawAxis(1);
+		double rightVal = OI.driveJoystick.getRawAxis(5);
 		double driveVal = (leftVal + rightVal)/2;
 		tankDrive.tankDrive(driveVal, driveVal);
 		

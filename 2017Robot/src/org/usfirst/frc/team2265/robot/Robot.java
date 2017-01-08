@@ -24,7 +24,6 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
-	public static Joystick driveJoystick;
 	Command autonomousCommand;
 
 	/**
@@ -34,8 +33,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
-		driveJoystick = new Joystick(RobotMap.driveJoyPort);
 		Drivetrain.encoder.reset();
+		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
 	}
