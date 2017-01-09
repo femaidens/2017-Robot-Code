@@ -21,6 +21,10 @@ public class Drop extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	GearChute.gearPiston.extend();
+    	
+    	if (Robot.gearPiston.get().equals(Value.kReverse)){
+    		gearPiston.set(DoubleSolenoid.Value.kForward);
+    		return;
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -8,22 +8,28 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 /**
  *
  */
+// makes gear chute subsystem
+//
 public class GearChute extends Subsystem {
 	public static DoubleSolenoid gearPiston = new DoubleSolenoid(RobotMap.gearport1, RobotMap.gearport2); 
 		public void extend() {
 		gearPiston.set(DoubleSolenoid.Value.kForward);
 	}
     
-	public void retract() {
+public void retract() {
 		gearPiston.set(DoubleSolenoid.Value.kReverse);
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    public void initDefaultCommand() {
+public void initDefaultCommand() {
     
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
 }
+
+
+}
+
 

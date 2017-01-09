@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
+	public static Joystick atkjoy = new Joystick(RobotMap.atkJoyPort);
 	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
@@ -41,9 +42,15 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	public static Button swap = new JoystickButton(driveJoystick, 3);
+	public static Button dropGear = new JoystickButton(atkjoy, 4);
 	
 	public void bindButtons(){
 		swap.whenPressed(new GearShift());
+		dropGear.whenPressed(new gearPiston());
 	}
-}
 
+	
+	
+		
+	}
+	
