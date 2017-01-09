@@ -11,6 +11,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,6 +38,9 @@ public class Robot extends IterativeRobot {
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
+		CameraServer.getInstance().startAutomaticCapture();
+    }
+		
 	}
 
 	public void disabledPeriodic() {
