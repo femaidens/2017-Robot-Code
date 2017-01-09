@@ -24,6 +24,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
+	public static Climber climber;
 	Command autonomousCommand;
 
 	/**
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
+		climber = new Climber();
 		Drivetrain.encoder.reset();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
