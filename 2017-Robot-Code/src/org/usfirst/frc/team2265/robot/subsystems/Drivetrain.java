@@ -29,9 +29,6 @@ public class Drivetrain extends Subsystem {
 	// Initialize solenoids
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
-	
-	//Initializing encoder 
-	public static Encoder encoder = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 
 	public Drivetrain() {
 	}
