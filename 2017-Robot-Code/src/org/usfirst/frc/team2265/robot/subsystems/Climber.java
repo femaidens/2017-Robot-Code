@@ -1,9 +1,7 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 import org.usfirst.frc.team2265.robot.RobotMap;
-
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,9 +25,9 @@ public class Climber extends Subsystem {
 	public void spin(double speed){
 		climberTalon.set(speed);
 		SmartDashboard.putNumber("Encoder Velocity: ", climberTalon.getEncVelocity());
-		SmartDashboard.putNumber("Encoder Position: ", climberTalon.getEncoderPos());
+		SmartDashboard.putNumber("Encoder Position: ", climberTalon.getEncPosition());
 		System.out.println("Encoder Position: " + climberTalon.getEncVelocity());
-		System.out.println("Encoder Position: " + climberTalon.getEncPos());
+		System.out.println("Encoder Position: " + climberTalon.getEncPosition());
 	}
 	
 	//manually stop
