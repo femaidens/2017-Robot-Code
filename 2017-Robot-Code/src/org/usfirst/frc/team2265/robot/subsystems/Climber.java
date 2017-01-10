@@ -6,7 +6,8 @@ import org.usfirst.frc.team2265.robot.RobotMap;
 
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.CANTalon;
 /**
  *
  */
