@@ -26,6 +26,8 @@ public class Climber extends Subsystem {
 	
 	public void spin(double speed){
 		climberTalon.set(speed);
+		SmartDashboard.putNumber("Encoder Velocity", climberTalon.getEncVelocity());
+		SmartDashboard.putNumber("Encoder Position", climberTalon.getEncoderPos());
 	}
 	
 	//manually stop
@@ -34,10 +36,8 @@ public class Climber extends Subsystem {
 	}
 	
 	//autostop
-	public void autoStop(){
-		SmartDashboard.putNumber("Right Encoder Values", climberTalon.getEncVelocity());
-		SmartDashboard.putNumber("Right Encoder Values", climberTalon.getEncoderPos());
-	}
+	//public void autoStop(){
+	//}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
