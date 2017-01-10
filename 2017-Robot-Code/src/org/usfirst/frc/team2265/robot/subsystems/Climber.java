@@ -26,8 +26,10 @@ public class Climber extends Subsystem {
 	
 	public void spin(double speed){
 		climberTalon.set(speed);
-		SmartDashboard.putNumber("Encoder Velocity", climberTalon.getEncVelocity());
-		SmartDashboard.putNumber("Encoder Position", climberTalon.getEncoderPos());
+		SmartDashboard.putNumber("Encoder Velocity: ", climberTalon.getEncVelocity());
+		SmartDashboard.putNumber("Encoder Position: ", climberTalon.getEncoderPos());
+		System.out.println("Encoder Position: " + climberTalon.getEncVelocity());
+		System.out.println("Encoder Position: " + climberTalon.getEncPos());
 	}
 	
 	//manually stop
