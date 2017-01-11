@@ -41,7 +41,6 @@ public class Robot extends IterativeRobot {
 		CameraServer.getInstance().startAutomaticCapture();
     }
 		
-	}
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
