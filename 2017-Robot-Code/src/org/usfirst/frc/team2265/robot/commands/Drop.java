@@ -22,11 +22,12 @@ public class Drop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+// retract if piston off/extended
     	if (GearChute.gearPiston.get().equals(Value.kForward) || GearChute.gearPiston.get().equals(Value.kOff)) {
 	    	GearChute.retract();
 	    	return;
     }
-    	
+    	// extend if piston is retracted
     	if (GearChute.gearPiston.get().equals(Value.kReverse)){
     		GearChute.extend();
     		return;
@@ -35,7 +36,9 @@ public class Drop extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+     // return true means the clause is now true, so the command will   
+stop executing  
+ return true;
     }
 
     // Called once after isFinished returns true
