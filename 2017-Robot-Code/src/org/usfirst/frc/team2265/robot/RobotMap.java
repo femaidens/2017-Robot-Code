@@ -30,6 +30,8 @@ public class RobotMap {
 	// Solenoid Ports
 	public static int transIn = 2;
 	public static int transOut = 3;
+	
+	//Solenoid Ports for gearChute
 	public static int gearport1 = 0;
 	public static int gearport2 = 1;
 
