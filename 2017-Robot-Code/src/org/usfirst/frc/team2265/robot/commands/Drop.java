@@ -10,43 +10,43 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Drop extends Command {
-	
-    public Drop() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+	public Drop() {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-// retract if piston off/extended
-    	if (GearChute.gearPiston.get().equals(Value.kForward) || GearChute.gearPiston.get().equals(Value.kOff)) {
-	    	GearChute.retract();
-	    	return;
-    }
-    	// extend if piston is retracted
-    	if (GearChute.gearPiston.get().equals(Value.kReverse)){
-    		GearChute.extend();
-    		return;
-    	}
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-     // return true means the clause is now true, so the command will   
-stop executing  
- return true;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		// retract if piston off/extended
+		if (GearChute.gearPiston.get().equals(Value.kForward) || GearChute.gearPiston.get().equals(Value.kOff)) {
+			GearChute.retract();
+			return;
+		}
+		// extend if piston is retracted
+		if (GearChute.gearPiston.get().equals(Value.kReverse)) {
+			GearChute.extend();
+			return;
+		}
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		// return true means the clause is now true, so the command will stop
+		// executing
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }
