@@ -19,7 +19,7 @@ public class Climber extends Subsystem {
 
 	// Talon that controls climber motor
 
-	public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort);
+	public static CANTalon climberTalon = new CANTalon(RobotMap.frontLeftPort);
 
 	public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
 	// makes a climber class
@@ -53,10 +53,6 @@ public class Climber extends Subsystem {
 	public void stop() {
 		climberTalon.set(0);
 	}
-
-	// autostop
-	// public void autoStop(){
-	// }
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

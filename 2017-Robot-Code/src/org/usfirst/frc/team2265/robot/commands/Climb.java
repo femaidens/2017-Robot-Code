@@ -1,7 +1,8 @@
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
-
+import org.usfirst.frc.team2265.robot.subsystems.Climber;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -23,8 +24,15 @@ public class Climb extends Command {
 	// starts rolling climber CANTalon
 	// sets the speed if the climber to half speed
 	protected void execute() {
-		Robot.climber.spin(0.5);
 
+if (Robot.climber.climberTalon.getEncPosition() < 1080) {    //1080 is a place holder
+Robot.climber.spin(0.5);
+}
+
+else {
+		Robot.climber.stop();
+            return;
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
