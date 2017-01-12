@@ -30,6 +30,8 @@ public class RobotMap {
 	// Solenoid Ports
 	public static int transIn = 2;
 	public static int transOut = 3;
+	public static int LEDSol = 6;
+	
 	
 	//Encoder Ports
 	public static int encPort1 = 0;
