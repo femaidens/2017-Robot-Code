@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -40,7 +41,7 @@ public class Drivetrain extends Subsystem {
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		tankDrive.tankDrive(leftVal, rightVal);
+		tankDrive.tankDrive(-leftVal, -rightVal);
 	}
 
 	// auton
