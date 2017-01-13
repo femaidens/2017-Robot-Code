@@ -3,9 +3,14 @@ package org.usfirst.frc.team2265.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.TimeAuton;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Talon;
@@ -24,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
+	SendableChooser autoChooser;
 	Command autonomousCommand;
 
 	/**
@@ -36,7 +42,11 @@ public class Robot extends IterativeRobot {
 		Drivetrain.encoder.reset();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new ExampleCommand();
+		//autonomousCommand = new ExampleCommand();
+		autoChooser = new SendableChooser();
+		autoChooser.addDefault("TimeAuton", new TimeAuton());
+		TimeAuton timeAuton = new TimeAuton();
+		SmartDashboard.putData("Autonomous Mode", autoChooser);
 	}
 
 	public void disabledPeriodic() {
@@ -45,8 +55,8 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
+		autonomousCommand = (Command) autoChooser.getSelected();
+		autonomousCommand.start();
 	}
 
 	/**
