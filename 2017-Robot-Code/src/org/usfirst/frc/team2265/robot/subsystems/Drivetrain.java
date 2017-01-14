@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
@@ -37,7 +39,34 @@ public class Drivetrain extends Subsystem {
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		tankDrive.tankDrive(leftVal, rightVal);
+		double left, right; 
+		/*if(leftVal > 0){
+			left = leftVal*leftVal*leftVal;
+		}
+		else{
+			left = -1*leftVal*leftVal*leftVal;
+		}
+		if(rightVal > 0){
+			right = rightVal*rightVal;
+		}
+		else{
+			right = -1*rightVal*rightVal;
+		}*/
+		left = Math.pow(leftVal, 3);
+		right = Math.pow(rightVal, 3);
+		tankDrive.tankDrive(-left , -right);
+		tankDrive.tankDrive(-leftVal,-rightVal);
+		/*SmartDashboard.putNumber("Encoder Velocity: ", rearRight.getEncVelocity());
+
+		SmartDashboard.putNumber("Encoder Position: ", rearRight.getPulseWidthPosition());
+
+		System.out.println("Encoder Velocity: " + rearRight.getEncVelocity());
+
+		System.out.println("Encoder Position: " + rearRight.getPulseWidthPosition());
+		
+		SmartDashboard.putNumber("Encoder Edges: ", rearRight.getNumberOfQuadIdxRises());
+
+		System.out.println("Encoder Edges: " + rearRight.getNumberOfQuadIdxRises());*/
 	}
 
 	// auton

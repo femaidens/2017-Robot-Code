@@ -10,6 +10,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
  */
 public class DriveAuton extends Command {
 	private double left, right;
+
     public DriveAuton(double l, double r) {
         // Use requires() here to declare subsystem dependencies
         

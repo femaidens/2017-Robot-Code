@@ -28,7 +28,7 @@ public class Climber extends Subsystem {
 
 		climberTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 
-		climberTalon.configEncoderCodesPerRev(360);
+		//climberTalon.configEncoderCodesPerRev(256);
 
 	}
 
@@ -39,14 +39,7 @@ public class Climber extends Subsystem {
 		climberTalon.set(speed);
 		// prints the encoder values on the smartDashboard
 
-		SmartDashboard.putNumber("Encoder Velocity: ", climberTalon.getEncVelocity());
-
-		SmartDashboard.putNumber("Encoder Position: ", climberTalon.getEncPosition());
-
-		System.out.println("Encoder Position: " + climberTalon.getEncVelocity());
-
-		System.out.println("Encoder Position: " + climberTalon.getEncPosition());
-
+		
 	}
 
 	// manually stop

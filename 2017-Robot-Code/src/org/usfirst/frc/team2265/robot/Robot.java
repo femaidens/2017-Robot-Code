@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
-		
+		drivetrain.rearRight.setPosition(0);
 	}
 
 	public void disabledPeriodic() {
