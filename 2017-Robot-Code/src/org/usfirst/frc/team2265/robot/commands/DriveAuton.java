@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.Timer;
 public class DriveAuton extends Command {
 	private double left, right, timePassed, time;
 	Timer timer;
+	public double ticksPerRev = 800;
+	public double circ = 2 * Math.PI;
+	public double distance = 36;
 	
     public DriveAuton(double l, double r, double seconds) {
         // Use requires() here to declare subsystem dependencies
@@ -23,6 +26,8 @@ public class DriveAuton extends Command {
     protected void initialize() {
     	timer = new Timer();
     	timer.start();
+    	
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
