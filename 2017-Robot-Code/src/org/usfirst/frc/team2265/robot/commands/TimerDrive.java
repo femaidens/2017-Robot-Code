@@ -8,14 +8,11 @@ import edu.wpi.first.wpilibj.Timer;
 /**
  *
  */
-public class DriveAuton extends Command {
+public class TimerDrive extends Command {
 	private double left, right, timePassed, time;
 	Timer timer;
-	public double ticksPerRev = 800;
-	public double circ = 2 * Math.PI;
-	public double distance = 36;
 	
-    public DriveAuton(double l, double r, double seconds) {
+    public TimerDrive(double l, double r, double seconds) {
         // Use requires() here to declare subsystem dependencies
         time = seconds;
     	left = l;
@@ -34,7 +31,9 @@ public class DriveAuton extends Command {
     protected void execute() {
     	timePassed = timer.get();
     	Robot.drivetrain.drive(left,right);
-    	Drivetrain.encoder.get();
+		//if (Drivetrain.encoder.getEncPosition() <= distance*ticksPerRev/circ){
+			//Robot.drivetrain.drive(0,0);
+		//}	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,7 +43,6 @@ public class DriveAuton extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	if (isFinished())
     		Robot.drivetrain.drive(0,0);
     }
 

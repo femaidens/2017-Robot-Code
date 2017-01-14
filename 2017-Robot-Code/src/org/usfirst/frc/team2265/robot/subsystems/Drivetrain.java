@@ -30,9 +30,6 @@ public class Drivetrain extends Subsystem {
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 	
-	public double ticksPerRev = 1024;
-	public double circ = 2 * Math.PI;
-	public double distance = 36;
 	
 	//Initializing encoder 
 	public static Encoder encoder = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
@@ -45,7 +42,8 @@ public class Drivetrain extends Subsystem {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
 		tankDrive.tankDrive(leftVal, rightVal);
-		
+	
+	
 
 	}
 
@@ -56,6 +54,7 @@ public class Drivetrain extends Subsystem {
 		frontLeft.set(l);
 		rearLeft.set(l);
 		
+ 
 	}
 	//straight
 	public void driveStraight(){
@@ -64,10 +63,8 @@ public class Drivetrain extends Subsystem {
 		double driveVal = (leftVal + rightVal)/2;
 		tankDrive.tankDrive(driveVal, driveVal);
 
-		
+	
 			
-		
-		
 	}
 	public void shiftToSpeed() {
 		gearShifter.set(DoubleSolenoid.Value.kReverse);
