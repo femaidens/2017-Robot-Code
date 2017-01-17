@@ -29,7 +29,14 @@ public class Drivetrain extends Subsystem {
 	// Initialize solenoids
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
-
+	// TODO set updates for speeds
+	public static double speedRight;
+	public static double speedLeft;
+	frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	frontLeft.configEncoderCodesPerRev(360);
+	frontRight.setFeedBackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	frontRight.configEncoderCodesPerRev(360);
+	
 	public Drivetrain() {
 	}
 
@@ -37,6 +44,8 @@ public class Drivetrain extends Subsystem {
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
+		speedLeft = leftVal;
+		speedRight = rightVal;
 		tankDrive.tankDrive(leftVal, rightVal);
 	}
 
