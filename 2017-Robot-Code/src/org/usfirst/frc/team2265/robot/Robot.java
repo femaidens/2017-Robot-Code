@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.TimeAuton;
+import org.usfirst.frc.team2265.robot.commands.TimerAuto;
+import org.usfirst.frc.team2265.robot.commands.EncoderAuto;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Talon;
@@ -30,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	SendableChooser autoChooser;
-	Command autonomousCommand;
+	CommandGroup autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -44,9 +45,11 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
 		//autonomousCommand = new ExampleCommand();
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("TimeAuton", new TimeAuton());
-		TimeAuton timeAuton = new TimeAuton();
-		SmartDashboard.putData("Autonomous Mode", autoChooser);
+		autoChooser.addDefault("Timer-Based Autonomous", new TimerAuto());
+		autoChooser.addObject("Encoder-Based Autonomous", new EncoderAuto());
+		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
+		//autonomousCommand = (CommandGroup) new EncoderAuto();
+		//System.out.println("set command to timer");
 	}
 
 	public void disabledPeriodic() {
@@ -55,8 +58,9 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		autonomousCommand = (Command) autoChooser.getSelected();
+		autonomousCommand = (CommandGroup) autoChooser.getSelected();
 		autonomousCommand.start();
+		System.out.println("Init auton");
 	}
 
 	/**
@@ -64,6 +68,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Encoder Velocity", Drivetrain.frontRight.getEncVelocity());
+		SmartDashboard.putNumber("Encoder Position", Drivetrain.frontRight.getEncPosition());
 	}
 
 	public void teleopInit() {
@@ -88,6 +94,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Encoder Velocity", Drivetrain.frontRight.getEncVelocity());
+		SmartDashboard.putNumber("Encoder Position", Drivetrain.frontRight.getEncPosition());
 	}
 
 	/**

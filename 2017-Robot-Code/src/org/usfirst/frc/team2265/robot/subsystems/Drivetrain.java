@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		tankDrive.tankDrive(leftVal, rightVal);
+		tankDrive.tankDrive(-leftVal, -rightVal);
 	}
 
 	// auton
