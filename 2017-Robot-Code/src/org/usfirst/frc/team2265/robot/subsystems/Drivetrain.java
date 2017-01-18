@@ -55,6 +55,8 @@ public class Drivetrain extends Subsystem {
 		rearRight.set(-r);
 		frontLeft.set(l);
 		rearLeft.set(l);
+		speedLeft = l;
+		speedRight = r;
 	}
 	//straight
 	public void driveStraight(){

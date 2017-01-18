@@ -27,15 +27,15 @@ public class OI {
 	public static Button swap = new JoystickButton(driveJoystick, 3);
 
 	public static Button climberButton = new JoystickButton(driveJoystick, 4);
+	public static Button driveStraightButton = new JoystickButton(driveJoystick, 5);
 
 	// creates and calls the bindButtons method (connects it to the 2 button)
 
 	public void bindButtons() {
 
 		swap.whenPressed(new GearShift());
-
 		climberButton.toggleWhenPressed(new Climb());// command needed);
-
+		driveStraightButton.whileHeld(new DriveStraightEncoder());
 	}
 
 }
