@@ -41,9 +41,11 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	public static Button swap = new JoystickButton(driveJoystick, 3);
+	public static Button gyroStraight = new JoystickButton(driveJoystick, 4);
 	
 	public void bindButtons(){
 		swap.whenPressed(new GearShift());
+		gyroStraight.toggleWhenPressed(new GyroStraight());
 	}
 }
 
