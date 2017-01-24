@@ -40,7 +40,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
-		Drivetrain.encoder.reset();
+		//Drivetrain.encoder.reset();// do we still need another encoder along with the one on the left and right side?
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		//autonomousCommand = new ExampleCommand();
@@ -68,8 +68,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Encoder Velocity", Drivetrain.frontRight.getEncVelocity());
-		SmartDashboard.putNumber("Encoder Position", Drivetrain.frontRight.getEncPosition());
+		SmartDashboard.putNumber("Left Encoder Velocity", Drivetrain.encoderLeft.getRate());
+		SmartDashboard.putNumber("Right Encoder Velocity", Drivetrain.encoderRight.getRate());
+		SmartDashboard.putNumber("Left Encoder Position", Drivetrain.encoderLeft.getDistance());
+		SmartDashboard.putNumber("Right Encoder Position", Drivetrain.encoderRight.getDistance());
 	}
 
 	public void teleopInit() {
@@ -94,8 +96,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Encoder Velocity", Drivetrain.frontRight.getEncVelocity());
-		SmartDashboard.putNumber("Encoder Position", Drivetrain.frontRight.getEncPosition());
+		SmartDashboard.putNumber("Left Encoder Velocity", Drivetrain.encoderLeft.getRate());
+		SmartDashboard.putNumber("Right Encoder Velocity", Drivetrain.encoderRight.getRate());
+		SmartDashboard.putNumber("Left Encoder Position", Drivetrain.encoderLeft.getDistance());
+		SmartDashboard.putNumber("Right Encoder Position", Drivetrain.encoderRight.getDistance());
 	}
 
 	/**
