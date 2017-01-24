@@ -6,6 +6,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Climber extends Subsystem {
 	// Talon that controls climber motor
 
 	public static CANTalon climberTalon = new CANTalon(RobotMap.frontLeftPort);
+	public static Encoder climberEncoder = new Encoder(RobotMap.climberEncoderPort,);
 
 	public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
 	// makes a climber class
