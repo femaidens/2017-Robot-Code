@@ -22,17 +22,19 @@ public class RobotMap {
 	public static int atkJoyPort = 1;
 
 	// Talon Ports
-	public static int rearLeftPort = 2;
+	public static int rearLeftPort = 7;
 	public static int rearRightPort = 4;
 	public static int frontLeftPort = 3;
-	public static int frontRightPort = 5;
-	public static int climberPort = 4;
+	public static int frontRightPort = 2;
+	public static int climberPort = 3;
 
 	// Solenoid Ports
 	public static int transIn = 2;
 	public static int transOut = 3;
 
-	// If you are using multiple modules, make sure to define both the port
+	//encoder ports
+	public static int climberEncoderPort1 = 3;
+	public static int climberEncoderPort2 = 4;	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;

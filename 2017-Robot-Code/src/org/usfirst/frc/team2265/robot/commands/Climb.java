@@ -19,8 +19,7 @@ public class Climb extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		
-		
+
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -28,18 +27,12 @@ public class Climb extends Command {
 	// sets the speed if the climber to half speed
 	protected void execute() {
 		System.out.println("Encoder Position: " + Robot.drivetrain.rearRight.getEncPosition());
-
-		if (Robot.drivetrain.rearRight.getEncPosition() > -256) { // 1080 is a
-			//getAnalogEncPosition														// place
-																	// holder
-			Robot.drivetrain.drive(0.25,0.25);
-	
+		if (Climber.climberEncoder.get() < 1080) { // 1080 is a place holder
+			Robot.climber.spin(0.5);
 		}
-
-		else {
-			Robot.climber.stop();
-			return;
-		}
+		/*
+		 * else { Robot.climber.stop(); return; }
+		 */
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
