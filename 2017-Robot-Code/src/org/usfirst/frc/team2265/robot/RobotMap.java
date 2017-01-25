@@ -22,9 +22,9 @@ public class RobotMap {
 	public static int atkJoyPort = 1;
 
 	// Talon Ports
-	public static int rearLeftPort = 5;
+	public static int rearLeftPort = 7;
 	public static int rearRightPort = 4;
-	public static int frontLeftPort = 6;
+	public static int frontLeftPort = 3;
 	public static int frontRightPort = 2;
 	public static int climberPort = 3;
 
