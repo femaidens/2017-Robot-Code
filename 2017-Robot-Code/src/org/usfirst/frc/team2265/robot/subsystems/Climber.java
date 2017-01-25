@@ -21,7 +21,7 @@ public class Climber extends Subsystem {
 	// Talon that controls climber motor
 
 	public static CANTalon climberTalon = new CANTalon(RobotMap.frontLeftPort);
-	public static Encoder climberEncoder = new Encoder(RobotMap.climberEncoderPort,);
+	public static Encoder climberEncoder = new Encoder(RobotMap.climberEncoderPort1, RobotMap.climberEncoderPort2);
 
 	public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
 	// makes a climber class
@@ -41,13 +41,13 @@ public class Climber extends Subsystem {
 		climberTalon.set(speed);
 		// prints the encoder values on the smartDashboard
 
-		SmartDashboard.putNumber("Encoder Velocity: ", climberTalon.getEncVelocity());
+		SmartDashboard.putNumber("Encoder Velocity: ", climberEncoder.getRate());
 
-		SmartDashboard.putNumber("Encoder Position: ", climberTalon.getEncPosition());
+		SmartDashboard.putNumber("Encoder Position: ", climberEncoder.getRaw());
 
-		System.out.println("Encoder Position: " + climberTalon.getEncVelocity());
+		System.out.println("Encoder Velocity: " + climberEncoder.getRate());
 
-		System.out.println("Encoder Position: " + climberTalon.getEncPosition());
+		System.out.println("Encoder Position: " + climberEncoder.getRaw());
 
 	}
 

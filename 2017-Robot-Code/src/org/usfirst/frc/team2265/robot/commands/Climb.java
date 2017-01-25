@@ -25,12 +25,12 @@ public class Climb extends Command {
 	// sets the speed if the climber to half speed
 	protected void execute() {
 
-if (Robot.climber.climberTalon.getEncPosition() < 1080) {    //1080 is a place holder
-Robot.climber.spin(0.5);
-}
+			if (Climber.climberEncoder.getRaw() < 1080) {    //1080 is a place holder
+				Robot.climber.spin(0.5);
+			}
 
-else {
-		Robot.climber.stop();
+			else {
+				Robot.climber.stop();
             return;
 		}
 	}
