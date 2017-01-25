@@ -22,10 +22,10 @@ public class RobotMap {
 	public static int atkJoyPort = 1;
 
 	// Talon Ports
-	public static int rearLeftPort = 2;
+	public static int rearLeftPort = 7;
 	public static int rearRightPort = 4;
 	public static int frontLeftPort = 3;
-	public static int frontRightPort = 5;
+	public static int frontRightPort = 2;
 
 	// Solenoid Ports
 	public static int transIn = 2;
