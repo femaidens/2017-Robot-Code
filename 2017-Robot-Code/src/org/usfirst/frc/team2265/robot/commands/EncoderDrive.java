@@ -5,6 +5,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -35,8 +36,11 @@ public class EncoderDrive extends Command {
 		Robot.drivetrain.drive(left, right);
 		distanceLeft = Drivetrain.encoderLeft.getDistance();
 		distanceRight = Drivetrain.encoderRight.getDistance();
-		System.out.println("Left Encoder Position" + Drivetrain.encoderLeft.getDistance());
-		System.out.println("Right Encoder Position" + Drivetrain.encoderRight.getDistance());
+		System.out.println("Left Encoder Position" + distanceLeft);
+		System.out.println("Right Encoder Position" + distanceRight);
+		SmartDashboard.putNumber("Left Encoder Position: ", distanceLeft);
+		SmartDashboard.putNumber("Right Encoder Position: ", distanceRight);
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
