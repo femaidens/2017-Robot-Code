@@ -34,7 +34,7 @@ public class Drivetrain extends Subsystem {
 	//Initializing encoder 
 	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 	public static Encoder encoderRight = new Encoder (RobotMap.encPort3, RobotMap.encPort4);
-
+	
 	public Drivetrain() {
 	}
 
@@ -44,7 +44,7 @@ public class Drivetrain extends Subsystem {
 		double rightVal = OI.driveJoystick.getRawAxis(5);
 		tankDrive.tankDrive(-leftVal, -rightVal);
 	}
-
+	
 	// auton
 	public void drive(double l, double r) {
 		frontRight.set(-r);

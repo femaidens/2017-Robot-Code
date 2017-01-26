@@ -37,6 +37,12 @@ public class RobotMap {
 	public static int encPort3 = 2;
 	public static int encPort4 = 3;
 	public static int climberEncoder = 4; //port is a placeholder
+	
+	//Ultrasonic Ports
+	public static int ultraPort1 = 0;
+	public static int ultraPort2 = 1;	
+	public static int ultraPort3 = 2;
+	public static int ultraPort4 = 3;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
