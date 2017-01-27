@@ -1,9 +1,12 @@
 package org.usfirst.frc.team2265.robot.commands;
 
+import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.Ultrasonic;
+
 
 /**
  *
@@ -26,8 +29,11 @@ public class UltrasonicDrive extends Command {
     protected void execute() {
     	leftRange = ultrasonicLeft.getRangeInches();
     	rightRange = ultrasonicRight.getRangeInches();
-    	while(leftRange < rightRange) {
-    		
+    	if(leftRange < rightRange) {
+    		Robot.drivetrain.turnDegreesLeft(Math.asin(rightRange/23.5));
+    	}
+    	else if(rightRange < leftRange){
+    		Robot.drivetrain.turnDegreesRight(Math.asin(leftRange/23.5));
     	}
     }
 

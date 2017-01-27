@@ -35,6 +35,8 @@ public class Drivetrain extends Subsystem {
 	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 	public static Encoder encoderRight = new Encoder (RobotMap.encPort3, RobotMap.encPort4);
 	
+	public static double constant = 8.6; //(2*23.5*pi/360)/(2*2*pi/256)
+	
 	public Drivetrain() {
 	}
 
@@ -67,6 +69,26 @@ public class Drivetrain extends Subsystem {
 
 	public void shiftToPower() {
 		gearShifter.set(DoubleSolenoid.Value.kForward);
+	}
+	
+	public double turnDegreesRight(double degrees){
+		double originalEncoderVal = encoderRight.get();
+		while(Math.abs(encoderRight.get() - originalEncoderValue) < degrees * constant){
+			frontRight.set(0);
+			rearRight.set(0);
+			frontLeft.set(0.25);
+			rearLeft.set(0.25);
+		}
+	}
+	
+	public double turnDegreesLeft(double degrees){
+		double originalEncoderVal = encoderLeft.get();
+		while(Math.abs(encoderLeft.get() - originalEncoderValue) < degrees * constant){
+			frontRight.set(0.25);
+			rearRight.set(0.25);
+			frontLeft.set(0);
+			rearLeft.set(0);
+		}
 	}
 
 	public void initDefaultCommand() {
