@@ -39,8 +39,8 @@ public class Robot extends IterativeRobot {
 	// public static Camera camera;
 	public static HelloCV mask;
 	Command autonomousCommand;
-	public static Mat image, image2, blurredImage, hsvImage, bigMask, smallMask, finalMask, morphOutput;
-
+	//public static Mat image, image2, blurredImage, hsvImage, bigMask, smallMask, finalMask, morphOutput;
+	public static Mat image, image2;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -58,9 +58,34 @@ public class Robot extends IterativeRobot {
 		 * cam = CameraServer.getInstance().startAutomaticCapture();
 		 * cam.setBrightness(0); cam.setResolution(640, 480);
 		 */
-
+		
 		new Thread(() -> {
-			mask.process();
+			 UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+             camera.setResolution(640, 480);
+             
+             CvSink cvSink = CameraServer.getInstance().getVideo();
+             CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+             
+             Mat source = new Mat();
+             image = new Mat();
+             image2 = new Mat();
+           //  Mat output = new Mat();
+             
+             while(!Thread.interrupted()) {
+                 cvSink.grabFrame(source);
+                 Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
+                 Imgproc.blur(image, image2, new Size(3,3));
+                 //Scalar bigMinValues = new Scalar(77,255,99); //placeholder values 
+                 //Scalar bigMaxValues = new Scalar(74,238,225); //placeholder values 
+                 Scalar bigMinValues = new Scalar(58,226,80); //placeholder values 
+                 Scalar bigMaxValues = new Scalar(108,255,150); //placeholder values 
+                 Core.inRange(image2, bigMinValues, bigMaxValues,image);
+                 outputStream.putFrame(image);
+                 image.release();
+                 image2.release();
+                 source.release();
+             }
+			
 		}).start();
 	}
 
