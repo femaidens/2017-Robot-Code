@@ -4,6 +4,7 @@ package org.usfirst.frc.team2265.robot.subsystems;
 import org.usfirst.frc.team2265.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
@@ -14,6 +15,9 @@ public class GearChute extends Subsystem {
 
 //intializes doubleSolenoid for the gearChute
 	public static DoubleSolenoid gearPiston = new DoubleSolenoid(RobotMap.gearport1, RobotMap.gearport2);
+	public static Servo gearServo1 = new Servo(RobotMap.gearServoPort1);
+	public static Servo gearServo2 = new Servo(RobotMap.gearServoPort2);
+			
 	
 //Extends the piston
 	public static void extend() {

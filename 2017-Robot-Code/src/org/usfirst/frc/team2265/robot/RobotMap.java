@@ -39,7 +39,10 @@ public class RobotMap {
 	public static int encPort1 = 0;
 	public static int encPort2 = 1;
 	
-
+	//servo ports
+	public static int gearServoPort1 = 2;
+	public static int gearServoPort2 = 3;
+	
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
