@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import org.usfirst.frc.team2265.robot.commands.DriveAuton;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
@@ -38,8 +40,8 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new ExampleCommand();
-		drivetrain.rearRight.setPosition(0);
+		autonomousCommand = new DriveAuton(1.0,1.0);
+		//drivetrain.rearRight.setPosition(0);
 	}
 
 	public void disabledPeriodic() {

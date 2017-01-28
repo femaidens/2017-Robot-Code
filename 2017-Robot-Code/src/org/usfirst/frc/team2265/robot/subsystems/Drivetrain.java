@@ -11,6 +11,7 @@ import com.ctre.CANTalon;
 //import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Encoder;
 
@@ -52,9 +53,9 @@ public class Drivetrain extends Subsystem {
 		else{
 			right = -1*rightVal*rightVal;
 		}*/
-		left = Math.pow(leftVal, 3);
-		right = Math.pow(rightVal, 3);
-		tankDrive.tankDrive(-left , -right);
+		//left = Math.pow(leftVal, 3);
+		//right = Math.pow(rightVal, 3);
+		//tankDrive.tankDrive(-left , -right);
 		tankDrive.tankDrive(-leftVal,-rightVal);
 		/*SmartDashboard.putNumber("Encoder Velocity: ", rearRight.getEncVelocity());
 
@@ -84,6 +85,7 @@ public class Drivetrain extends Subsystem {
 		tankDrive.tankDrive(driveVal, driveVal);
 		
 	}
+
 	public void shiftToSpeed() {
 		gearShifter.set(DoubleSolenoid.Value.kReverse);
 	}

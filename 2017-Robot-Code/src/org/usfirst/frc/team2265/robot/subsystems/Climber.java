@@ -6,6 +6,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Servo;
 
 /**
  *
@@ -19,7 +20,8 @@ public class Climber extends Subsystem {
 
 	// Talon that controls climber motor
 
-    public static CANTalon climberTalon = new CANTalon(RobotMap.frontLeftPort);
+   // public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort);
+	public static Servo climberServo = new Servo(RobotMap.servoPort);
 	public static Encoder climberEncoder = new Encoder(RobotMap.climberEncoderPort1, RobotMap.climberEncoderPort2);
 
 	//public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
@@ -36,21 +38,21 @@ public class Climber extends Subsystem {
 
 	public void spin(double speed) {
 
-		climberTalon.set(speed);
+		climberServo.set(speed);
 		// prints the encoder values on the smartDashboard
-		SmartDashboard.putNumber("Encoder Velocity: ", climberEncoder.getRate());
+		//SmartDashboard.putNumber("Encoder Velocity: ", climberEncoder.getRate());
 
-		SmartDashboard.putNumber("Encoder Position: ", climberEncoder.get());
+		//SmartDashboard.putNumber("Encoder Position: ", climberEncoder.get());
 
-		System.out.println("Encoder Velocity: " + climberEncoder.getRate());
+		//System.out.println("Encoder Velocity: " + climberEncoder.getRate());
 
-		System.out.println("Encoder Position: " + climberEncoder.get());
+		//System.out.println("Encoder Position: " + climberEncoder.get());
 
 	}
 
 	// manually stop
 	public void stop() {
-		climberTalon.set(0);
+		climberServo.set(0.0);
 	}
 
 	public void initDefaultCommand() {

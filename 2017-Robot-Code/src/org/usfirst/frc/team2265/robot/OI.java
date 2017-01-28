@@ -27,6 +27,8 @@ public class OI {
 	public static Button swap = new JoystickButton(driveJoystick, 3);
 
 	public static Button climberButton = new JoystickButton(driveJoystick, 4);
+	
+	public static Button releaseButton = new JoystickButton(driveJoystick,1);
 
 	// creates and calls the bindButtons method (connects it to the 2 button)
 
@@ -34,8 +36,9 @@ public class OI {
 
 		swap.whenPressed(new GearShift());
 
-		climberButton.toggleWhenPressed(new Climb());// command needed);
-
+		climberButton.toggleWhenPressed(new Climb(1.0));// command needed);
+		//climberButton.whileHeld(new Climb(0.75));
+		releaseButton.toggleWhenPressed(new Climb(-1.0));
 	}
 
 }
