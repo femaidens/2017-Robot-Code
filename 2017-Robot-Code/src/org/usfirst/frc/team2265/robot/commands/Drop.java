@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Drop extends Command {
-
-	public Drop() {
+	boolean down;
+	public Drop(boolean u) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		down = u;
 	}
 
 	// Called just before this Command runs the first time
@@ -23,14 +24,18 @@ public class Drop extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// retract if piston off/extended
-		if (GearChute.gearPiston.get().equals(Value.kForward) || GearChute.gearPiston.get().equals(Value.kOff)) {
-			GearChute.retract();
-			return;
+		//if (GearChute.gearPiston.get().equals(Value.kForward) || GearChute.gearPiston.get().equals(Value.kOff)) {
+			if(down)
+			{
+				GearChute.extend();
+				return;
+				
 		}
 		// extend if piston is retracted
-		if (GearChute.gearPiston.get().equals(Value.kReverse)) {
-			GearChute.extend();
-			return;
+		//if (GearChute.gearPiston.get().equals(Value.kReverse)) {
+			if (!down){
+				GearChute.retract();
+				return;
 		}
 	}
 

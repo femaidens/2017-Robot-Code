@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2265.robot.subsystems.GearChute;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	Command autonomousCommand;
+	public static GearChute gearChute;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
 		drivetrain = new Drivetrain();
 		Drivetrain.encoder.reset();
 		oi.bindButtons();
+		gearChute = new GearChute();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
 	}

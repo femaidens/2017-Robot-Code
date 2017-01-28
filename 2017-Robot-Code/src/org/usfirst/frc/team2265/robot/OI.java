@@ -3,6 +3,7 @@ package org.usfirst.frc.team2265.robot;
 import org.usfirst.frc.team2265.robot.commands.Drop;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 //import org.usfirst.frc.team2265.robot.commands.GearShift
+import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -44,14 +45,18 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	//swap mode
-	public static Button swap = new JoystickButton(driveJoystick, 3);
+	//public static Button swap = new JoystickButton(driveJoystick, 3);
 	
 	//button to drop the gear
-	public static Button dropGear = new JoystickButton(driveJoystick, 4);
+	public static Button dropGear = new JoystickButton(driveJoystick, 3);
+	
+	//button to reset gearchute
+	public static Button reset = new JoystickButton(driveJoystick, 2);
 	
 	public void bindButtons(){
 		//swap.whenPressed(new GearShift());
-		dropGear.whenPressed(new Drop());
+		dropGear.whenPressed(new ShiftChute(false));
+		reset.whenPressed(new ShiftChute(true));
 	}
 
 	
