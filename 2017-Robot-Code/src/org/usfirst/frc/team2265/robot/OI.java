@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.Climb;
 import org.usfirst.frc.team2265.robot.commands.GearShift;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,9 +41,12 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	public static Button swap = new JoystickButton(driveJoystick, 3);
+	public static Button climberButton = new JoystickButton(driveJoystick, 4);
+
 	
 	public void bindButtons(){
 		swap.whenPressed(new GearShift());
+		climberButton.whileHeld(new Climb(0.5));
 	}
 }
 
