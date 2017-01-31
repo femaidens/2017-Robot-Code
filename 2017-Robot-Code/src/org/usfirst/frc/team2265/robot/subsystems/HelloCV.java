@@ -57,7 +57,7 @@ public class HelloCV {
     
     }
     
-    public static ArrayList<Double> getContourArea(){
+/*    public static ArrayList<Double> getContourArea1(){
     	Iterator<MatOfPoint> contourItr = contours.iterator();
     	ArrayList<Double> area = new ArrayList<Double>();
     	while(contourItr.hasNext()){
@@ -67,8 +67,9 @@ public class HelloCV {
     	}
 		return area;
     }
+    System.out.println(getContourArea1());*/
     
-    public static Mat process(Mat source) {
+   /* public static Mat process(Mat source) {
        // System.loadLibrary("opencv_java320");
         //image = Imgcodecs.imread("D:\\R\\RetroreflectiveTape.png");
     	/*image = source; 
@@ -81,8 +82,10 @@ public class HelloCV {
        // Core.inRange(blurredImage, smallMinValues, smallMaxValues,smallMask);
        // Core.addWeighted(bigMask, 1,smallMask,1, 0, finalMask);
         contouring(bigMask);*/
-    Imgproc.cvtColor(image, hsvImage, Imgproc.COLOR_BGR2GRAY, 0);
+   /* 
+    * Imgproc.cvtColor(image, hsvImage, Imgproc.COLOR_BGR2GRAY, 0);
         return bigMask;
+        */
         //System.out.println(getContourArea());
         //Imgcodecs.imwrite("D:\\R\\contouredd.jpg",bigMask);
     }
@@ -107,4 +110,4 @@ public class HelloCV {
     // releaseImage(img1);
     // cvReleaseImag(imghsv);
 
-}
+//}

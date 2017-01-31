@@ -6,8 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -81,10 +86,24 @@ public class Robot extends IterativeRobot {
                  Scalar bigMaxValues = new Scalar(108,255,150); //placeholder values 
                  Core.inRange(image2, bigMinValues, bigMaxValues,image);
                  outputStream.putFrame(image);
-                 image.release();
-                 image2.release();
-                 source.release();
-             }
+                  
+                 ArrayList<MatOfPoint >contours = new ArrayList<MatOfPoint>();
+                 image.convertTo(image, CvType.CV_8UC1);
+                 Mat mat = new Mat();
+                 Imgproc.findContours(image, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+                 System.out.println(contours);
+                 Iterator<MatOfPoint> contourItr = contours.iterator();
+             		ArrayList<Double> area = new ArrayList<Double>();
+             		while(contourItr.hasNext()){
+             		MatOfPoint p = contourItr.next();
+             		area.add(Imgproc.contourArea(p));
+             		
+             	}
+             		System.out.println(area.toString());
+             		image.release();
+                    image2.release();
+                    source.release();
+            }
 			
 		}).start();
 	}
