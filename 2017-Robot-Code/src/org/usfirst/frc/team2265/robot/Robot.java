@@ -1,22 +1,19 @@
 
 package org.usfirst.frc.team2265.robot;
 
+import org.usfirst.frc.team2265.robot.commands.CenterAuto;
+import org.usfirst.frc.team2265.robot.commands.LeftAuto;
+import org.usfirst.frc.team2265.robot.commands.RightAuto;
+import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2265.robot.subsystems.GearChute;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.TimerAuto;
-import org.usfirst.frc.team2265.robot.commands.EncoderAuto;
-import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +27,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
+	public static GearChute gearChute;
 	SendableChooser autoChooser;
 	CommandGroup autonomousCommand;
 
@@ -40,13 +38,15 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
+		gearChute = new GearChute();
 		//Drivetrain.encoder.reset();// do we still need another encoder along with the one on the left and right side?
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		//autonomousCommand = new ExampleCommand();
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Timer-Based Autonomous", new TimerAuto());
-		autoChooser.addObject("Encoder-Based Autonomous", new EncoderAuto());
+		autoChooser.addDefault("Center Mode", new CenterAuto());
+		autoChooser.addObject("Left Mode", new LeftAuto());
+		autoChooser.addObject("Right Mode", new RightAuto());
 		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
 		//autonomousCommand = (CommandGroup) new EncoderAuto();
 		//System.out.println("set command to timer");

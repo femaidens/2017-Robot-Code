@@ -1,16 +1,17 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
-import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
+import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
+
 import com.ctre.CANTalon;
+
 //import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -71,9 +72,9 @@ public class Drivetrain extends Subsystem {
 		gearShifter.set(DoubleSolenoid.Value.kForward);
 	}
 	
-	public double turnDegreesRight(double degrees){
+	public void turnDegreesRight(double degrees){
 		double originalEncoderVal = encoderRight.get();
-		while(Math.abs(encoderRight.get() - originalEncoderValue) < degrees * constant){
+		while(Math.abs(encoderRight.get() - originalEncoderVal) < degrees * constant){
 			frontRight.set(0);
 			rearRight.set(0);
 			frontLeft.set(0.25);
@@ -81,9 +82,9 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 	
-	public double turnDegreesLeft(double degrees){
+	public void turnDegreesLeft(double degrees){
 		double originalEncoderVal = encoderLeft.get();
-		while(Math.abs(encoderLeft.get() - originalEncoderValue) < degrees * constant){
+		while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees * constant){
 			frontRight.set(0.25);
 			rearRight.set(0.25);
 			frontLeft.set(0);

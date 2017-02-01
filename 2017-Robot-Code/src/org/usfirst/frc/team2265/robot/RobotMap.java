@@ -1,9 +1,5 @@
 package org.usfirst.frc.team2265.robot;
 
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick;
-
 //RobotMap.java
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -43,6 +39,15 @@ public class RobotMap {
 	public static int ultraPort2 = 1;	
 	public static int ultraPort3 = 2;
 	public static int ultraPort4 = 3;
+	
+	//gyro ports
+	public static int gyroPort = 0;
+	
+	//gear servo ports
+	public static int gearServoPort1 = 0;
+	public static int gearServoPort2 = 1;
+	public static int gearPort1 = 2;
+	public static int gearPort2 = 3;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

@@ -1,8 +1,7 @@
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.EncoderDrive;
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.GearShift;
+import org.usfirst.frc.team2265.robot.commands.UltrasonicDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
