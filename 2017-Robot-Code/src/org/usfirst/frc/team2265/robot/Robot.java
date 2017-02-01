@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
                  Core.inRange(image2, bigMinValues, bigMaxValues,image);
                  outputStream.putFrame(image);
                   
-                 ArrayList<MatOfPoint >contours = new ArrayList<MatOfPoint>();
+                 ArrayList<MatOfPoint>contours = new ArrayList<MatOfPoint>();
                  image.convertTo(image, CvType.CV_8UC1);
                  Mat mat = new Mat();
                  Imgproc.findContours(image, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
