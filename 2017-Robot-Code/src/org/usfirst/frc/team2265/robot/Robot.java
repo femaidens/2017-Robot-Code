@@ -10,6 +10,7 @@ import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Climber climber;
+	public static Compressor; 
 	Command autonomousCommand;
 
 	/**
@@ -35,6 +37,7 @@ public class Robot extends IterativeRobot {
 		drivetrain = new Drivetrain();
 		climber = new Climber();
 		Drivetrain.encoder.reset();
+		compressette = new Compressor();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();

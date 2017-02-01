@@ -40,13 +40,14 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-	public static Button swap = new JoystickButton(driveJoystick, 3);
+
 	public static Button climberButton = new JoystickButton(driveJoystick, 4);
+	public static Button compressorButton = new JoystickButton(driveJoystick, 2) //is this being used?
 
 	
 	public void bindButtons(){
-		swap.whenPressed(new GearShift());
 		climberButton.whileHeld(new Climb(0.5));
+		compressorButton.toggleWhenPressed(new ToggleCompressor())
 	}
 }
 
