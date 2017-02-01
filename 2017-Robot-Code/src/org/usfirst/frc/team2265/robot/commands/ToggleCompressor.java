@@ -1,8 +1,7 @@
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.command.Command;
 

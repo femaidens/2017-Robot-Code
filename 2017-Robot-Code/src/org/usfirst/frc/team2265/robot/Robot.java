@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Climber climber;
-	public static Compressor; 
+	public static Compressor compressette; 
 	Command autonomousCommand;
 
 	/**

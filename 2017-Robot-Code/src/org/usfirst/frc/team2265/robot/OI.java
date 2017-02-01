@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2265.robot;
 
 import org.usfirst.frc.team2265.robot.commands.Climb;
-import org.usfirst.frc.team2265.robot.commands.GearShift;
+import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -42,12 +42,12 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 
 	public static Button climberButton = new JoystickButton(driveJoystick, 4);
-	public static Button compressorButton = new JoystickButton(driveJoystick, 2) //is this being used?
+	public static Button compressorButton = new JoystickButton(driveJoystick, 2); //is this being used?
 
 	
 	public void bindButtons(){
 		climberButton.whileHeld(new Climb(0.5));
-		compressorButton.toggleWhenPressed(new ToggleCompressor())
+		compressorButton.toggleWhenPressed(new ToggleCompressor());
 	}
 }
 
