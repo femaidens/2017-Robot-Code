@@ -15,10 +15,16 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class HelloCV {
-    static Mat image,blurredImage,hsvImage,bigMask,smallMask,finalMask,morphOutput;
+    public static Mat image;
+	public static Mat blurredImage;
+	static Mat hsvImage;
+	static Mat bigMask;
+	static Mat smallMask;
+	static Mat finalMask;
+	static Mat morphOutput;
     static List<MatOfPoint> contours, contours1;
-    static double midX;
-	static double midY;
+    static double midX,midY,k,b;
+    public static ArrayList<Rect> rectList;
     public static void removeNoise(Mat image) {
         blurredImage = new Mat();
         hsvImage = new Mat();
@@ -30,7 +36,24 @@ public class HelloCV {
         Imgproc.cvtColor(image, hsvImage, Imgproc.COLOR_BGR2HSV, 0);
         Imgproc.blur(hsvImage, blurredImage, size);
     }
-    public static ArrayList<Double> contouring(Mat image){
+    public static double getDistance(ArrayList<Rect> rectList){
+    	Rect maxRect = rectList.get(0);
+    	for(int i = 0; i<rectList.size();i++){
+    		if(rectList.get(i).height> maxRect.height)
+    			maxRect = rectList.get(i);
+    	}
+    	double distance=(maxRect.height-b)/k;
+    	
+    	/*for(int i = 0; i<rectList.size();i++){
+    		if(rectList.get(i).area()> maxRect.area())
+    			maxRect = rectList.get(i);
+    	}
+    	double distance=(Math.sqrt(maxRect.area())-b)/k;
+    	*/
+    	return distance;
+    	
+    }
+    public static double contouring(Mat image){
         contours = new ArrayList<MatOfPoint>();
         image.convertTo(image, CvType.CV_8UC1);
 
@@ -38,8 +61,8 @@ public class HelloCV {
         System.out.println(contours);
         //ArrayList<MatOfPoint> contours1 = new ArrayList<MatOfPoint>();
         Imgproc.drawContours(image, contours, -1, new Scalar(60, 255, 255), 2);
-        ArrayList<Rect> rectList = new ArrayList<Rect>(); 
-        ArrayList<Double> centerList = new ArrayList<Double>();
+        rectList = new ArrayList<Rect>(); 
+        //ArrayList<Double> centerList = new ArrayList<Double>();
         
         for(int i = 0; i < contours.size(); i++){
         	MatOfPoint cPoint = contours.get(i);
@@ -48,19 +71,15 @@ public class HelloCV {
         }
         System.out.println(rectList);
         
-        midX = (rectList.get(0).x * 2 + rectList.get(1).x)/3.25;
-        midY = rectList.get(0).y + rectList.get(1).y/3;
+        midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
+        //midY = (rectList.get(0).y + rectList.get(0).height)/2;
         
-        centerList.add(midX);
-        centerList.add(midY);
+        //centerList.add(midX);
+        //centerList.add(midY);
        
-        Imgproc.circle(image, new Point(midX, midY), 1, new Scalar(255, 255, 255), 2);
-        Imgproc.circle(image, new Point(326, 157), 1, new Scalar(180, 255, 255), 2);
-        Imgproc.circle(image, new Point(138, 152), 1, new Scalar(180, 255, 255), 2);
-        
-        return centerList;
+        return midX;
     }
-
+    	
 }
     
     
