@@ -71,7 +71,9 @@ public class HelloCV {
         }
         System.out.println(rectList);
         
+        
         midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
+        
         //midY = (rectList.get(0).y + rectList.get(0).height)/2;
         
         //centerList.add(midX);

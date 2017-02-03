@@ -13,6 +13,8 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
@@ -44,8 +46,10 @@ public class Robot extends IterativeRobot {
 	// public static Camera camera;
 	public static HelloCV mask;
 	Command autonomousCommand;
-	//public static Mat image, image2, blurredImage, hsvImage, bigMask, smallMask, finalMask, morphOutput;
+	// public static Mat image, image2, blurredImage, hsvImage, bigMask,
+	// smallMask, finalMask, morphOutput;
 	public static Mat image, image2;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -54,57 +58,83 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		// camera = new Camera();
-		Drivetrain.encoder.reset();
+		Drivetrain.encoderLeft.reset();
+		Drivetrain.encoderRight.reset();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
-		mask = new HelloCV();
+		//mask = new HelloCV();
 		/*
 		 * cam = CameraServer.getInstance().startAutomaticCapture();
 		 * cam.setBrightness(0); cam.setResolution(640, 480);
 		 */
 		
+		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(640, 480);
+		camera.setBrightness(0);
+		CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+		CvSink cvSink = CameraServer.getInstance().getVideo();
 		new Thread(() -> {
-			 UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-             camera.setResolution(640, 480);
-             
-             CvSink cvSink = CameraServer.getInstance().getVideo();
-             CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
-             
-             Mat source = new Mat();
-             image = new Mat();
-             image2 = new Mat();
-           //  Mat output = new Mat();
-             
-             while(!Thread.interrupted()) {
-                 cvSink.grabFrame(source);
-                 Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
-                 Imgproc.blur(image, image2, new Size(3,3));
-                 //Scalar bigMinValues = new Scalar(77,255,99); //placeholder values 
-                 //Scalar bigMaxValues = new Scalar(74,238,225); //placeholder values 
-                 Scalar bigMinValues = new Scalar(58,226,80); //placeholder values 
-                 Scalar bigMaxValues = new Scalar(108,255,150); //placeholder values 
-                 Core.inRange(image2, bigMinValues, bigMaxValues,image);
-                 outputStream.putFrame(image);
-                  
-                 ArrayList<MatOfPoint>contours = new ArrayList<MatOfPoint>();
-                 image.convertTo(image, CvType.CV_8UC1);
-                 Mat mat = new Mat();
-                 Imgproc.findContours(image, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-                 System.out.println(contours);
-                 Iterator<MatOfPoint> contourItr = contours.iterator();
-             		ArrayList<Double> area = new ArrayList<Double>();
-             		while(contourItr.hasNext()){
-             		MatOfPoint p = contourItr.next();
-             		area.add(Imgproc.contourArea(p));
-             		
-             	}
-             		System.out.println(area.toString());
-             		image.release();
-                    image2.release();
-                    source.release();
-            }
 			
+			Mat source = new Mat();
+			image = new Mat();
+			image2 = new Mat();
+
+			while (!Thread.interrupted()) {
+				cvSink.grabFrame(source);
+				Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
+				//outputStream.putFrame(image);
+				Imgproc.blur(image, image2, new Size(3, 3));
+				Scalar bigMinValues = new Scalar(58, 226, 80); // placeholder
+																// values
+				Scalar bigMaxValues = new Scalar(108, 255, 150); // placeholder
+																	// values
+				Core.inRange(image2, bigMinValues, bigMaxValues, image);
+				
+				
+				ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+				image.convertTo(image, CvType.CV_8UC1);
+				Mat mat = new Mat();
+				Imgproc.findContours(image, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+				Imgproc.drawContours(image, contours, -1, new Scalar(60, 255, 255), 2);
+				
+				//System.out.println(contours);
+				Iterator<MatOfPoint> contourItr = contours.iterator();
+				ArrayList<Double> area = new ArrayList<Double>();
+				while (contourItr.hasNext()) {
+					MatOfPoint p = contourItr.next();
+					area.add(Imgproc.contourArea(p));
+
+				}
+				System.out.println("Area: " + area.toString());
+				ArrayList<Rect> rectList = new ArrayList<Rect>();
+				// ArrayList<Double> centerList = new ArrayList<Double>();
+
+				for (int i = 0; i < contours.size(); i++) {
+					MatOfPoint cPoint = contours.get(i);
+					Rect rect = Imgproc.boundingRect(cPoint);
+					rectList.add(rect);
+				}
+				System.out.println("Rectangles: " + rectList);
+				if (rectList.size() > 0){
+				Imgproc.rectangle(image, new Point(rectList.get(0).x, rectList.get(0).y),
+						new Point(rectList.get(0).x + rectList.get(0).width,
+								rectList.get(0).y - rectList.get(0).height),
+						new Scalar(179, 255, 255), 1); 
+				}
+				outputStream.putFrame(image);
+				/*// midX = (rectList.get(0).x + (rectList.get(1).x +
+				// rectList.get(1).width))/2;
+
+				System.out.println(area.toString());
+				for (int i = 0; i < rectList.size(); i++) {
+					System.out.print(rectList.get(i).height);
+				}*/
+				image.release();
+				image2.release();
+				source.release();
+			}
+
 		}).start();
 	}
 
