@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-
+//command group used if robot is in center position so can just drive straight (rotates gear flaps and drops gear)
 public class CenterAuto extends CommandGroup {
 
 	public CenterAuto() {

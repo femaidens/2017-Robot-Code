@@ -12,6 +12,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
 public class DriveTeleop extends Command {
 
+
 	public DriveTeleop() {
 		// Use requires() here to declare subsystem dependencies
 		// requires(Robot.exampleSubsystem);
@@ -25,14 +26,22 @@ public class DriveTeleop extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.drivetrain.drive();
+		
+		//gets the distance
 		double distanceLeft = Drivetrain.encoderLeft.getDistance();
 		double distanceRight = Drivetrain.encoderRight.getDistance();
+		
+		//gets encoder values for left and right
 		double leftCount = Drivetrain.encoderLeft.get();
 		double rightCount = Drivetrain.encoderRight.get();
+		
+		//prints distance to console and smartdashboard
 		System.out.println("Left Encoder Distance: " + distanceLeft);
 		System.out.println("Right Encoder Distance: " + distanceRight);
 		SmartDashboard.putNumber("Left Encoder Distance: ", distanceLeft);
 		SmartDashboard.putNumber("Right Encoder Distance: ", distanceRight);
+		
+		//prints position to console and smartdashboard
 		System.out.println("Left Encoder Position: " + leftCount);
 		System.out.println("Right Encoder Position: " + rightCount);
 		SmartDashboard.putNumber("Left Encoder Position: ", leftCount);

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
+//uses timerDrive command during auton mode 
 public class TimerAuto extends CommandGroup {
 
     public TimerAuto() {

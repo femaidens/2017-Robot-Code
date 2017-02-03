@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+//rotateGearFlaps is used when dropping gear onto peg (in shiftChute command group) 
 public class RotateGearFlaps extends Command {
 
+	//makes a reset variable
 	boolean reset;
 
 	public RotateGearFlaps(boolean r) {

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class LeftAuto extends CommandGroup {
-    
+   //if robot is in left position then robot turns right to go to peg
     public  LeftAuto() {
         // Add Commands here:
         // e.g. addSequential(new Command1());

@@ -26,6 +26,7 @@ public class Drivetrain extends Subsystem {
 	public static CANTalon rearLeft = new CANTalon(RobotMap.rearLeftPort);
 	public static CANTalon frontRight = new CANTalon(RobotMap.frontRightPort);
 	public static CANTalon rearRight = new CANTalon(RobotMap.rearRightPort);
+	//initialize joysticks
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 	// Initialize solenoids
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
@@ -36,6 +37,7 @@ public class Drivetrain extends Subsystem {
 	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 	public static Encoder encoderRight = new Encoder (RobotMap.encPort3, RobotMap.encPort4);
 	
+	//converts the number of degrees into ticks
 	public static double constant = 8.6; //(2*23.5*pi/360)/(2*2*pi/256)
 	
 	public Drivetrain() {
@@ -43,6 +45,7 @@ public class Drivetrain extends Subsystem {
 
 	// Teleop
 	public void drive() {
+		//gets the axis value
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
 		tankDrive.tankDrive(-leftVal, -rightVal);
@@ -50,6 +53,7 @@ public class Drivetrain extends Subsystem {
 	
 	// auton
 	public void drive(double l, double r) {
+		//sets motors with variables as parameters (called in drive command)
 		frontRight.set(-r);
 		rearRight.set(-r);
 		frontLeft.set(l);
@@ -57,38 +61,37 @@ public class Drivetrain extends Subsystem {
 		
  
 	}
-	//straight
+	//helps driver drive straight
 	public void driveStraight(){
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
 		double driveVal = (leftVal + rightVal)/2;
+		//uses drive value in tankdrive method
 		tankDrive.tankDrive(driveVal, driveVal);	
 	}
-	public void shiftToSpeed() {
-		gearShifter.set(DoubleSolenoid.Value.kReverse);
-	}
-
-	public void shiftToPower() {
-		gearShifter.set(DoubleSolenoid.Value.kForward);
-	}
 	
+	//called in ultrasonic drive
 	public void turnDegreesRight(double degrees){
 		double originalEncoderVal = encoderRight.get();
+		//if distance moved is less than the distance you want to move, then the motors will get set so that it turns right 
 		while(Math.abs(encoderRight.get() - originalEncoderVal) < degrees * constant){
-			frontRight.set(0);
-			rearRight.set(0);
+			//sets motor values
+			frontRight.set(-0.25);
+			rearRight.set(-0.25);
 			frontLeft.set(0.25);
 			rearLeft.set(0.25);
 		}
 	}
 	
+	//called in ultrasonic drive
 	public void turnDegreesLeft(double degrees){
 		double originalEncoderVal = encoderLeft.get();
+		if distance moved is less than the distance you want to move, then the motors will get set so that it turns left
 		while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees * constant){
 			frontRight.set(0.25);
 			rearRight.set(0.25);
-			frontLeft.set(0);
-			rearLeft.set(0);
+			frontLeft.set(-0.25);
+			rearLeft.set(-0.25);
 		}
 	}
 

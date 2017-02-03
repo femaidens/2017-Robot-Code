@@ -22,6 +22,7 @@ public class TurnRight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//calls turndegrees right in drivetrain and the command is called in left auto (command group)
     	Robot.drivetrain.turnDegreesRight(degrees);
     }
 

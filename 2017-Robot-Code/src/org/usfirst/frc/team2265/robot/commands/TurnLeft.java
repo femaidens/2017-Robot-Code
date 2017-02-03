@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class TurnLeft extends Command {
+	//declares degrees variable
 	double degrees;
 
+	//instantiates variable
     public TurnLeft(double d) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis)
@@ -20,6 +22,7 @@ public class TurnLeft extends Command {
     protected void initialize() {
     }
 
+    //calls drivetrain to use the turndegreesleft method and is called in right auto command group
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivetrain.turnDegreesLeft(degrees);

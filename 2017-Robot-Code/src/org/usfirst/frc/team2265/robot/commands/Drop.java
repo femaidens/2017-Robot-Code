@@ -7,9 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+
 public class Drop extends Command {
 	boolean down;
-
+	
+	//retracts and extends piston to drop gear
 	public Drop(boolean u) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
