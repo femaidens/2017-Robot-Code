@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
+
 public class CenterAuto extends CommandGroup {
 
 	public CenterAuto() {
