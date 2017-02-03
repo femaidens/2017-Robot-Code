@@ -86,7 +86,7 @@ public class Drivetrain extends Subsystem {
 	//called in ultrasonic drive
 	public void turnDegreesLeft(double degrees){
 		double originalEncoderVal = encoderLeft.get();
-		if distance moved is less than the distance you want to move, then the motors will get set so that it turns left
+		//if distance moved is less than the distance you want to move, then the motors will get set so that it turns left
 		while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees * constant){
 			frontRight.set(0.25);
 			rearRight.set(0.25);

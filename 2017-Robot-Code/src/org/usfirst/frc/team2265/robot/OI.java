@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.GearShift;
 import org.usfirst.frc.team2265.robot.commands.UltrasonicDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -40,11 +39,9 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-	public static Button swap = new JoystickButton(driveJoystick, 3);
 	public static Button ultrasonicBtn = new JoystickButton(driveJoystick, 4);
 	
 	public void bindButtons(){
-		swap.whenPressed(new GearShift());
 		ultrasonicBtn.whenPressed(new UltrasonicDrive());
 	}
 }
