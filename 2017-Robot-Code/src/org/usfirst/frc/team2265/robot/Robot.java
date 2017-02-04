@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.GearChute;
+import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.I2C;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,8 +25,11 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
+	public static Climber climber;
+	public static Compressor compressette; 
 	Command autonomousCommand;
-	public static GearChute gearChute;
+	public static byte [] toSend = new byte[1];
+	public static I2C i2c;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -35,11 +38,15 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
+		climber = new Climber();
 		Drivetrain.encoder.reset();
+		compressette = new Compressor();
 		oi.bindButtons();
-		gearChute = new GearChute();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
+		CameraServer.getInstance().startAutomaticCapture();
+	    i2c = new I2C(I2C.Port.kOnboard, 84);
+	    
 	}
 
 	public void disabledPeriodic() {
