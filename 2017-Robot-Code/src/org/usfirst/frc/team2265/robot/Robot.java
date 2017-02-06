@@ -25,6 +25,7 @@ import org.usfirst.frc.team2265.robot.subsystems.HelloCV;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 	// public static Mat image, image2, blurredImage, hsvImage, bigMask,
 	// smallMask, finalMask, morphOutput;
 	public static Mat image, image2;
+	public static I2C i2c;
+	public static byte[] toSend;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -63,6 +66,10 @@ public class Robot extends IterativeRobot {
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
+	    i2c = new I2C(I2C.Port.kOnboard, 84);
+	    toSend = new byte[1];
+	    
+
 		//mask = new HelloCV();
 		/*
 		 * cam = CameraServer.getInstance().startAutomaticCapture();
