@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static GearChute gearChute;
 	SendableChooser autoChooser;
 	CommandGroup autonomousCommand;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
