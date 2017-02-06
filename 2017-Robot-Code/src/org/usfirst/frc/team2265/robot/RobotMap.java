@@ -34,7 +34,9 @@ public class RobotMap {
 	//Solenoid Ports for gearChute
 	public static int gearport1 = 0;
 	public static int gearport2 = 1;
-
+	public static int gearport3 = 2;
+	public static int gearport4 = 3;
+	
 	//Encoder Ports
 	public static int encPort1 = 0;
 	public static int encPort2 = 1;
