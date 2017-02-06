@@ -1,7 +1,8 @@
 package org.usfirst.frc.team2265.robot;
 
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.GearShift;
+import org.usfirst.frc.team2265.robot.commands.GyroStraight;
+import org.usfirst.frc.team2265.robot.commands.DriveStraightEncoder;
 import org.usfirst.frc.team2265.robot.commands.Climb;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,18 +25,17 @@ public class OI {
 
 	// makes a new button and sets button number
 
-	public static Button swap = new JoystickButton(driveJoystick, 3);
-
 	public static Button climberButton = new JoystickButton(driveJoystick, 4);
-	public static Button driveStraightButton = new JoystickButton(driveJoystick, 5);
+	public static Button driveStraightForwardButton = new JoystickButton(driveJoystick, 5);
+	public static Button driveStraightBackwardButton = new JoystickButton(driveJoystick, 6);
 
 	// creates and calls the bindButtons method (connects it to the 2 button)
 
 	public void bindButtons() {
 
-		swap.whenPressed(new GearShift());
 		climberButton.toggleWhenPressed(new Climb());// command needed);
-		driveStraightButton.whileHeld(new DriveStraightEncoder());
+		driveStraightForwardButton.whileHeld(new GyroStraight(0.3));
+		driveStraightBackwardButton.whileHeld(new GyroStraight(-0.3));
 	}
 
 }

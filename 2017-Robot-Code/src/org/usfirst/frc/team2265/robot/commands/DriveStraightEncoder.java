@@ -1,5 +1,6 @@
-package org.usfirst.frc.team2265.robot.subsystems;
+package org.usfirst.frc.team2265.robot.commands;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
@@ -11,7 +12,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Encoder;
-import org.usfirst.frc.team2265.robot.subsystem.Drivetrain;
+import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
 
 /**
