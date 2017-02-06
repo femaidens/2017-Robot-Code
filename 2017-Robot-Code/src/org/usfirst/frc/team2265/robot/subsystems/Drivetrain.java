@@ -97,12 +97,12 @@ public class Drivetrain extends Subsystem {
 			if (HelloCV.midX <= 305) {
 				frontRight.set(0.25);
 				rearRight.set(0.25);
-				frontLeft.set(-0.25);
-				rearLeft.set(-0.25);
+				frontLeft.set(-0.125);
+				rearLeft.set(-0.125);
 				//turns left
 			} else if (HelloCV.midX >= 335) {
-				frontRight.set(-0.25);
-				rearRight.set(-0.25);
+				frontRight.set(-0.125);
+				rearRight.set(-0.125);
 				frontLeft.set(0.25);
 				rearLeft.set(0.25);
 				//turns right
