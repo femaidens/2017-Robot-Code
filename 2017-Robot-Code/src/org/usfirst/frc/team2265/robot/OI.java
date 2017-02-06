@@ -42,7 +42,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 
 	public static Button climberButton = new JoystickButton(driveJoystick, 4);
-	public static Button compressorButton = new JoystickButton(driveJoystick, 2); //is this being used?
+	public static Button compressorButton = new JoystickButton(driveJoystick, 3); //is this being used?
 
 	
 	public void bindButtons(){
