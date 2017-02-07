@@ -1,10 +1,8 @@
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
-import org.usfirst.frc.team2265.robot.subsystems.Climber;
-import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -38,12 +36,7 @@ public class Climb extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Climber.climberServo.getAngle() == 720) {
-		return true;
-		}
-		else {
-			return false;
-		}
+		return false;
 	}
 
 	// Called once after isFinished returns true

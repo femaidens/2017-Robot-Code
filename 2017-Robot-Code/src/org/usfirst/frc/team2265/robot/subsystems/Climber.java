@@ -1,12 +1,11 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.RobotMap;
+
 import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -21,7 +20,8 @@ public class Climber extends Subsystem {
 	// Talon that controls climber motor
 
    // public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort);
-	public static Servo climberServo = new Servo(RobotMap.servoPort);
+	public static CANTalon climber1 = new CANTalon(RobotMap.climberPort1);
+	public static CANTalon climber2 = new CANTalon(RobotMap.climberPort2);
 	public static Encoder climberEncoder = new Encoder(RobotMap.climberEncoderPort1, RobotMap.climberEncoderPort2);
 
 	//public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
@@ -38,7 +38,8 @@ public class Climber extends Subsystem {
 
 	public void spin(double speed) {
 
-		climberServo.set(speed);
+		climber1.set(speed);
+		climber2.set(speed);
 		// prints the encoder values on the smartDashboard
 		//SmartDashboard.putNumber("Encoder Velocity: ", climberEncoder.getRate());
 
@@ -52,7 +53,8 @@ public class Climber extends Subsystem {
 
 	// manually stop
 	public void stop() {
-		climberServo.set(0.0);
+		climber1.set(0.0);
+		climber2.set(0.0);
 	}
 
 	public void initDefaultCommand() {

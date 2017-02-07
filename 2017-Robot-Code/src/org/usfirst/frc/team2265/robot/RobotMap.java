@@ -1,9 +1,5 @@
 package org.usfirst.frc.team2265.robot;
 
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick;
-
 //RobotMap.java
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -26,10 +22,10 @@ public class RobotMap {
 	public static int rearRightPort = 13; //4
 	public static int frontLeftPort = 12; //3
 	public static int frontRightPort = 1; //2
-	//public static int climberPort = 7; //0
 
-	//servo ports
-	public static int servoPort = 0;
+	//climber ports
+	public static int climberPort1 = 0;
+	public static int climberPort2 = 1;
 	// Solenoid Ports
 	public static int transIn = 2;
 	public static int transOut = 3;

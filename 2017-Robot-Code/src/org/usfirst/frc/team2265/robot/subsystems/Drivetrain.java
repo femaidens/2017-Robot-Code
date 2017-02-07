@@ -1,19 +1,16 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
-import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
+import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
+
 import com.ctre.CANTalon;
+
 //import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *

@@ -1,19 +1,15 @@
 
 package org.usfirst.frc.team2265.robot;
 
+import org.usfirst.frc.team2265.robot.commands.DriveAuton;
+import org.usfirst.frc.team2265.robot.subsystems.Climber;
+import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team2265.robot.commands.DriveAuton;
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.Climber;
-import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
