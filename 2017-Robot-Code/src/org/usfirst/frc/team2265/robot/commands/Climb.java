@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Climb extends Command {
 	double speed;
-	
+
 	public Climb(double s) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -17,20 +17,29 @@ public class Climb extends Command {
 	}
 
 	// Called just before this Command runs the first time
-	
-protected void initialize() {
+
+	protected void initialize() {
 
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	// starts rolling climber CANTalon
 	// sets the speed if the climber to half speed
-	
-protected void execute() {
+
+	protected void execute() {
 		Robot.climber.spin(speed);
 	}
-	
-// Make this return true when this Command no longer needs to run execute()
+	/*
+	 * AUTO-STOP? protected void execute() {
+	 * 
+	 * if (Robot.climber.climberTalon.getEncPosition() < 1080) { // 1080 is a //
+	 * place // holder Robot.climber.spin(0.5); }
+	 * 
+	 * else { Robot.climber.stop(); return; } }
+	 * 
+	 */
+
+	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return false;
 	}
@@ -44,5 +53,7 @@ protected void execute() {
 	// subsystems is scheduled to run
 	// stops CANtalons from rotating
 	protected void interrupted() {
+		Robot.climber.stop();
 	}
+
 }

@@ -24,9 +24,10 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
-	public static Climber climber;
-	public static Compressor compressette; 
+	public static Compressor compressor; 
 	Command autonomousCommand;
+	public static Climber climber;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -36,8 +37,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		climber = new Climber();
-		Drivetrain.encoder.reset();
-		compressette = new Compressor();
+		//Drivetrain.encoder.reset();
+		compressor = new Compressor();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();

@@ -20,19 +20,26 @@ public class Drivetrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	// Initialize CANTalons
-	public static CANTalon frontLeft = new CANTalon(RobotMap.frontLeftPort);
-	public static CANTalon rearLeft = new CANTalon(RobotMap.rearLeftPort);
-	public static CANTalon frontRight = new CANTalon(RobotMap.frontRightPort);
-	public static CANTalon rearRight = new CANTalon(RobotMap.rearRightPort);
+	public static CANTalon frontLeft, rearLeft, frontRight,rearRight;
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 	// Initialize solenoids
 	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
-	
-	//Initializing encoder 
-	public static Encoder encoder = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
+	// TODO set updates for speeds
+	public static double speedRight;
+	public static double speedLeft;
 
+	
+	
 	public Drivetrain() {
+		frontLeft = new CANTalon(RobotMap.frontLeftPort);
+		rearLeft = new CANTalon(RobotMap.rearLeftPort);
+		frontRight = new CANTalon(RobotMap.frontRightPort);
+		rearRight = new CANTalon(RobotMap.rearRightPort);
+		frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		frontLeft.configEncoderCodesPerRev(360);
+		frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		frontRight.configEncoderCodesPerRev(360);
 	}
 
 	// Teleop
@@ -41,6 +48,7 @@ public class Drivetrain extends Subsystem {
 		double rightVal = OI.driveJoystick.getRawAxis(5);
 		System.out.println("leftVal: " + leftVal + "rightVal: " + rightVal);
 		tankDrive.tankDrive(-leftVal * 0.6, -rightVal * 0.6);
+
 	}
 
 	// auton
@@ -49,6 +57,8 @@ public class Drivetrain extends Subsystem {
 		rearRight.set(-r);
 		frontLeft.set(l);
 		rearLeft.set(l);
+		speedLeft = l;
+		speedRight = r;
 	}
 	//straight
 	public void driveStraight(){

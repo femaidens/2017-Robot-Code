@@ -22,7 +22,7 @@ public class ToggleCompressor extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.compressette.start();
+    	Robot.compressor.start();
     	SmartDashboard.putBoolean("CompressorStatus", true);
     }
 
@@ -38,7 +38,7 @@ public class ToggleCompressor extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.compressette.stop();
+    	Robot.compressor.stop();
     	SmartDashboard.putBoolean("CompressorStatus", false);
     }
 }
