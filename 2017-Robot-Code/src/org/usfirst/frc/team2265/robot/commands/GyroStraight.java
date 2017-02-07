@@ -4,14 +4,15 @@ import org.usfirst.frc.team2265.robot.RobotMap;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.GyroBase;
+import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.CANTalon;
 /**
  *
  */
 public class GyroStraight extends Command {
-	private Gyro gyro;
+	private GyroBase gyro;
 	private double angle;
 	private double leftVel = Robot.drivetrain.frontRight.get();
 	private double rightVel = Robot.drivetrain.frontLeft.get();
@@ -34,7 +35,7 @@ public class GyroStraight extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(angle > 90 && angle < 180) {//turning left
-    		Robot.drivetrain.frontRight.set(rightVel - .0.1);
+    		Robot.drivetrain.frontRight.set(rightVel - 0.1);
     		Robot.drivetrain.rearRight.set(rightVel - 0.1);
     	}
     	else if(angle < 90 && angle > 0){
