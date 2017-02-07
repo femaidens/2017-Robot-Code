@@ -42,8 +42,8 @@ public class HelloCV {
     		if(rectList.get(i).height> maxRect.height)
     			maxRect = rectList.get(i);
     	}
-    	double distance=(maxRect.height-b)/k;
     	
+    	double distance = -.0004*(Math.pow(maxRect.height, 3)) +.0824*(Math.pow(maxRect.height, 2)) + 252.82; 
     	/*for(int i = 0; i<rectList.size();i++){
     		if(rectList.get(i).area()> maxRect.area())
     			maxRect = rectList.get(i);
