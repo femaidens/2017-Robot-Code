@@ -12,7 +12,8 @@ public class Climber extends Subsystem {
 
 	// Talon that controls climber motor
 
-   	public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort);
+   	public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort1);
+   	public static CANTalon climberTalon2 = new CANTalon(RobotMap.climberPort2);
 	
 	public Climber() {
 	}
@@ -20,11 +21,13 @@ public class Climber extends Subsystem {
 	// Sets speed for climber motor
 
 	public void spin(double speed) {
-		climberTalon.set(speed);
+		climberTalon.set(-speed);
+		climberTalon2.set(-speed);
 	}
 
 	public void stop() {
 		climberTalon.set(0.0);
+		climberTalon2.set(0.0);
 	}
 
 	public void initDefaultCommand() {

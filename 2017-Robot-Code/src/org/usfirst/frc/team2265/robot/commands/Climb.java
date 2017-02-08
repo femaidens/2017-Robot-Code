@@ -44,5 +44,6 @@ protected void execute() {
 	// subsystems is scheduled to run
 	// stops CANtalons from rotating
 	protected void interrupted() {
+		Robot.climber.stop();
 	}
 }
