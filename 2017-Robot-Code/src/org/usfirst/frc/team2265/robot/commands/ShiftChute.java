@@ -12,7 +12,7 @@ public class ShiftChute extends CommandGroup {
     public ShiftChute(boolean reset) {
     	//up = getting gear, down = scoring gear
     	addParallel(new Drop(reset));
-    	addParallel(new RotateGearFlaps(reset));
+    	addParallel(new RotateGearFlaps());
     	
 
 

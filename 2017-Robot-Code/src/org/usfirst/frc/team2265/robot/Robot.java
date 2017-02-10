@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.Climber;
+//import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.CameraServer;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
 
@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
-	public static Climber climber;
+	//public static Climber climber;
 	public static Compressor compressette; 
 	Command autonomousCommand;
 	public static byte [] toSend = new byte[1];
@@ -38,13 +38,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
-		climber = new Climber();
+		//climber = new Climber();
 		Drivetrain.encoder.reset();
 		compressette = new Compressor();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
-		CameraServer.getInstance().startAutomaticCapture();
+		//CameraServer.getInstance().startAutomaticCapture();
 	    i2c = new I2C(I2C.Port.kOnboard, 84);
 	    
 	}

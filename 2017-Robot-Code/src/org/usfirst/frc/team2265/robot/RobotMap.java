@@ -18,8 +18,8 @@ public class RobotMap {
 	// public static int rightMotor = 2;
 
 	// Joystick Ports
-	public static int driveJoyPort = 2;
-	public static int atkJoyPort = 1;
+	public static int driveJoyPort = 1;
+	//public static int atkJoyPort = 1;
 
 	// Talon Ports
 	public static int rearLeftPort = 5;
@@ -32,10 +32,10 @@ public class RobotMap {
 	public static int transOut = 3;
 	
 	//Solenoid Ports for gearChute
-	public static int gearport1 = 0;
-	public static int gearport2 = 1;
-	public static int gearport3 = 2;
-	public static int gearport4 = 3;
+	public static int gearport1 = 4;
+	public static int gearport2 = 5;
+	public static int gearport3 = 6; //cross
+	public static int gearport4 = 7; //cross
 	
 	//Encoder Ports
 	public static int encPort1 = 0;
