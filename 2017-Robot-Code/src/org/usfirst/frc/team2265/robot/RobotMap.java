@@ -15,23 +15,25 @@ public class RobotMap {
 
 	// Joystick Ports
 	public static int driveJoyPort = 1;
-	//public static int atkJoyPort = 1;
+	// public static int atkJoyPort = 1;
 
 	// Talon Ports
-	public static int rearLeftPort = 1; //3 
-	public static int frontLeftPort = 2; //12
-	
-	public static int rearRightPort = 3; //13
-	public static int frontRightPort = 4; //1
-	
+	public static int rearLeftPort = 1; // 3
+	public static int frontLeftPort = 2; // 12
+
+	public static int rearRightPort = 3; // 13
+	public static int frontRightPort = 4; // 1
+
 	public static int climberPort1 = 5;
 	public static int climberPort2 = 6;
 
-	// Solenoid Ports
-	public static int transIn = 2;
-	public static int transOut = 3;
-	
-	//Encoder Ports
+	// Solenoid Ports for gearChute
+	public static int gearPort1 = 4;
+	public static int gearPort2 = 5;
+	public static int basePort1 = 6; // cross
+	public static int basePort2 = 7; // cross
+
+	// Encoder Ports
 	public static int encPort1 = 0;
 	public static int encPort2 = 1;
 
