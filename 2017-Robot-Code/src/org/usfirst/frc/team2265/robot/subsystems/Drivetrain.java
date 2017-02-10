@@ -1,5 +1,3 @@
-
-
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -27,10 +25,9 @@ public class Drivetrain extends Subsystem {
 	public static CANTalon rearRight = new CANTalon(RobotMap.rearRightPort);
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 	// Initialize solenoids
-	public static DoubleSolenoid gearShifter = new DoubleSolenoid(RobotMap.transIn, RobotMap.transOut);
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
-	
-	//Initializing encoder 
+
+	// Initializing encoder
 	public static Encoder encoder = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 
 	public Drivetrain() {
@@ -51,20 +48,14 @@ public class Drivetrain extends Subsystem {
 		frontLeft.set(l);
 		rearLeft.set(l);
 	}
-	//straight
-	public void driveStraight(){
+
+	// straight
+	public void driveStraight() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		double driveVal = (leftVal + rightVal)/2;
+		double driveVal = (leftVal + rightVal) / 2;
 		tankDrive.tankDrive(driveVal, driveVal);
-		
-	}
-	public void shiftToSpeed() {
-		gearShifter.set(DoubleSolenoid.Value.kReverse);
-	}
 
-	public void shiftToPower() {
-		gearShifter.set(DoubleSolenoid.Value.kForward);
 	}
 
 	public void initDefaultCommand() {
