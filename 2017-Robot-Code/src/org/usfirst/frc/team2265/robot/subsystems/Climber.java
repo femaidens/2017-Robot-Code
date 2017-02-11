@@ -21,7 +21,7 @@ public class Climber extends Subsystem {
 	// Sets speed for climber motor
 
 	public void spin(double speed) {
-		climberTalon.set(-speed);
+		climberTalon.set(speed);
 		climberTalon2.set(-speed);
 	}
 
