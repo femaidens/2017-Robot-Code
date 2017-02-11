@@ -6,7 +6,6 @@ import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 import com.ctre.CANTalon;
-//import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
@@ -44,7 +43,7 @@ public class Drivetrain extends Subsystem {
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		tankDrive.tankDrive(leftVal, rightVal);
+		tankDrive.tankDrive(-leftVal, -rightVal);
 	}
 
 	// auton
@@ -93,18 +92,18 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void autoAlign() {
-		while (HelloCV.midX <= 305 || HelloCV.midX >= 335) {
-			if (HelloCV.midX <= 305) {
-				frontRight.set(0.25);
-				rearRight.set(0.25);
-				frontLeft.set(-0.125);
-				rearLeft.set(-0.125);
+		while (Robot.midX <= 285 || Robot.midX >= 315) {
+			if (Robot.midX <= 270) {
+				frontRight.set(-0.1);
+				rearRight.set(-0.1);
+				frontLeft.set(-0.1);
+				rearLeft.set(-0.1);
 				//turns left
-			} else if (HelloCV.midX >= 335) {
-				frontRight.set(-0.125);
-				rearRight.set(-0.125);
-				frontLeft.set(0.25);
-				rearLeft.set(0.25);
+			} else if (Robot.midX >= 370) {
+				frontRight.set(0.1);
+				rearRight.set(0.1);
+				frontLeft.set(0.1);
+				rearLeft.set(0.1);
 				//turns right
 			}
 			//this will keep running if the midX is not in within 305 and 335
@@ -114,6 +113,7 @@ public class Drivetrain extends Subsystem {
 		rearRight.set(0);
 		frontLeft.set(0);
 		rearLeft.set(0);
+		return;
 	}
 
 	public void initDefaultCommand() {

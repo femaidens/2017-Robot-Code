@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2265.robot;
 
+import org.usfirst.frc.team2265.robot.commands.CameraAuto;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.GearShift;
 //import org.usfirst.frc.team2265.robot.commands.TurnLEDOn;
@@ -42,10 +43,12 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	public static Button swap = new JoystickButton(driveJoystick, 3);
+	public static Button align = new JoystickButton(driveJoystick, 4);
 	//public static Button LEDButton = new JoystickButton(driveJoystick, 4);
 	
 	public void bindButtons(){
 		swap.whenPressed(new GearShift());
+		align.toggleWhenPressed(new CameraAuto());
 		//LEDButton.toggleWhenPressed(new TurnLEDOn());
 	}
 }

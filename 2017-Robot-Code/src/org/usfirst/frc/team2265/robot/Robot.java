@@ -14,6 +14,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2265.robot.commands.CenterAuto;
+import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.LeftAuto;
 import org.usfirst.frc.team2265.robot.commands.RightAuto;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 	CommandGroup autonomousCommand;
 	public static I2C i2c;
 	public static byte[] toSend;
+	public static int midX;
+	public static boolean stop;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -80,9 +83,9 @@ public class Robot extends IterativeRobot {
 	    				Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
 	    				//outputStream.putFrame(image);
 	    				Imgproc.blur(image, image2, new Size(3, 3));
-	    				Scalar bigMinValues = new Scalar(58, 226, 80); // placeholder
+	    				Scalar bigMinValues = new Scalar(50, 180, 100); // placeholder
 	    																// values
-	    				Scalar bigMaxValues = new Scalar(108, 255, 150); // placeholder
+	    				Scalar bigMaxValues = new Scalar(120, 255,255); // placeholder
 	    																	// values
 	    				Core.inRange(image2, bigMinValues, bigMaxValues, image);
 	    				
@@ -117,6 +120,7 @@ public class Robot extends IterativeRobot {
 	    								rectList.get(0).y - rectList.get(0).height),
 	    						new Scalar(179, 255, 255), 1); 
 	    				}
+	    				
 	    				outputStream.putFrame(image);
 	    				/*// midX = (rectList.get(0).x + (rectList.get(1).x +
 	   				// rectList.get(1).width))/2;
@@ -125,6 +129,10 @@ public class Robot extends IterativeRobot {
 	    				for (int i = 0; i < rectList.size(); i++) {
 	    					System.out.print(rectList.get(i).height);
 	    				}*/
+	    				if(rectList.size()> 1){
+	    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
+	    					System.out.println("midX: " + midX);
+	    				}
 	    				image.release();
 	    				image2.release();
 	    				source.release();
@@ -134,11 +142,11 @@ public class Robot extends IterativeRobot {
 	    
 		// instantiate the command used for the autonomous period
 		//autonomousCommand = new ExampleCommand();
-		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Center Mode", new CenterAuto());
-		autoChooser.addObject("Left Mode", new LeftAuto());
-		autoChooser.addObject("Right Mode", new RightAuto());
-		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
+		//autoChooser = new SendableChooser();
+		//autoChooser.addDefault("Center Mode", new CenterAuto());
+		//autoChooser.addObject("Left Mode", new LeftAuto());
+		//autoChooser.addObject("Right Mode", new RightAuto());
+		//SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
 		//autonomousCommand = (CommandGroup) new EncoderAuto();
 		//System.out.println("set command to timer");
 	}
@@ -149,9 +157,10 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		autonomousCommand = (CommandGroup) autoChooser.getSelected();
+		/*autonomousCommand = (CommandGroup) autoChooser.getSelected();
 		autonomousCommand.start();
-		System.out.println("Init auton");
+		System.out.println("Init auton");*/
+		//autonomousCommand = (Command) ;
 	}
 
 	/**
