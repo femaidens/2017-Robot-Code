@@ -5,10 +5,27 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Rect;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
@@ -30,6 +47,7 @@ public class Robot extends IterativeRobot {
 	public static I2C i2c;
 	public static byte[] toSend;
 	Command autonomousCommand;
+	public static int midX;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -39,7 +57,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		climber = new Climber();
-		Drivetrain.encoder.reset();
+		//Drivetrain.encoder.reset();
 		compressette = new Compressor();
 		i2c = new I2C(I2C.Port.kOnboard, 84);
 	    toSend = new byte[1];
@@ -48,7 +66,73 @@ public class Robot extends IterativeRobot {
 		
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
-		CameraServer.getInstance().startAutomaticCapture();
+		 UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+		    camera.setResolution(640, 480);
+		    camera.setBrightness(0);
+		    CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
+		    CvSink cvSink = CameraServer.getInstance().getVideo();
+		    
+		    
+		    new Thread(() -> {
+		    			
+		    			Mat source = new Mat();
+		    			Mat image = new Mat();
+		    			Mat image2 = new Mat();
+		    
+		   			while (!Thread.interrupted()) {
+		    				cvSink.grabFrame(source);
+		    				Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
+		    				//outputStream.putFrame(image);
+		    				Imgproc.blur(image, image2, new Size(3, 3));
+		    				Scalar bigMinValues = new Scalar(50, 180, 100); // placeholder
+		    																// values
+		    				Scalar bigMaxValues = new Scalar(120, 255,255); // placeholder
+		    																	// values
+		    				Core.inRange(image2, bigMinValues, bigMaxValues, image);
+		    				
+		    				
+		    				ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+		    				image.convertTo(image, CvType.CV_8UC1);
+		    				Mat mat = new Mat();
+		    				Imgproc.findContours(image, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+		    				Imgproc.drawContours(image, contours, -1, new Scalar(60, 255, 255), 2);
+		    				
+		    				//System.out.println(contours);
+		    				Iterator<MatOfPoint> contourItr = contours.iterator();
+		    				ArrayList<Double> area = new ArrayList<Double>();
+		   				while (contourItr.hasNext()) {
+		    					MatOfPoint p = contourItr.next();
+		    					area.add(Imgproc.contourArea(p));
+		   
+		    				}
+		    				System.out.println("Area: " + area.toString());
+		   				ArrayList<Rect> rectList = new ArrayList<Rect>();
+		    				// ArrayList<Double> centerList = new ArrayList<Double>();
+		    
+		    				for (int i = 0; i < contours.size(); i++) {
+		    					MatOfPoint cPoint = contours.get(i);
+		    					Rect rect = Imgproc.boundingRect(cPoint);
+		    					rectList.add(rect);
+		    				}
+		    				System.out.println("Rectangles: " + rectList);
+		    				if (rectList.size() > 0){
+		    				Imgproc.rectangle(image, new Point(rectList.get(0).x, rectList.get(0).y),
+		    						new Point(rectList.get(0).x + rectList.get(0).width,
+		    								rectList.get(0).y - rectList.get(0).height),
+		    						new Scalar(179, 255, 255), 1); 
+		    				}
+		    				
+		    				outputStream.putFrame(image);
+		    				if(rectList.size()> 1){
+		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
+		    					System.out.println("midX: " + midX);
+		    				}
+		    				image.release();
+		    				image2.release();
+		    				source.release();
+		    			}
+		    
+		    		}).start();
 	}
 
 	public void disabledPeriodic() {

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2265.robot;
 
+import org.usfirst.frc.team2265.robot.commands.CameraAuto;
 import org.usfirst.frc.team2265.robot.commands.Climb;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
@@ -47,11 +48,15 @@ public class OI {
 	public static Button compressorButton = new JoystickButton(driveJoystick, 3);
 	public static Button dropGear = new JoystickButton(driveJoystick, 2);
 	public static Button reset = new JoystickButton(driveJoystick, 1);
+	public static Button align = new JoystickButton(driveJoystick, 9);
+	
 
 	public void bindButtons() {
 		climberButton.whileHeld(new Climb(0.5));
 		compressorButton.toggleWhenPressed(new ToggleCompressor());
 		dropGear.whenPressed(new ShiftChute(false));
 		reset.whenPressed(new ShiftChute(true));
+		align.toggleWhenPressed(new CameraAuto());
+		
 	}
 }

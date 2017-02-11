@@ -25,7 +25,7 @@ public class DriveAuton extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.drivetrain.drive(left,right);
-    	Drivetrain.encoder.get();
+    	//Drivetrain.encoder.get();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -3,6 +3,7 @@ package org.usfirst.frc.team2265.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
+import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -27,7 +28,10 @@ public class Drivetrain extends Subsystem {
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
 	// Initializing encoder
-	public static Encoder encoder = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
+	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
+	public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4);
+	
+	public static double constant = 8.6;
 
 	public Drivetrain() {
 	}
@@ -55,6 +59,50 @@ public class Drivetrain extends Subsystem {
 		double driveVal = (leftVal + rightVal) / 2;
 		tankDrive.tankDrive(driveVal, driveVal);
 
+	}
+	public void turnDegreesRight(double degrees){
+		double originalEncoderVal = encoderRight.get();
+		while(Math.abs(encoderRight.get() - originalEncoderVal) < degrees * constant){
+			frontRight.set(0);
+			rearRight.set(0);
+			frontLeft.set(0.25);
+			rearLeft.set(0.25);
+		}
+	}
+	
+	public void turnDegreesLeft(double degrees){
+		double originalEncoderVal = encoderLeft.get();
+		while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees * constant){
+			frontRight.set(0.25);
+			rearRight.set(0.25);
+			frontLeft.set(0);
+			rearLeft.set(0);
+		}
+	}
+	
+	public void autoAlign() {
+		while (Robot.midX <= 285 || Robot.midX >= 315) {
+			if (Robot.midX <= 270) {
+				frontRight.set(-0.1);
+				rearRight.set(-0.1);
+				frontLeft.set(-0.1);
+				rearLeft.set(-0.1);
+				//turns left
+			} else if (Robot.midX >= 370) {
+				frontRight.set(0.1);
+				rearRight.set(0.1);
+				frontLeft.set(0.1);
+				rearLeft.set(0.1);
+				//turns right
+			}
+			//this will keep running if the midX is not in within 305 and 335
+		}
+
+		frontRight.set(0);
+		rearRight.set(0);
+		frontLeft.set(0);
+		rearLeft.set(0);
+		return;
 	}
 
 	public void initDefaultCommand() {
