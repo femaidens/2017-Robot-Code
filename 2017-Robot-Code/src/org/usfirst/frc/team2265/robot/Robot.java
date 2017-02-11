@@ -11,6 +11,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.I2C;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,8 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain drivetrain;
 	public static Climber climber;
 	public static Compressor compressette; 
+	public static I2C i2c;
+	public static byte[] toSend;
 	Command autonomousCommand;
 
 	/**
@@ -38,7 +41,11 @@ public class Robot extends IterativeRobot {
 		climber = new Climber();
 		Drivetrain.encoder.reset();
 		compressette = new Compressor();
+		i2c = new I2C(I2C.Port.kOnboard, 84);
+	    toSend = new byte[1];
+	    
 		oi.bindButtons();
+		
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
 		CameraServer.getInstance().startAutomaticCapture();
@@ -68,6 +75,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		Robot.toSend[0] = 88;
 	}
 
 	/**
