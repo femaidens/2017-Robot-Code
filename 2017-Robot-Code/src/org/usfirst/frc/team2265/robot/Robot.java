@@ -1,20 +1,23 @@
 
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.CenterAuto;
-import org.usfirst.frc.team2265.robot.commands.LeftAuto;
-import org.usfirst.frc.team2265.robot.commands.RightAuto;
-import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.GearChute;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team2265.robot.commands.CenterAuto;
+import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.LeftAuto;
+import org.usfirst.frc.team2265.robot.commands.RightAuto;
+import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2265.robot.subsystems.Climber;
+import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser<V>;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,30 +31,36 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain drivetrain;
-	public static GearChute gearChute;
-	SendableChooser autoChooser;
-	CommandGroup autonomousCommand;
-	
+	public static Climber climber;
+	public static Compressor compressette; 
+	public static I2C i2c;
+	public static byte[] toSend;
+	public static SendableChooser<V> autoChooser; 
+	Command autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		i2c = new I2C(I2C.Port.kOnboard, 84);
+	    toSend = new byte[1];
 		oi = new OI();
 		drivetrain = new Drivetrain();
-		gearChute = new GearChute();
-		//Drivetrain.encoder.reset();// do we still need another encoder along with the one on the left and right side?
+		climber = new Climber();
+		Drivetrain.encoderLeft.reset();
+		Drivetrain.encoderRight.reset();
+		compressette = new Compressor();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
-		//autonomousCommand = new ExampleCommand();
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Center Mode", new CenterAuto());
 		autoChooser.addObject("Left Mode", new LeftAuto());
 		autoChooser.addObject("Right Mode", new RightAuto());
 		SmartDashboard.putData("Autonomous Mode Selector", autoChooser);
-		//autonomousCommand = (CommandGroup) new EncoderAuto();
-		//System.out.println("set command to timer");
+		
+		autonomousCommand = new ExampleCommand();
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	public void disabledPeriodic() {
@@ -60,20 +69,12 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		autonomousCommand = (CommandGroup) autoChooser.getSelected();
-		autonomousCommand.start();
-		System.out.println("Init auton");
+		if (autonomousCommand != null)
+			autonomousCommand.start();
 	}
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Encoder Velocity", Drivetrain.encoderLeft.getRate());
-		SmartDashboard.putNumber("Right Encoder Velocity", Drivetrain.encoderRight.getRate());
-		SmartDashboard.putNumber("Left Encoder Position", Drivetrain.encoderLeft.getDistance());
-		SmartDashboard.putNumber("Right Encoder Position", Drivetrain.encoderRight.getDistance());
 	}
 
 	public void teleopInit() {
@@ -98,10 +99,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Encoder Velocity", Drivetrain.encoderLeft.getRate());
-		SmartDashboard.putNumber("Right Encoder Velocity", Drivetrain.encoderRight.getRate());
-		SmartDashboard.putNumber("Left Encoder Position", Drivetrain.encoderLeft.getDistance());
-		SmartDashboard.putNumber("Right Encoder Position", Drivetrain.encoderRight.getDistance());
 	}
 
 	/**
