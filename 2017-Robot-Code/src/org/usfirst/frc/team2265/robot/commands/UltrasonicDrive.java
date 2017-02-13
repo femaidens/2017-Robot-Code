@@ -33,6 +33,7 @@ public class UltrasonicDrive extends Command {
     	//instantiates variables by using getrangeinches method for each ultrasonic
     	leftRange = ultrasonicLeft.getRangeInches();
     	rightRange = ultrasonicRight.getRangeInches();
+    	byte[] toSend = new byte[1];
     	
     	//if the left side of robot is closer to object than right side, then it turns more left to get straight
     	if(leftRange < rightRange) {
@@ -41,6 +42,17 @@ public class UltrasonicDrive extends Command {
     //the right side of robot is closer to object than left side, then it turns more left to get straight
     	else if(rightRange < leftRange){
     		Robot.drivetrain.turnDegreesRight(Math.asin(leftRange/23.5));
+    	}
+    	
+    	// PLEASE CHECK THIS
+    	if (leftRange == 10 || rightRange == 10) {
+    		toSend[0] = 76;
+    		i2c.transaction(toSend, 1, null, 0);
+    	}
+    	else
+    	{
+    		toSend[1] = 72;
+    		i2c.transaction(toSend, 1, null, 0);
     	}
     }
 
