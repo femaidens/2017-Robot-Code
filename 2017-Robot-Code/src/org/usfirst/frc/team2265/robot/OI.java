@@ -3,6 +3,7 @@ package org.usfirst.frc.team2265.robot;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.GearShift;
 import org.usfirst.frc.team2265.robot.commands.GyroStraight;
+import org.usfirst.frc.team2265.robot.commands.GyroStraightBack;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -42,11 +43,14 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	public static Button swap = new JoystickButton(driveJoystick, 3);
-	public static Button gyroStraight = new JoystickButton(driveJoystick, 4);
+	public static Button gyroStraight = new JoystickButton(driveJoystick, 5);
+	public static Button gyroStraightB = new JoystickButton(driveJoystick, 4);
 	
 	public void bindButtons(){
 		swap.whenPressed(new GearShift());
-		gyroStraight.toggleWhenPressed(new GyroStraight());
+		gyroStraight.whileHeld(new GyroStraight(0.6));
+		//gyroStraightB.whileHeld(new GyroStraightBack(-0.6));
+		
 	}
 }
 
