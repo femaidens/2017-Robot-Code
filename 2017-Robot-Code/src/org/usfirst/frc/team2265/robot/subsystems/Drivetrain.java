@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Encoder;
+import com.ctre.CANTalon;
 
 /**
  *
@@ -32,10 +33,10 @@ public class Drivetrain extends Subsystem {
 	// TODO set updates for speeds
 	public static double speedRight;
 	public static double speedLeft;
-	frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+	/*frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 	frontLeft.configEncoderCodesPerRev(360);
 	frontRight.setFeedBackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-	frontRight.configEncoderCodesPerRev(360);
+	frontRight.configEncoderCodesPerRev(360);*/
 	
 	public Drivetrain() {
 	}
