@@ -3,7 +3,6 @@ package org.usfirst.frc.team2265.robot.commands;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -19,7 +18,6 @@ public class UltrasonicDrive extends Command {
 	public static Ultrasonic ultrasonicRight = new Ultrasonic(RobotMap.ultraPort3, RobotMap.ultraPort4);
 	//declares leftRange and rightRange as variables
 	double leftRange, rightRange;
-	public static I2C i2c;
 
     public UltrasonicDrive() {
         // Use requires() here to declare subsystem dependencies
@@ -35,7 +33,7 @@ public class UltrasonicDrive extends Command {
     	//instantiates variables by using getrangeinches method for each ultrasonic
     	leftRange = ultrasonicLeft.getRangeInches();
     	rightRange = ultrasonicRight.getRangeInches();
-    	byte[] toSend = new byte[0];
+    	byte[] toSend = new byte[1];
     	
     	//if the left side of robot is closer to object than right side, then it turns more left to get straight
     	if(leftRange < rightRange) {
@@ -47,13 +45,13 @@ public class UltrasonicDrive extends Command {
     	}
     	
     	// PLEASE CHECK THIS
-    	if (leftRange == 10 || rightRange == 10) {
-    		toSend[0] = 92 ;
+    	if (leftRange <= 10 & rightRange <= 10) {
+    		toSend[0] =90 ;
     		i2c.transaction(toSend, 1, null, 0);
     	}
     	else
     	{
-    		toSend[1] = 90;
+    		toSend[1] = 92;
     		i2c.transaction(toSend, 1, null, 0);
     	}
     }

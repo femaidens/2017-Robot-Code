@@ -33,6 +33,9 @@ public class Drivetrain extends Subsystem {
 	// TODO set updates for speeds
 	public static double speedRight;
 	public static double speedLeft;
+	
+	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
+	public static Encoder encoderRight = new Encoder (RobotMap.encPort3, RobotMap.encPort4);
 	/*frontLeft.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 	frontLeft.configEncoderCodesPerRev(360);
 	frontRight.setFeedBackDevice(CANTalon.FeedbackDevice.QuadEncoder);
