@@ -2,6 +2,7 @@ package org.usfirst.frc.team2265.robot;
 
 import org.usfirst.frc.team2265.robot.commands.CameraAuto;
 import org.usfirst.frc.team2265.robot.commands.Climb;
+import org.usfirst.frc.team2265.robot.commands.GyroStraight;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
 
@@ -48,7 +49,10 @@ public class OI {
 	public static Button compressorButton = new JoystickButton(driveJoystick, 3);
 	public static Button dropGear = new JoystickButton(driveJoystick, 2);
 	public static Button reset = new JoystickButton(driveJoystick, 1);
-	public static Button align = new JoystickButton(driveJoystick, 9);
+	public static Button align = new JoystickButton(driveJoystick, 8);
+	public static Button gyroStraight = new JoystickButton(driveJoystick, 5);
+	public static Button gyroStraightB = new JoystickButton(driveJoystick, 4);
+
 	
 
 	public void bindButtons() {
@@ -57,6 +61,9 @@ public class OI {
 		dropGear.whenPressed(new ShiftChute(false));
 		reset.whenPressed(new ShiftChute(true));
 		align.toggleWhenPressed(new CameraAuto());
+		gyroStraight.whileHeld(new GyroStraight(0.4));
+		//gyroStraightB.whileHeld(new GyroStraightBack(-0.6));
+
 		
 	}
 }

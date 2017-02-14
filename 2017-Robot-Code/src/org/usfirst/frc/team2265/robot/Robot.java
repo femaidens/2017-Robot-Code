@@ -55,14 +55,15 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
+		
 		drivetrain = new Drivetrain();
 		climber = new Climber();
 		//Drivetrain.encoder.reset();
 		compressette = new Compressor();
 		i2c = new I2C(I2C.Port.kOnboard, 84);
 	    toSend = new byte[1];
-	    
-		oi.bindButtons();
+	    oi.bindButtons();
+		
 		
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new ExampleCommand();
@@ -115,10 +116,10 @@ public class Robot extends IterativeRobot {
 		    					rectList.add(rect);
 		    				}
 		    				System.out.println("Rectangles: " + rectList);
-		    				if (rectList.size() > 0){
+		    				if (rectList.size() > 1){
 		    				Imgproc.rectangle(image, new Point(rectList.get(0).x, rectList.get(0).y),
-		    						new Point(rectList.get(0).x + rectList.get(0).width,
-		    								rectList.get(0).y - rectList.get(0).height),
+		    						new Point(rectList.get(0).x + rectList.get(1).width,
+		    								rectList.get(0).y - rectList.get(1).height),
 		    						new Scalar(179, 255, 255), 1); 
 		    				}
 		    				
@@ -126,6 +127,9 @@ public class Robot extends IterativeRobot {
 		    				if(rectList.size()> 1){
 		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
 		    					System.out.println("midX: " + midX);
+		    				}
+		    				else if (rectList.size() >0){
+		    					midX = rectList.get(0).x;
 		    				}
 		    				image.release();
 		    				image2.release();

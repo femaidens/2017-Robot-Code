@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team2265.robot.commands.CameraAuto;
 import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
@@ -67,6 +69,7 @@ public class Drivetrain extends Subsystem {
 			rearRight.set(0);
 			frontLeft.set(0.25);
 			rearLeft.set(0.25);
+			
 		}
 	}
 	
@@ -80,21 +83,28 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 	
-	public void autoAlign() {
-		while (Robot.midX <= 285 || Robot.midX >= 315) {
-			if (Robot.midX <= 270) {
+	/*public void autoAlign() {
+		while ((!CameraAuto.done) &&(Robot.midX < 285 || Robot.midX > 315)) {
+			if (Robot.midX < 285) {
 				frontRight.set(-0.1);
 				rearRight.set(-0.1);
 				frontLeft.set(-0.1);
 				rearLeft.set(-0.1);
+				System.out.println("<285");
 				//turns left
-			} else if (Robot.midX >= 370) {
+			} else if (Robot.midX > 315) {
 				frontRight.set(0.1);
 				rearRight.set(0.1);
 				frontLeft.set(0.1);
 				rearLeft.set(0.1);
+				
 				//turns right
+				System.out.println(">315");
 			}
+			else {
+				break;
+			}
+			System.out.println("autoaligning, mid X = " + Robot.midX);
 			//this will keep running if the midX is not in within 305 and 335
 		}
 
@@ -104,7 +114,7 @@ public class Drivetrain extends Subsystem {
 		rearLeft.set(0);
 		return;
 	}
-
+*/
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveTeleop());
