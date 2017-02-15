@@ -14,7 +14,7 @@ public class GearChute extends Subsystem {
 
 	// intializes doubleSolenoid for the gearChute
 	public static DoubleSolenoid gearPiston1 = new DoubleSolenoid(RobotMap.gearport1, RobotMap.gearport2);
-	public static DoubleSolenoid gearPiston2 = new DoubleSolenoid (RobotMap.gearport3, RobotMap.gearport4);
+	public static DoubleSolenoid gearPiston2 = new DoubleSolenoid (RobotMap.baseport1, RobotMap.baseport2);
 
 	// Extends the piston
 	public static void extend() {
