@@ -10,6 +10,7 @@ import org.usfirst.frc.team2265.robot.RobotMap;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 
 /**
@@ -17,9 +18,9 @@ import edu.wpi.first.wpilibj.Encoder;
  */
 
 public class Drivetrain extends Subsystem {
-
+	public static AnalogGyro gyro = new AnalogGyro(RobotMap.gyroPort);
 	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	// here. Call these from Commands
 	// Initialize CANTalons
 	public static CANTalon frontLeft = new CANTalon(RobotMap.frontLeftPort);
 	public static CANTalon rearLeft = new CANTalon(RobotMap.rearLeftPort);
@@ -30,20 +31,25 @@ public class Drivetrain extends Subsystem {
 	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
 	// Initializing encoder
-	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
-	public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4);
+	//public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
+	//public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4);
+	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2, false, Encoder.EncodingType.k1X);
+	public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4, false, Encoder.EncodingType.k1X);
 	
 	public static double constant = 8.6;
 
 	public Drivetrain() {
+		encoderLeft.setMaxPeriod(200);
+		encoderRight.setMaxPeriod(200);
 	}
 
 	// Teleop
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		System.out.println("leftVal: " + leftVal + "rightVal: " + rightVal);
+		System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " + encoderRight.get());
 		tankDrive.tankDrive(-leftVal*0.8, -rightVal*0.8);
+
 	}
 
 	// auton
@@ -55,27 +61,41 @@ public class Drivetrain extends Subsystem {
 	}
 
 	// straight
-	public void driveStraight() {
+	/*public void driveStraight() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
 		double driveVal = (leftVal + rightVal) / 2;
 		tankDrive.tankDrive(driveVal, driveVal);
 
-	}
+	}*/
 	public void turnDegreesRight(double degrees){
-		double originalEncoderVal = encoderRight.get();
+		/*double originalEncoderVal = encoderRight.get();
 		while(Math.abs(encoderRight.get() - originalEncoderVal) < degrees * constant){
 			frontRight.set(0);
 			rearRight.set(0);
 			frontLeft.set(0.25);
 			rearLeft.set(0.25);
 			
+		}*/
+		double angle = gyro.getAngle();
+		while (Math.abs(gyro.getAngle() - angle) < degrees) {
+			frontRight.set(0);
+			rearRight.set(0);
+			frontLeft.set(0.25);
+			rearLeft.set(0.25);
 		}
 	}
 	
 	public void turnDegreesLeft(double degrees){
-		double originalEncoderVal = encoderLeft.get();
+		/*double originalEncoderVal = encoderLeft.get();
 		while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees * constant){
+			frontRight.set(0.25);
+			rearRight.set(0.25);
+			frontLeft.set(0);
+			rearLeft.set(0);
+		}*/
+		double angle = gyro.getAngle();
+		while (Math.abs(gyro.getAngle() - angle) < degrees) {
 			frontRight.set(0.25);
 			rearRight.set(0.25);
 			frontLeft.set(0);
