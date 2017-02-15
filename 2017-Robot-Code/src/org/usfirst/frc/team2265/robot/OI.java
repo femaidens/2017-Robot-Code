@@ -21,7 +21,7 @@ public class OI {
 	// creates two new Joysticks (driveJoystick and atkJoy)
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 
-	public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
+	//public static Joystick atkJoy = new Joystick(RobotMap.atkJoyPort);
 
 	// makes a new button and sets button number
 

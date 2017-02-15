@@ -19,7 +19,9 @@ public class Climber extends Subsystem {
 
 	// Talon that controls climber motor
 
-	public static CANTalon climberTalon = new CANTalon(RobotMap.frontLeftPort);
+	//public static CANTalon climberTalon = new CANTalon(RobotMap.frontLeftPort);
+	public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort1);
+	public static CANTalon climberTalon2 = new CANTalon(RobotMap.climberPort2);
 
 	public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
 	// makes a climber class
