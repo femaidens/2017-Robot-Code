@@ -15,7 +15,7 @@ import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 //makes the command and 
 public class EncGyroDriveStraight extends Command {
 	//declaring variables
-	double distance, left, right, distanceLeft, distanceRight;
+	double distance, leftVel, rightVel, distanceLeft, distanceRight;
 	AnalogGyro gyro;
 	double angle;
 	
@@ -23,9 +23,7 @@ public class EncGyroDriveStraight extends Command {
 	static ArrayList<Rect> rectList = HelloCV.rectList;
 	static Mat image = HelloCV.image;
 	static Mat blurredImage = HelloCV.blurredImage;
-	double leftVel = Drivetrain.frontRight.get();
-	double rightVel = Drivetrain.frontLeft.get();
-
+	
 	//can be used to hardcode the distance
 	public EncGyroDriveStraight(double d, double l, double r) {
 		// Use requires() here to declare subsystem dependencies
@@ -33,8 +31,8 @@ public class EncGyroDriveStraight extends Command {
 		
 		//instantiating variables
 		distance = d;
-		right = r;
-		left = l;
+		rightVel = r;
+		leftVel = l;
 		gyro = new AnalogGyro(RobotMap.gyroPort);
 		angle = gyro.getAngle();
 	}
@@ -44,8 +42,8 @@ public class EncGyroDriveStraight extends Command {
 		HelloCV.removeNoise(image);
 		HelloCV.contouring(blurredImage);
 		distance = HelloCV.getDistance(rectList);
-		right = r;
-		left = l;
+		rightVel = r;
+		leftVel = l;
 		gyro = new AnalogGyro(RobotMap.gyroPort);
 		angle = gyro.getAngle();
 	}
@@ -61,9 +59,13 @@ public class EncGyroDriveStraight extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (angle > 90 && angle < 180) {// turning left
-			Drivetrain.frontRight.set(rightVel - 0.1);
-			Drivetrain.rearRight.set(rightVel - 0.1);
+			Drivetrain.frontRight.set(-rightVel - 0.1);
+			Drivetrain.rearRight.set(-rightVel - 0.1);
+			Drivetrain.frontLeft.set(leftVel);
+			Drivetrain.rearLeft.set(leftVel);
 		} else if (angle < 90 && angle > 0) { //turning right
+			Drivetrain.frontRight.set(-rightVel);
+			Drivetrain.rearRight.set(-rightVel);
 			Drivetrain.frontLeft.set(leftVel - 0.1);
 			Drivetrain.rearLeft.set(leftVel - 0.1);
 		}
@@ -90,7 +92,7 @@ public class EncGyroDriveStraight extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		//stops motors and resets encoders
-		Robot.drivetrain.drive(0, 0);
+		Drivetrain.drive(0, 0);
 		Drivetrain.encoderLeft.reset();
 		Drivetrain.encoderRight.reset();// remove if we want to see how far the
 										// encoder has moved AFTER stopping

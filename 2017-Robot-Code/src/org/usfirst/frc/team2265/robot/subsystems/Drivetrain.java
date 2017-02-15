@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -37,6 +38,9 @@ public class Drivetrain extends Subsystem {
 	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
 	public static Encoder encoderRight = new Encoder (RobotMap.encPort3, RobotMap.encPort4);
 	
+	public static Ultrasonic ultrasonicLeft = new Ultrasonic(RobotMap.ultraPort1,RobotMap.ultraPort2);
+	public static Ultrasonic ultrasonicRight = new Ultrasonic(RobotMap.ultraPort3, RobotMap.ultraPort4);
+	
 	//converts the number of degrees into ticks
 	public static double constant = 8.6; //(2*23.5*pi/360)/(2*2*pi/256)
 	
@@ -52,15 +56,14 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	// auton
-	public void drive(double l, double r) {
+	public static void drive(double l, double r) {
 		//sets motors with variables as parameters (called in drive command)
 		frontRight.set(-r);
 		rearRight.set(-r);
 		frontLeft.set(l);
-		rearLeft.set(l);
-		
- 
+		rearLeft.set(l); 
 	}
+	
 	//helps driver drive straight
 	public void driveStraight(){
 		double leftVal = OI.driveJoystick.getRawAxis(1);
@@ -70,16 +73,12 @@ public class Drivetrain extends Subsystem {
 		tankDrive.tankDrive(driveVal, driveVal);	
 	}
 	
-	//called in ultrasonic drive
 	public void turnDegreesRight(double degrees){
 		double originalEncoderVal = encoderRight.get();
 		//if distance moved is less than the distance you want to move, then the motors will get set so that it turns right 
 		while(Math.abs(encoderRight.get() - originalEncoderVal) < degrees * constant){
 			//sets motor values
-			frontRight.set(-0.25);
-			rearRight.set(-0.25);
-			frontLeft.set(0.25);
-			rearLeft.set(0.25);
+			drive(0.25, -0.25);
 		}
 	}
 	
@@ -88,10 +87,7 @@ public class Drivetrain extends Subsystem {
 		double originalEncoderVal = encoderLeft.get();
 		//if distance moved is less than the distance you want to move, then the motors will get set so that it turns left
 		while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees * constant){
-			frontRight.set(0.25);
-			rearRight.set(0.25);
-			frontLeft.set(-0.25);
-			rearLeft.set(-0.25);
+			drive(-0.25, 0.25);
 		}
 	}
 

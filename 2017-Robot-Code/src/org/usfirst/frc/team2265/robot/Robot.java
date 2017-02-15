@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser<V>;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Compressor compressette; 
 	public static I2C i2c;
 	public static byte[] toSend;
-	public static SendableChooser<V> autoChooser; 
+	public static SendableChooser<Object> autoChooser; 
 	Command autonomousCommand;
 
 	/**
@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
 		compressette = new Compressor();
 		oi.bindButtons();
 		// instantiate the command used for the autonomous period
-		autoChooser = new SendableChooser();
+		autoChooser = new SendableChooser<>();
 		autoChooser.addDefault("Center Mode", new CenterAuto());
 		autoChooser.addObject("Left Mode", new LeftAuto());
 		autoChooser.addObject("Right Mode", new RightAuto());

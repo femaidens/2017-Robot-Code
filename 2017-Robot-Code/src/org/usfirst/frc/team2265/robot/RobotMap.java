@@ -14,12 +14,12 @@ public class RobotMap {
 	// public static int rightMotor = 2;
 
 	// Joystick Ports
-	public static int driveJoyPort = 2;
-	public static int atkJoyPort = 1;
+	public static int driveJoyPort = 1;
+	//public static int atkJoyPort = 1;
 
 	// Talon Ports
-	public static int rearLeftPort = 2;
-	public static int rearRightPort = 5;
+	public static int rearLeftPort = 1;
+	public static int rearRightPort = 2;
 	public static int frontLeftPort = 3;
 	public static int frontRightPort = 4;
 
@@ -32,7 +32,11 @@ public class RobotMap {
 	public static int encPort2 = 1;
 	public static int encPort3 = 2;
 	public static int encPort4 = 3;
-	public static int climberEncoder = 4; //port is a placeholder
+	//public static int climberEncoder = 4;
+	
+	//climber talon port
+	public static int climberPort1 = 5;
+	public static int climberPort2 = 6;
 	
 	//Ultrasonic Ports
 	public static int ultraPort1 = 0;
@@ -43,11 +47,11 @@ public class RobotMap {
 	//gyro ports
 	public static int gyroPort = 0;
 	
-	//gear servo ports
-	public static int gearServoPort1 = 0;
-	public static int gearServoPort2 = 1;
-	public static int gearPort1 = 2;
-	public static int gearPort2 = 3;
+	//gearPorts
+	public static int gearPort1 = 6;
+	public static int gearPort2 = 7;
+	public static int basePort1 = 4;
+	public static int basePort2 = 5;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

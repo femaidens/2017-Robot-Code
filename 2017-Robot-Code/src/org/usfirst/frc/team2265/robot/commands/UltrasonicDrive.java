@@ -1,11 +1,10 @@
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
-import org.usfirst.frc.team2265.robot.RobotMap;
+import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Ultrasonic;
+
 
 
 /**
@@ -13,9 +12,6 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  */
 
 public class UltrasonicDrive extends Command {
-	//makes new ultrasonics for left and right with ports
-	public static Ultrasonic ultrasonicLeft = new Ultrasonic(RobotMap.ultraPort1,RobotMap.ultraPort2);
-	public static Ultrasonic ultrasonicRight = new Ultrasonic(RobotMap.ultraPort3, RobotMap.ultraPort4);
 	//declares leftRange and rightRange as variables
 	double leftRange, rightRange;
 
@@ -31,9 +27,8 @@ public class UltrasonicDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//instantiates variables by using getrangeinches method for each ultrasonic
-    	leftRange = ultrasonicLeft.getRangeInches();
-    	rightRange = ultrasonicRight.getRangeInches();
-    	byte[] toSend = new byte[1];
+    	leftRange = Drivetrain.ultrasonicLeft.getRangeInches();
+    	rightRange = Drivetrain.ultrasonicRight.getRangeInches();
     	
     	//if the left side of robot is closer to object than right side, then it turns more left to get straight
     	if(leftRange < rightRange) {
@@ -45,15 +40,11 @@ public class UltrasonicDrive extends Command {
     	}
     	
     	// PLEASE CHECK THIS
-    	if (leftRange == 10 || rightRange == 10) {
-    		toSend[0] = 76;
-    		i2c.transaction(toSend, 1, null, 0);
-    	}
+    	if (leftRange <= 10 && rightRange <= 10)
+    		Robot.toSend[0] = 90;
     	else
-    	{
-    		toSend[1] = 72;
-    		i2c.transaction(toSend, 1, null, 0);
-    	}
+    		Robot.toSend[1] = 92;
+    	Robot.i2c.transaction(Robot.toSend, 1, null, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
