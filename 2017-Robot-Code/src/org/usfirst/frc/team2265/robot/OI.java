@@ -5,6 +5,7 @@ import org.usfirst.frc.team2265.robot.commands.Climb;
 import org.usfirst.frc.team2265.robot.commands.GyroStraight;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
+import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -56,7 +57,8 @@ public class OI {
 	
 
 	public void bindButtons() {
-		climberButton.whileHeld(new Climb(0.5));
+		//climberButton.whileHeld(new Climb(0.5));
+		climberButton.whileHeld(new TurnDegrees(180));
 		compressorButton.toggleWhenPressed(new ToggleCompressor());
 		dropGear.whenPressed(new ShiftChute(false));
 		reset.whenPressed(new ShiftChute(true));

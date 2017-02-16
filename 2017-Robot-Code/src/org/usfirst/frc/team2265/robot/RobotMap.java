@@ -50,7 +50,7 @@ public class RobotMap {
 	public static int encPort4 = 7;
 	
 	//Gyro port
-	public static int gyroPort = 0;
+	public static int gyroPort = 1;
 
 
 	// If you are using multiple modules, make sure to define both the port
