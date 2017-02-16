@@ -32,8 +32,8 @@ public class Drivetrain extends Subsystem {
 
 	// Initializing encoder
 	//public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2);
-	//public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4);
-	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2, false, Encoder.EncodingType.k1X);
+	//public static d encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4);
+	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2, true, Encoder.EncodingType.k1X);
 	public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4, false, Encoder.EncodingType.k1X);
 	
 	public static double constant = 8.6;

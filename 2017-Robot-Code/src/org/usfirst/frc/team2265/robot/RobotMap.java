@@ -24,11 +24,11 @@ public class RobotMap {
 	public static int rearRightPort = 3;
 	public static int frontRightPort = 4; */
 	
-	public static int rearLeftPort = 1;
-	public static int frontLeftPort = 2;
+	public static int rearLeftPort = 3; //1
+	public static int frontLeftPort = 4; //2
 
-	public static int rearRightPort = 3;
-	public static int frontRightPort = 4;
+	public static int rearRightPort = 1; //3
+	public static int frontRightPort = 2; //4
 
 	public static int climberPort1 = 5;
 	public static int climberPort2 = 6;
@@ -40,10 +40,14 @@ public class RobotMap {
 	public static int basePort2 = 5; 
 
 	// Encoder Ports
-	public static int encPort1 = 5;
+	/*public static int encPort1 = 5;
 	public static int encPort2 = 6;
 	public static int encPort3 = 7;
-	public static int encPort4 = 8;
+	public static int encPort4 = 8;*/
+	public static int encPort1 = 4;
+	public static int encPort2 = 5;
+	public static int encPort3 = 6;
+	public static int encPort4 = 7;
 	
 	//Gyro port
 	public static int gyroPort = 0;

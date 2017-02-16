@@ -107,7 +107,6 @@ public class Robot extends IterativeRobot {
 		    					area.add(Imgproc.contourArea(p));
 		   
 		    				}
-		    				System.out.println("Area: " + area.toString());
 		   				ArrayList<Rect> rectList = new ArrayList<Rect>();
 		    				// ArrayList<Double> centerList = new ArrayList<Double>();
 		    
@@ -116,7 +115,7 @@ public class Robot extends IterativeRobot {
 		    					Rect rect = Imgproc.boundingRect(cPoint);
 		    					rectList.add(rect);
 		    				}
-		    				System.out.println("Rectangles: " + rectList);
+		    			
 		    				if (rectList.size() > 1){
 		    				Imgproc.rectangle(image, new Point(rectList.get(0).x, rectList.get(0).y),
 		    						new Point(rectList.get(0).x + rectList.get(1).width,
