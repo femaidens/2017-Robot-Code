@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CameraAuto extends Command {
 	boolean done = false;
+	int autoAligning = 0; // not auto aligning
 
 	public CameraAuto() {
 		// Use requires() here to declare subsystem dependencies
@@ -23,15 +24,18 @@ public class CameraAuto extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.drivetrain.autoAlign();
+		autoAligning = 1; // auto aligning
 		connectArduino();
 		done = true;
 	}
 
 	public void connectArduino() {
-		if (!done)
+		if (autoAligning == 0)
 			Robot.toSend[0] = 3;
-		else
+		else if(autoAligning == 1)
 			Robot.toSend[0] = 4;
+		else if(autoAligning == 2)
+			Robot.toSend[0] = 5;
 		Robot.i2c.transaction(Robot.toSend, 1, null, 0);
 		Timer.delay(0.0005);
 	}
@@ -44,6 +48,7 @@ public class CameraAuto extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		autoAligning = 2; //done auto aligning
 		connectArduino();
 	}
 
@@ -51,6 +56,7 @@ public class CameraAuto extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		done = true;
+		autoAligning = 2; // done auto aligning
 		connectArduino();
 	}
 

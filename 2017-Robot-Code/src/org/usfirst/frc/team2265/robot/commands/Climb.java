@@ -37,9 +37,9 @@ public class Climb extends Command {
 	
 	public void connectArduino() {
 		if (climbing)
-			Robot.toSend[0] = 5;
-		else
 			Robot.toSend[0] = 6;
+		else
+			Robot.toSend[0] = 7;
 		Robot.i2c.transaction(Robot.toSend, 1, null, 0);
 		Timer.delay(0.0005);
 }

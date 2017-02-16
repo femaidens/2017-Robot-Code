@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	public static Climber climber;
 	public static Compressor compressette; 
 	public static I2C i2c;
-	public static byte[] toSend;
+	public static byte[] toSend;  
 	public static SendableChooser<Object> autoChooser; 
 	Command autonomousCommand;
 	public static int midX;
