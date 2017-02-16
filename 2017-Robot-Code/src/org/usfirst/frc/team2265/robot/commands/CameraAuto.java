@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+// auto aligning 0 = not aligning, auto aligning 1 = currently aligning, auto aligning 2 = done aligning
 public class CameraAuto extends Command {
 	boolean done = false;
 
@@ -43,7 +44,7 @@ public class CameraAuto extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		done = true;
-		Robot.autoAligning = 0;
+		Robot.autoAligning = 0; 
 		Robot.connectArduino();
 	}
 

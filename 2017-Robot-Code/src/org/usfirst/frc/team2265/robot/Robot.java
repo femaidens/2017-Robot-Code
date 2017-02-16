@@ -48,16 +48,22 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public static  void connectArduino() {
+		//if the chute is closed and its not auto aligning turns green and purple
 		if (chuteOpen == false && autoAligning == 0)
 			toSend[0] = 1;
+		//if the chute is closed and its currently auto aligning turns green and blinking purple
 		else if(chuteOpen == false && autoAligning == 1)
 			toSend[0] = 2;
+		//if the chute is closed and its done auto aligning then flashes white and turns green and white
 		else if(chuteOpen == false && autoAligning == 2)
 			toSend[0] = 3;
+		//if chute is open and it's not auto aligning or its done auto aligning then blinking green and purple
 		else if(chuteOpen == true && (autoAligning == 0 || autoAligning == 2))
 			toSend[0] = 4;
+		//if the chute is opening and its currently auto aligning then blinking green and purple
 		else if(chuteOpen == true && autoAligning == 1)
 			toSend[0] = 5;
+		//if it's climbing then "light saber" mode
 		else if(climbing)
 			toSend[0] = 6;
 		i2c.transaction(toSend, 1, null, 0);

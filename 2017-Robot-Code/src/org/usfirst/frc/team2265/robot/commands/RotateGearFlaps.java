@@ -22,6 +22,7 @@ public class RotateGearFlaps extends Command {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
+	//if the pistons are extended it retracts them and then the chute is open (true)
 	protected void execute() {
 		if (GearChute.gearPiston1.get().equals(Value.kForward) || GearChute.gearPiston1.get().equals(Value.kOff)) {
 			GearChute.retract();
@@ -29,7 +30,7 @@ public class RotateGearFlaps extends Command {
 			Robot.connectArduino();
 			return;
 		}
-
+//if the pistons are retracted then extend them, and means chute is closed (false)
 		if (GearChute.gearPiston2.get().equals(Value.kReverse)) {
 			GearChute.extend();
 			Robot.chuteOpen = false;
@@ -44,6 +45,7 @@ public class RotateGearFlaps extends Command {
 	}
 
 	// Called once after isFinished returns true
+	//if auto aligning is finished (2) and the chute is open (true) then assume that gear is on peg and set auto align back to not auto aligning
 	protected void end() {
 		if(Robot.autoAligning == 2 && Robot.chuteOpen == true)
 			Robot.autoAligning = 0;
