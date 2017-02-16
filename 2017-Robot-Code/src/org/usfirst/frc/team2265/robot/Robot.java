@@ -37,6 +37,8 @@ public class Robot extends IterativeRobot {
 	public static byte[] toSend;
 	public static SendableChooser<Object> autoChooser; 
 	Command autonomousCommand;
+	public static int midX;
+
 
 	/**
 	 * This function is run when the robot is first started up and should be

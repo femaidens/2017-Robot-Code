@@ -38,14 +38,9 @@ public class UltrasonicDrive extends Command {
     	else if(rightRange < leftRange){
     		Robot.drivetrain.turnDegreesRight(Math.asin(leftRange/23.5));
     	}
-    	
-    	// PLEASE CHECK THIS
-    	if (leftRange <= 10 && rightRange <= 10)
-    		Robot.toSend[0] = 90;
-    	else
-    		Robot.toSend[1] = 92;
-    	Robot.i2c.transaction(Robot.toSend, 1, null, 0);
     }
+    	
+    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

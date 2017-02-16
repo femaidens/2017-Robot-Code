@@ -22,7 +22,6 @@ public class Climber extends Subsystem {
    // public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort);
 	public static CANTalon climber1 = new CANTalon(RobotMap.climberPort1);
 	public static CANTalon climber2 = new CANTalon(RobotMap.climberPort2);
-	public static Encoder climberEncoder = new Encoder(RobotMap.climberEncoderPort1, RobotMap.climberEncoderPort2);
 
 	//public static int periodUs = climberTalon.getPulseWidthRiseToRiseUs();
 	// makes a climber class

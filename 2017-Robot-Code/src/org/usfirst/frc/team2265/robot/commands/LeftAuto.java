@@ -16,10 +16,10 @@ public class LeftAuto extends CommandGroup {
 	addSequential(new TurnRight(30));
 	addSequential(new EncGyroDriveStraight(3,1,1));
 	addParallel(new Drop(false));
-	addSequential(new RotateGearFlaps(false));
+	addSequential(new RotateGearFlaps());
 	addSequential(new EncGyroDriveStraight(1,-1,-1));
 	addParallel(new Drop(true));
-	addSequential(new RotateGearFlaps(true));
+	addSequential(new RotateGearFlaps());
 
     
 // To run multiple commands at the same time,

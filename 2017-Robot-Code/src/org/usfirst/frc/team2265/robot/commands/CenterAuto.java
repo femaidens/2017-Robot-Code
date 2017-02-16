@@ -15,10 +15,10 @@ public class CenterAuto extends CommandGroup {
 		// these will run in order.
 		addSequential(new EncGyroDriveStraight(9, 1, 1));
 		addParallel(new Drop(false));
-		addSequential(new RotateGearFlaps(false));
+		addSequential(new RotateGearFlaps());
 		addSequential(new EncGyroDriveStraight(1, -1, -1));
 		addParallel(new Drop(true));
-		addSequential(new RotateGearFlaps(true));
+		addSequential(new RotateGearFlaps());
 
 		// To run multiple commands at the same time,
 		// use addParallel()

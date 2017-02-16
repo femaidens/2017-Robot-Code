@@ -39,7 +39,7 @@ public class EncoderDrive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		//gets left and right distances
-		Robot.drivetrain.drive(left, right);
+		Drivetrain.drive(left, right);
 		distanceLeft = Drivetrain.encoderLeft.getDistance();
 		distanceRight = Drivetrain.encoderRight.getDistance();
 		

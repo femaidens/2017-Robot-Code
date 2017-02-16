@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2265.robot.commands;
 
-import org.usfirst.frc.team2265.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -18,10 +16,10 @@ public class RightAuto extends CommandGroup {
 	addSequential(new TurnLeft(30));
 	addSequential(new EncGyroDriveStraight(3 ,1,1));
 	addParallel(new Drop(false));
-	addSequential(new RotateGearFlaps(false));
+	addSequential(new RotateGearFlaps());
 	addSequential(new EncGyroDriveStraight(1,-1,-1));
 	addParallel(new Drop(true));
-	addSequential(new RotateGearFlaps(true));
+	addSequential(new RotateGearFlaps());
     
 // To run multiple commands at the same time,
         // use addParallel()

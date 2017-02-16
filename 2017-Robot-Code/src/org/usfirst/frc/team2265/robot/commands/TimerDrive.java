@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2265.robot.commands;
 
-import org.usfirst.frc.team2265.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.Timer;
@@ -40,7 +38,7 @@ public class TimerDrive extends Command {
     	timePassed = timer.get();
     	
     	//drives the robot
-    	Robot.drivetrain.drive(left,right);
+    	Drivetrain.drive(left,right);
 		//if (Drivetrain.encoder.getEncPosition() <= distance*ticksPerRev/circ){
 			//Robot.drivetrain.drive(0,0);
 		//}	
@@ -55,7 +53,7 @@ public class TimerDrive extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	//stops motors
-    		Robot.drivetrain.drive(0,0);
+    		Drivetrain.drive(0,0);
     }
 
     // Called when another command which requires one or more of the same

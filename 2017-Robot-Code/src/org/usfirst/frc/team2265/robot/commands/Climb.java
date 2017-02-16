@@ -1,67 +1,68 @@
 package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.Robot;
-import org.usfirst.frc.team2265.robot.subsystems.GearChute;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RotateGearFlaps extends Command {
-	boolean open;
 
-	public RotateGearFlaps() {
+public class Climb extends Command {
+	double speed;
+	boolean climbing;
+
+	public Climb(double s) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		speed = s;
 	}
 
 	// Called just before this Command runs the first time
+
 	protected void initialize() {
 
 	}
 
 	// Called repeatedly when this Command is scheduled to run
+	// starts rolling climber CANTalon
+	// sets the speed if the climber to half speed
+
 	protected void execute() {
-		if (GearChute.gearPiston1.get().equals(Value.kForward) || GearChute.gearPiston1.get().equals(Value.kOff)) {
-			GearChute.retract();
-			open = true;
-			connectArduino();
-			return;
-		}
-
-		if (GearChute.gearPiston2.get().equals(Value.kReverse)) {
-			GearChute.extend();
-			open = false;
-			connectArduino();
-		}
-
+		Robot.climber.spin(speed);
+		climbing = true;
+		connectArduino();
 	}
-
+	
 	public void connectArduino() {
-		if (open)
-			Robot.toSend[0] = 2;
+		if (climbing)
+			Robot.toSend[0] = 5;
 		else
-			Robot.toSend[0] = 1;
+			Robot.toSend[0] = 6;
 		Robot.i2c.transaction(Robot.toSend, 1, null, 0);
 		Timer.delay(0.0005);
-	}
+}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return true;
+		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		open = false;
+		Robot.climber.stop();
+		climbing = false;
 		connectArduino();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
+	// stops CANtalons from rotating
 	protected void interrupted() {
+		Robot.climber.stop();
+		climbing = false;
+		connectArduino();
 	}
+
 }
