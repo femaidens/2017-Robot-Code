@@ -4,14 +4,12 @@ import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.subsystems.GearChute;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class RotateGearFlaps extends Command {
-	boolean open;
 
 	public RotateGearFlaps() {
 		// Use requires() here to declare subsystem dependencies
@@ -27,26 +25,17 @@ public class RotateGearFlaps extends Command {
 	protected void execute() {
 		if (GearChute.gearPiston1.get().equals(Value.kForward) || GearChute.gearPiston1.get().equals(Value.kOff)) {
 			GearChute.retract();
-			open = true;
-			connectArduino();
+			Robot.chuteOpen = true;
+			Robot.connectArduino();
 			return;
 		}
 
 		if (GearChute.gearPiston2.get().equals(Value.kReverse)) {
 			GearChute.extend();
-			open = false;
-			connectArduino();
+			Robot.chuteOpen = false;
+			Robot.connectArduino();
 		}
 
-	}
-
-	public void connectArduino() {
-		if (open)
-			Robot.toSend[0] = 2;
-		else
-			Robot.toSend[0] = 1;
-		Robot.i2c.transaction(Robot.toSend, 1, null, 0);
-		Timer.delay(0.0005);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -56,8 +45,10 @@ public class RotateGearFlaps extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		open = false;
-		connectArduino();
+		if(Robot.autoAligning == 2 && Robot.chuteOpen == true)
+			Robot.autoAligning = 0;
+		Robot.connectArduino();
+		
 	}
 
 	// Called when another command which requires one or more of the same

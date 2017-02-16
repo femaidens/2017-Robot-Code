@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2265.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -38,12 +39,31 @@ public class Robot extends IterativeRobot {
 	public static SendableChooser<Object> autoChooser; 
 	Command autonomousCommand;
 	public static int midX;
+	public static boolean chuteOpen, climbing;
+	public static int autoAligning = 0;//not autoAligning
 
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
+	public static  void connectArduino() {
+		if (chuteOpen == false && autoAligning == 0)
+			toSend[0] = 1;
+		else if(chuteOpen == false && autoAligning == 1)
+			toSend[0] = 2;
+		else if(chuteOpen == false && autoAligning == 2)
+			toSend[0] = 3;
+		else if(chuteOpen == true && (autoAligning == 0 || autoAligning == 2))
+			toSend[0] = 4;
+		else if(chuteOpen == true && autoAligning == 1)
+			toSend[0] = 5;
+		else if(climbing)
+			toSend[0] = 6;
+		i2c.transaction(toSend, 1, null, 0);
+		Timer.delay(0.0005);
+	}
+	
 	public void robotInit() {
 		i2c = new I2C(I2C.Port.kOnboard, 84);
 	    toSend = new byte[1];
@@ -63,6 +83,9 @@ public class Robot extends IterativeRobot {
 		
 		autonomousCommand = new ExampleCommand();
 		CameraServer.getInstance().startAutomaticCapture();
+		toSend[0] = 6;
+		i2c.transaction(toSend, 1, null, 0);
+		Timer.delay(0.0005);
 	}
 
 	public void disabledPeriodic() {
@@ -93,7 +116,9 @@ public class Robot extends IterativeRobot {
 	 * to reset subsystems before shutting down.
 	 */
 	public void disabledInit() {
-
+		toSend[0] = 6;
+		i2c.transaction(toSend, 1, null, 0);
+		Timer.delay(0.0005);
 	}
 
 	/**

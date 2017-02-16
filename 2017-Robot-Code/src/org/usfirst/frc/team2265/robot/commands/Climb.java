@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Climb extends Command {
 	double speed;
-	boolean climbing;
 
 	public Climb(double s) {
 		// Use requires() here to declare subsystem dependencies
@@ -31,18 +30,9 @@ public class Climb extends Command {
 
 	protected void execute() {
 		Robot.climber.spin(speed);
-		climbing = true;
-		connectArduino();
+		Robot.climbing = true;
+		Robot.connectArduino();
 	}
-	
-	public void connectArduino() {
-		if (climbing)
-			Robot.toSend[0] = 6;
-		else
-			Robot.toSend[0] = 7;
-		Robot.i2c.transaction(Robot.toSend, 1, null, 0);
-		Timer.delay(0.0005);
-}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
@@ -52,8 +42,8 @@ public class Climb extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.climber.stop();
-		climbing = false;
-		connectArduino();
+		Robot.climbing = false;
+		Robot.connectArduino();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -61,8 +51,8 @@ public class Climb extends Command {
 	// stops CANtalons from rotating
 	protected void interrupted() {
 		Robot.climber.stop();
-		climbing = false;
-		connectArduino();
+		Robot.climbing = false;
+		Robot.connectArduino();
 	}
 
 }
