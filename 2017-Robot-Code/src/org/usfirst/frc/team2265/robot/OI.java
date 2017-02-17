@@ -58,7 +58,7 @@ public class OI {
 
 	public void bindButtons() {
 		//climberButton.whileHeld(new Climb(0.5));
-		climberButton.whileHeld(new TurnDegrees(180));
+		climberButton.whileHeld(new TurnDegrees(30));
 		compressorButton.toggleWhenPressed(new ToggleCompressor());
 		dropGear.whenPressed(new ShiftChute(false));
 		reset.whenPressed(new ShiftChute(true));
