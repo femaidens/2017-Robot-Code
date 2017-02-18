@@ -129,7 +129,7 @@ public class Robot extends IterativeRobot {
 		    			    		if(rectList.get(i).height> maxRect.height)
 		    			    			maxRect = rectList.get(i);
 		    			    	}
-		    			    	distance = -.0003502*(Math.pow(maxRect.height, 3)) +.082*(Math.pow(maxRect.height, 2)) - 7.01*maxRect.height+ 252.816;
+		    			    	distance = -.0003502*(Math.pow(maxRect.height, 3)) +.082*(Math.pow(maxRect.height, 2)) - 7.01*maxRect.height+ 253.816;
 		    			    	System.out.println("Distance from Peg: "+ distance);
 		    			    
 		    				}
