@@ -2,7 +2,7 @@ package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import org.usfirst.frc.team2265.robot.commands.CameraAuto;
+import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
@@ -51,8 +51,7 @@ public class Drivetrain extends Subsystem {
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		 System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " +
-		 encoderRight.get());
+		 //System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " + encoderRight.get());
 		// System.out.println("Gyro: "+ gyro.getAngle());
 		tankDrive.tankDrive(-leftVal, -rightVal);
 
@@ -105,13 +104,13 @@ public class Drivetrain extends Subsystem {
 
 	}
 
-	public void turnDegreesLeft(double degrees) {
+	/*public void turnDegreesLeft(double degrees) {
 		/*
 		 * double originalEncoderVal = encoderLeft.get();
 		 * while(Math.abs(encoderLeft.get() - originalEncoderVal) < degrees *
 		 * constant){ frontRight.set(0.25); rearRight.set(0.25);
 		 * frontLeft.set(0); rearLeft.set(0); }
-		 */
+		 
 		double angle = gyro.getAngle();
 		while (Math.abs(gyro.getAngle() - angle) < degrees) {
 			frontRight.set(0.25);
@@ -119,10 +118,10 @@ public class Drivetrain extends Subsystem {
 			frontLeft.set(0);
 			rearLeft.set(0);
 		}
-	}
+	}*/
 
 	public void autoAlign() { 
-		while ((!CameraAuto.done) &&(Robot.midX < 285 || Robot.midX > 315)) { 
+		while ((!AutoAlign.done) &&(Robot.midX < 285 || Robot.midX > 315)) { 
 			if (Robot.midX < 285) { 
 				frontRight.set(-0.125);
 				rearRight.set(-0.125); 

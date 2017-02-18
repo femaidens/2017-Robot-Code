@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot {
 		i2c = new I2C(I2C.Port.kOnboard, 84);
 	    toSend = new byte[1];
 	    oi.bindButtons();
-	    compressette.stop();
+	    
 		
 		
 		// instantiate the command used for the autonomous period

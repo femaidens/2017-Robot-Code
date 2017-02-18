@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.CameraAuto;
+import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.Climb;
 import org.usfirst.frc.team2265.robot.commands.GyroStraight;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
@@ -56,13 +56,14 @@ public class OI {
 
 	
 
+	
 	public void bindButtons() {
-		//climberButton.whileHeld(new Climb(0.5));
-		climberButton.whileHeld(new TurnDegrees(30));
+		climberButton.whileHeld(new Climb(1.0));
+		//climberButton.whileHeld(new TurnDegrees(30));
 		compressorButton.toggleWhenPressed(new ToggleCompressor());
 		dropGear.whenPressed(new ShiftChute(false));
 		reset.whenPressed(new ShiftChute(true));
-		align.toggleWhenPressed(new CameraAuto());
+		align.toggleWhenPressed(new AutoAlign());
 		gyroStraight.whileHeld(new GyroStraight(0.4));
 		//gyroStraightB.whileHeld(new GyroStraightBack(-0.6));
 
