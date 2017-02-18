@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
 	public static byte[] toSend;
 	Command autonomousCommand;
 	public static int midX;
+	public static double distance;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -121,16 +122,27 @@ public class Robot extends IterativeRobot {
 		    						new Point(rectList.get(0).x + rectList.get(1).width,
 		    								rectList.get(0).y - rectList.get(1).height),
 		    						new Scalar(179, 255, 255), 1); 
+		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
+		    					System.out.println("midX: " + midX);
+		    					Rect maxRect = rectList.get(0);
+		    			    	for(int i = 0; i<rectList.size();i++){
+		    			    		if(rectList.get(i).height> maxRect.height)
+		    			    			maxRect = rectList.get(i);
+		    			    	}
+		    			    	
+		    			    	distance = -.0004*(Math.pow(maxRect.height, 3)) +.0824*(Math.pow(maxRect.height, 2)) + 252.82; 
+		    			    
 		    				}
 		    				
 		    				outputStream.putFrame(image);
-		    				if(rectList.size()> 1){
+		    				/*if(rectList.size()> 1){
 		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
 		    					System.out.println("midX: " + midX);
 		    				}
 		    				else if (rectList.size() >0){
 		    					midX = rectList.get(0).x;
 		    				}
+		    				*/
 		    				image.release();
 		    				image2.release();
 		    				source.release();
