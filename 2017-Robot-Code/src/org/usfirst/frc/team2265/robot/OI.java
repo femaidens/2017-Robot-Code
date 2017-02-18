@@ -2,6 +2,7 @@ package org.usfirst.frc.team2265.robot;
 
 import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.Climb;
+import org.usfirst.frc.team2265.robot.commands.DriveDistance;
 import org.usfirst.frc.team2265.robot.commands.GyroStraight;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
@@ -58,8 +59,8 @@ public class OI {
 
 	
 	public void bindButtons() {
-		climberButton.whileHeld(new Climb(1.0));
-		//climberButton.whileHeld(new TurnDegrees(30));
+		//climberButton.whileHeld(new Climb(1.0));
+		climberButton.whenPressed(new DriveDistance(142,0.5));
 		compressorButton.toggleWhenPressed(new ToggleCompressor());
 		dropGear.whenPressed(new ShiftChute(false));
 		reset.whenPressed(new ShiftChute(true));
