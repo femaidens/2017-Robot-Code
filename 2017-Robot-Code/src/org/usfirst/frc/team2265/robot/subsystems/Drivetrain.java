@@ -43,17 +43,18 @@ public class Drivetrain extends Subsystem {
 	public static double constant = 8.6;
 
 	public Drivetrain() {
-		encoderLeft.setMaxPeriod(200);
-		encoderRight.setMaxPeriod(200);
+		encoderLeft.setMaxPeriod(2);
+		encoderRight.setMaxPeriod(2);
 	}
 
 	// Teleop
 	public void drive() {
 		double leftVal = OI.driveJoystick.getRawAxis(1);
 		double rightVal = OI.driveJoystick.getRawAxis(5);
-		System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " + encoderRight.get());
-		System.out.println("Gyro: "+ gyro.getAngle());
-		tankDrive.tankDrive(-leftVal * 0.8, -rightVal * 0.8);
+		 System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " +
+		 encoderRight.get());
+		// System.out.println("Gyro: "+ gyro.getAngle());
+		tankDrive.tankDrive(-leftVal, -rightVal);
 
 	}
 
@@ -87,7 +88,7 @@ public class Drivetrain extends Subsystem {
 
 		if (degrees > 0) {
 			while (gyro.getAngle() < degrees) {
-				
+
 				frontRight.set(-0.25);
 				rearRight.set(-0.25);
 				frontLeft.set(-0.25);
@@ -120,21 +121,34 @@ public class Drivetrain extends Subsystem {
 		}
 	}
 
-	/*
-	 * public void autoAlign() { while ((!CameraAuto.done) &&(Robot.midX < 285
-	 * || Robot.midX > 315)) { if (Robot.midX < 285) { frontRight.set(-0.1);
-	 * rearRight.set(-0.1); frontLeft.set(-0.1); rearLeft.set(-0.1);
-	 * System.out.println("<285"); //turns left } else if (Robot.midX > 315) {
-	 * frontRight.set(0.1); rearRight.set(0.1); frontLeft.set(0.1);
-	 * rearLeft.set(0.1);
-	 * 
-	 * //turns right System.out.println(">315"); } else { break; }
-	 * System.out.println("autoaligning, mid X = " + Robot.midX); //this will
-	 * keep running if the midX is not in within 305 and 335 }
-	 * 
-	 * frontRight.set(0); rearRight.set(0); frontLeft.set(0); rearLeft.set(0);
-	 * return; }
-	 */
+	public void autoAlign() { 
+		while ((!CameraAuto.done) &&(Robot.midX < 285 || Robot.midX > 315)) { 
+			if (Robot.midX < 285) { 
+				frontRight.set(-0.125);
+				rearRight.set(-0.125); 
+				frontLeft.set(-0.125); 
+				rearLeft.set(-0.125);
+				System.out.println("<285"); //turns left 
+			} else if (Robot.midX > 315) {
+				frontRight.set(0.125); 
+				rearRight.set(0.125); 
+				frontLeft.set(0.125);
+				rearLeft.set(0.125);
+	  
+				//turns right 
+				System.out.println(">315"); } 
+			else { 
+				break; 
+			}
+			 System.out.println("autoaligning, mid X = " + Robot.midX); //this will keep running if the midX is not in within 305 and 335 }
+		}
+	 
+	  
+	  frontRight.set(0); rearRight.set(0); frontLeft.set(0); rearLeft.set(0);
+	  return; 
+	  
+	}
+
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveTeleop());

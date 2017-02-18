@@ -40,13 +40,13 @@ public class GyroStraight extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (Drivetrain.gyro.getAngle() < angle) {
-			Robot.drivetrain.frontRight.set(-rightVel + 0.055);
-			Robot.drivetrain.rearRight.set(-rightVel + 0.055);
+			Robot.drivetrain.frontRight.set(-rightVel + 0.0575);
+			Robot.drivetrain.rearRight.set(-rightVel + 0.0575);
 			Robot.drivetrain.frontLeft.set(leftVel);
 			Robot.drivetrain.rearLeft.set(leftVel);
 		} else if (Drivetrain.gyro.getAngle() > angle) {
-			Robot.drivetrain.frontLeft.set(leftVel - 0.055);
-			Robot.drivetrain.rearLeft.set(leftVel - 0.055);
+			Robot.drivetrain.frontLeft.set(leftVel - 0.0575);
+			Robot.drivetrain.rearLeft.set(leftVel - 0.0575);
 			Robot.drivetrain.rearRight.set(-rightVel);
 			Robot.drivetrain.frontRight.set(-rightVel);
 		}

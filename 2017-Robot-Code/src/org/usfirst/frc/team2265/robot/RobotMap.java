@@ -24,11 +24,11 @@ public class RobotMap {
 	public static int rearRightPort = 3;
 	public static int frontRightPort = 4; */
 	
-	public static int rearLeftPort = 3; //1
-	public static int frontLeftPort = 4; //2
+	public static int rearLeftPort = 1; //3
+	public static int frontLeftPort = 2; //4
 
-	public static int rearRightPort = 1; //3
-	public static int frontRightPort = 2; //4
+	public static int rearRightPort = 3; //1
+	public static int frontRightPort = 4; //2
 
 	public static int climberPort1 = 5;
 	public static int climberPort2 = 6;
