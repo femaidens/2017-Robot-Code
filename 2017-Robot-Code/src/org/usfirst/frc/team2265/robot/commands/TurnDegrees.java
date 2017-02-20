@@ -12,7 +12,7 @@ public class TurnDegrees extends Command {
     public TurnDegrees(double d) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	degrees = d-1;
+    	degrees = d-15;
     	
     }
 
@@ -23,7 +23,7 @@ public class TurnDegrees extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	System.out.println("Gyro: " + Drivetrain.gyro.getAngle());
 
 		if (degrees > 0) {
 			while (Drivetrain.gyro.getAngle() < degrees) {
@@ -32,7 +32,7 @@ public class TurnDegrees extends Command {
 				Drivetrain.rearRight.set(0.25);
 				Drivetrain.frontLeft.set(0.25);
 				Drivetrain.rearLeft.set(0.25);
-				System.out.println(Drivetrain.gyro.getAngle());
+				
 			}
 		} else {
 			while (Drivetrain.gyro.getAngle() > degrees) {
@@ -40,7 +40,7 @@ public class TurnDegrees extends Command {
 				Drivetrain.rearRight.set(-0.25);
 				Drivetrain.frontLeft.set(-0.25);
 				Drivetrain.rearLeft.set(-0.25);
-				System.out.println(Drivetrain.gyro.getAngle());
+				
 			}
 		}
     }

@@ -24,20 +24,20 @@ public class AutoAlign extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-			if (Robot.midX < 270) { 
-				Drivetrain.frontRight.set(-0.11);
-				Drivetrain.rearRight.set(-0.11); 
-				Drivetrain.frontLeft.set(-0.11); 
-				Drivetrain.rearLeft.set(-0.11);
+			if (Robot.midX < 290) { //DON'T FORGET TO CHANGE BOTTOM!!!!!!!!
+				Drivetrain.frontRight.set(-0.125);
+				Drivetrain.rearRight.set(-0.125); 
+				Drivetrain.frontLeft.set(-0.125); 
+				Drivetrain.rearLeft.set(-0.125);
 				System.out.println("<285"); //turns left 
-			} else if (Robot.midX > 340) {
-				Drivetrain.frontRight.set(0.11); 
-				Drivetrain.rearRight.set(0.11); 
-				Drivetrain.frontLeft.set(0.11);
-				Drivetrain.rearLeft.set(0.11);
+			} else if (Robot.midX > 330) {
+				Drivetrain.frontRight.set(0.125); 
+				Drivetrain.rearRight.set(0.125); 
+				Drivetrain.frontLeft.set(0.125);
+				Drivetrain.rearLeft.set(0.125);
 	  
 				//turns right 
-				System.out.println(">325"); } 
+				System.out.println(">323"); } 
 			else{
 				done = true;
 				return;
@@ -50,7 +50,7 @@ public class AutoAlign extends Command {
 	protected boolean isFinished() {
 		//return  ((Robot.midX > 285 || Robot.midX < 315) && !done);
 		
-		return (AutoAlign.done) &&(Robot.midX > 270 && Robot.midX < 340);
+		return (AutoAlign.done) &&(Robot.midX > 290 && Robot.midX < 330);
 	}
 
 	// Called once after isFinished returns true

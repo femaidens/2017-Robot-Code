@@ -47,15 +47,17 @@ public class DriveDistance extends Command {
 	protected void execute() {
 		//gets left and right distances
 		if (Drivetrain.gyro.getAngle() < angle) {
-			Robot.drivetrain.frontRight.set(-rightVel + 0.0575);
-			Robot.drivetrain.rearRight.set(-rightVel + 0.0575);
+			Robot.drivetrain.frontRight.set(-rightVel + 0.1);
+			Robot.drivetrain.rearRight.set(-rightVel + 0.1);
 			Robot.drivetrain.frontLeft.set(leftVel);
 			Robot.drivetrain.rearLeft.set(leftVel);
+			System.out.println("Left:"  + Drivetrain.gyro.getAngle());
 		} else if (Drivetrain.gyro.getAngle() > angle) {
-			Robot.drivetrain.frontLeft.set(leftVel - 0.0575);
-			Robot.drivetrain.rearLeft.set(leftVel - 0.0575);
+			Robot.drivetrain.frontLeft.set(leftVel - 0.1);
+			Robot.drivetrain.rearLeft.set(leftVel - 0.1);
 			Robot.drivetrain.rearRight.set(-rightVel);
 			Robot.drivetrain.frontRight.set(-rightVel);
+			System.out.println("Right: "+Drivetrain.gyro.getAngle());
 		}
 	
 
@@ -63,10 +65,10 @@ public class DriveDistance extends Command {
 		distanceRight = Drivetrain.encoderRight.get();
 		
 		//prints positions to console and smart dashboard
-		System.out.println("Left Encoder Distance" + distanceLeft * 12/236);
-		System.out.println("Right Encoder Distance" + distanceRight*12/236);
-		SmartDashboard.putNumber("Left Encoder Position: ", distanceLeft);
-		SmartDashboard.putNumber("Right Encoder Position: ", distanceRight);
+		//System.out.println("Left Encoder Distance" + distanceLeft * 12/236);
+		//System.out.println("Right Encoder Distance" + distanceRight*12/236);
+		//SmartDashboard.putNumber("Left Encoder Position: ", distanceLeft);
+		//SmartDashboard.putNumber("Right Encoder Position: ", distanceRight);
 
 	}
 

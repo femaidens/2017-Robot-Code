@@ -19,6 +19,7 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.RightAuto;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
@@ -48,7 +49,7 @@ public class Robot extends IterativeRobot {
 	public static byte[] toSend;
 	Command autonomousCommand;
 	public static int midX;
-	public static double distance;
+	public static double distance, d;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -64,11 +65,12 @@ public class Robot extends IterativeRobot {
 		i2c = new I2C(I2C.Port.kOnboard, 84);
 	    toSend = new byte[1];
 	    oi.bindButtons();
+	    distance = 3.0;
 	    
 		
 		
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new ExampleCommand();
+		
 		 UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		    camera.setResolution(640, 480);
 		    camera.setBrightness(0);
@@ -87,9 +89,9 @@ public class Robot extends IterativeRobot {
 		    				Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
 		    				//outputStream.putFrame(image);
 		    				Imgproc.blur(image, image2, new Size(3, 3));
-		    				Scalar bigMinValues = new Scalar(50, 180, 100); // placeholder
+		    				Scalar bigMinValues = new Scalar(50, 150, 100); // placeholder 72 160 200
 		    																// values
-		    				Scalar bigMaxValues = new Scalar(120, 255,255); // placeholder
+		    				Scalar bigMaxValues = new Scalar(120, 255,255); // placeholder 72 160 200
 		    																	// values
 		    				Core.inRange(image2, bigMinValues, bigMaxValues, image);
 		    				
@@ -123,32 +125,30 @@ public class Robot extends IterativeRobot {
 		    								rectList.get(0).y - rectList.get(1).height),
 		    						new Scalar(179, 255, 255), 1); 
 		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
-		    					System.out.println("midX: " + midX);
+		    					//System.out.println("midX: " + midX);
 		    					Rect maxRect = rectList.get(0);
 		    			    	for(int i = 0; i<rectList.size();i++){
 		    			    		if(rectList.get(i).height> maxRect.height)
 		    			    			maxRect = rectList.get(i);
 		    			    	}
-		    			    	distance = -.0003502*(Math.pow(maxRect.height, 3)) +.082*(Math.pow(maxRect.height, 2)) - 7.01*maxRect.height+ 253.816;
-		    			    	System.out.println("Distance from Peg: "+ distance);
+		    			    	distance = -.0003502*(Math.pow(maxRect.height, 3)) +.085*(Math.pow(maxRect.height, 2)) - 6.98*maxRect.height+ 253.816;
+		    			    	d = distance;
+		    			    	//System.out.println("Distance from Peg (robot): "+ distance);
 		    			    
 		    				}
 		    				
 		    				outputStream.putFrame(image);
-		    				/*if(rectList.size()> 1){
-		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
-		    					System.out.println("midX: " + midX);
-		    				}
-		    				else if (rectList.size() >0){
-		    					midX = rectList.get(0).x;
-		    				}
-		    				*/
 		    				image.release();
 		    				image2.release();
 		    				source.release();
 		    			}
 		    
 		    		}).start();
+		    autonomousCommand = new RightAuto();
+	}
+	public static double getDistanceFromPeg(){
+		System.out.println("Distance from peg:" + d);
+		return d;
 	}
 
 	public void disabledPeriodic() {

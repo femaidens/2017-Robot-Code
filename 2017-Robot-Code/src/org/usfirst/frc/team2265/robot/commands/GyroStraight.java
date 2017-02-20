@@ -24,8 +24,8 @@ public class GyroStraight extends Command {
 	public GyroStraight(double v) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		angle = Drivetrain.gyro.getAngle();
-
+		//angle = Drivetrain.gyro.getAngle();
+		Drivetrain.gyro.reset();
 		leftVel = v;
 		rightVel = v;
 
@@ -33,22 +33,24 @@ public class GyroStraight extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Drivetrain.gyro.reset();
-
+		//
+		angle = Drivetrain.gyro.getAngle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (Drivetrain.gyro.getAngle() < angle) {
-			Robot.drivetrain.frontRight.set(-rightVel + 0.0575);
-			Robot.drivetrain.rearRight.set(-rightVel + 0.0575);
+			Robot.drivetrain.frontRight.set(-rightVel + 0.1);
+			Robot.drivetrain.rearRight.set(-rightVel + 0.1);
 			Robot.drivetrain.frontLeft.set(leftVel);
 			Robot.drivetrain.rearLeft.set(leftVel);
+			System.out.println("Left:"  + Drivetrain.gyro.getAngle());
 		} else if (Drivetrain.gyro.getAngle() > angle) {
-			Robot.drivetrain.frontLeft.set(leftVel - 0.0575);
-			Robot.drivetrain.rearLeft.set(leftVel - 0.0575);
+			Robot.drivetrain.frontLeft.set(leftVel - 0.1);
+			Robot.drivetrain.rearLeft.set(leftVel - 0.1);
 			Robot.drivetrain.rearRight.set(-rightVel);
 			Robot.drivetrain.frontRight.set(-rightVel);
+			System.out.println("Right: "+Drivetrain.gyro.getAngle());
 		}
 	}
 
