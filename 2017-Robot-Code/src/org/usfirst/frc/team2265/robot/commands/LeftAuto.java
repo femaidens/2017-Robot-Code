@@ -27,18 +27,14 @@ public class LeftAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new DriveDistance(23.0, 0.65));
-    	System.out.println("Driving Forward");
-    	addSequential(new TurnDegrees(-30));
-    	System.out.println("Turning");
-    	addSequential(new DriveDistance(8.0, 0.65));
-      	addSequential(new AutoAlign());
-       addSequential(new DriveDistance(18.0, 0.65));
+    	addSequential(new DriveDistance(36.0, 0.675));
+    	addSequential(new TurnDegrees(60));
+       addSequential(new DriveDistance(8.0, 0.675));
     	addSequential(new AutoAlign());
     	System.out.println("Aligning");
     	//double distance = Robot.getDistanceFromPeg();
     	System.out.println("Distance:" + Robot.getDistanceFromPeg());
-    	addSequential(new DriveToPeg(0.4));
+    	addSequential(new DriveToPeg(0.375));
     	System.out.println("Driving Forward");
     	addSequential(new ShiftChute(false));
     	System.out.println("Dropping Gear");

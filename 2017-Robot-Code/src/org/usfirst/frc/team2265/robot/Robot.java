@@ -18,7 +18,9 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team2265.robot.commands.CenterAuto;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2265.robot.commands.LeftAuto;
 import org.usfirst.frc.team2265.robot.commands.RightAuto;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
@@ -144,7 +146,7 @@ public class Robot extends IterativeRobot {
 		    			}
 		    
 		    		}).start();
-		    autonomousCommand = new RightAuto();
+		    autonomousCommand = new LeftAuto();
 	}
 	public static double getDistanceFromPeg(){
 		System.out.println("Distance from peg:" + d);
