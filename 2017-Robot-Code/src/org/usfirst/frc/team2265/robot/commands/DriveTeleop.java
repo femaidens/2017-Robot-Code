@@ -15,54 +15,6 @@ public class DriveTeleop extends Command {
 		// requires(Robot.exampleSubsystem);
 		requires(Robot.drivetrain);
 	}
-	package org.usfirst.frc.team2265.robot.commands;
-
-	import edu.wpi.first.wpilibj.command.Command;
-
-	import org.usfirst.frc.team2265.robot.Robot;
-
-	/**
-	 *
-	 */
-
-	public class DriveTeleop extends Command {
-
-		public DriveTeleop() {
-			// Use requires() here to declare subsystem dependencies
-			// requires(Robot.exampleSubsystem);
-			requires(Robot.drivetrain);
-		}
-
-		// Called just before this Command runs the first time
-		protected void initialize() {
-		}
-
-		// Called repeatedly when this Command is scheduled to run
-		protected void execute() {
-			//Robot.drivetrain.drive();
-			if (Robot.slow == false) {
-				Robot.drivetrain.drive();
-				//System.out.println("NOT slow");
-			} else if (Robot.slow == true) {
-				Robot.drivetrain.driveSlow();
-				//System.out.println("Slow");
-			}
-		}
-
-		// Make this return true when this Command no longer needs to run execute()
-		protected boolean isFinished() {
-			return false;
-		}
-
-		// Called once after isFinished returns true
-		protected void end() {
-		}
-
-		// Called when another command which requires one or more of the same
-		// subsystems is scheduled to run
-		protected void interrupted() {
-		}
-	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
@@ -70,7 +22,14 @@ public class DriveTeleop extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.drivetrain.drive();
+		// Robot.drivetrain.drive();
+		if (Robot.slow == false) {
+			Robot.drivetrain.drive();
+			// System.out.println("NOT slow");
+		} else if (Robot.slow == true) {
+			Robot.drivetrain.driveSlow();
+			// System.out.println("Slow");
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -86,4 +45,5 @@ public class DriveTeleop extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 	}
+
 }
