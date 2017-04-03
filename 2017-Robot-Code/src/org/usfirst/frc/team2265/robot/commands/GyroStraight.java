@@ -39,17 +39,33 @@ public class GyroStraight extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Drivetrain.gyro.getAngle() < angle) {
-			Robot.drivetrain.frontRight.set(-rightVel + 0.1);
-			Robot.drivetrain.rearRight.set(-rightVel + 0.1);
-			Robot.drivetrain.frontLeft.set(leftVel);
-			Robot.drivetrain.rearLeft.set(leftVel);
+		System.out.println(Drivetrain.gyro.getAngle());
+		/*if (Drivetrain.gyro.getAngle() < angle) {
+			Robot.drivetrain.frontRight.set(rightVel - 0.1);
+			Robot.drivetrain.rearRight.set(rightVel - 0.1);
+			Robot.drivetrain.frontLeft.set(-leftVel);
+			Robot.drivetrain.rearLeft.set(-leftVel);
 			System.out.println("Left:"  + Drivetrain.gyro.getAngle());
 		} else if (Drivetrain.gyro.getAngle() > angle) {
-			Robot.drivetrain.frontLeft.set(leftVel - 0.1);
-			Robot.drivetrain.rearLeft.set(leftVel - 0.1);
-			Robot.drivetrain.rearRight.set(-rightVel);
-			Robot.drivetrain.frontRight.set(-rightVel);
+			Robot.drivetrain.frontLeft.set(-leftVel + 0.1);
+			Robot.drivetrain.rearLeft.set(-leftVel + 0.1);
+			Robot.drivetrain.rearRight.set(rightVel);
+			Robot.drivetrain.frontRight.set(rightVel);
+			System.out.println("Right: "+Drivetrain.gyro.getAngle());
+		}*/
+		
+		//works for second robot?
+		if (Drivetrain.gyro.getAngle() < angle) {
+			Robot.drivetrain.frontRight.set(rightVel + 0.1);
+			Robot.drivetrain.rearRight.set(rightVel + 0.1);
+			Robot.drivetrain.frontLeft.set(-leftVel);
+			Robot.drivetrain.rearLeft.set(-leftVel);
+			System.out.println("Left:"  + Drivetrain.gyro.getAngle());
+		} else if (Drivetrain.gyro.getAngle() > angle) {
+			Robot.drivetrain.frontLeft.set(-leftVel - 0.1);
+			Robot.drivetrain.rearLeft.set(-leftVel- 0.1);
+			Robot.drivetrain.rearRight.set(rightVel);
+			Robot.drivetrain.frontRight.set(rightVel);
 			System.out.println("Right: "+Drivetrain.gyro.getAngle());
 		}
 	}

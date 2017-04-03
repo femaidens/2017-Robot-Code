@@ -46,7 +46,7 @@ public class DriveDistance extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		//gets left and right distances
-		if (Drivetrain.gyro.getAngle() < angle) {
+		/*if (Drivetrain.gyro.getAngle() < angle) {
 			Robot.drivetrain.frontRight.set(-rightVel + 0.1);
 			Robot.drivetrain.rearRight.set(-rightVel + 0.1);
 			Robot.drivetrain.frontLeft.set(leftVel);
@@ -57,6 +57,21 @@ public class DriveDistance extends Command {
 			Robot.drivetrain.rearLeft.set(leftVel - 0.1);
 			Robot.drivetrain.rearRight.set(-rightVel);
 			Robot.drivetrain.frontRight.set(-rightVel);
+			System.out.println("Right: "+Drivetrain.gyro.getAngle());
+		}*/
+		
+		//works for second robot?
+		if (Drivetrain.gyro.getAngle() < angle) {
+			Robot.drivetrain.frontRight.set(rightVel + 0.1);
+			Robot.drivetrain.rearRight.set(rightVel + 0.1);
+			Robot.drivetrain.frontLeft.set(-leftVel);
+			Robot.drivetrain.rearLeft.set(-leftVel);
+			System.out.println("Left:"  + Drivetrain.gyro.getAngle());
+		} else if (Drivetrain.gyro.getAngle() > angle) {
+			Robot.drivetrain.frontLeft.set(-leftVel - 0.1);
+			Robot.drivetrain.rearLeft.set(-leftVel- 0.1);
+			Robot.drivetrain.rearRight.set(rightVel);
+			Robot.drivetrain.frontRight.set(rightVel);
 			System.out.println("Right: "+Drivetrain.gyro.getAngle());
 		}
 	

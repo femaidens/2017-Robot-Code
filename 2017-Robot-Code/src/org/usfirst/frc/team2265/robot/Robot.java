@@ -52,6 +52,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	public static int midX;
 	public static double distance, d;
+	public static boolean slow = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -68,6 +69,7 @@ public class Robot extends IterativeRobot {
 	    toSend = new byte[1];
 	    oi.bindButtons();
 	    distance = 3.0;
+	    slow = false;
 	    
 		
 		
@@ -146,7 +148,9 @@ public class Robot extends IterativeRobot {
 		    			}
 		    
 		    		}).start();
-		    autonomousCommand = new LeftAuto();
+		    autonomousCommand = new RightAuto();
+		    //autonomousCommand = new CenterAuto();
+		    //autonomousCommand = new LeftAuto();
 	}
 	public static double getDistanceFromPeg(){
 		System.out.println("Distance from peg:" + d);

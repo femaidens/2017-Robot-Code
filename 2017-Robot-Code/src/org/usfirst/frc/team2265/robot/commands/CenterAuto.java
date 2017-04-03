@@ -27,17 +27,16 @@ public class CenterAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new DriveDistance(2.0, 0.65));
+    	//addSequential(new DriveDistance(2.0, 1.0));
+    	addSequential(new DriveDistance(65.0, 1.0));
     	
-      	addSequential(new AutoAlign());
+      	//addSequential(new AutoAlign());
      
-    	addSequential(new DriveToPeg(0.4));
+    	//addSequential(new DriveToPeg(0.4));
     	
     	addSequential(new ShiftChute(false));
     	
     	addSequential(new DriveDistanceBack(-12.0, -0.4));
-    	addSequential(new ShiftChute(true));
-    	//addSequential(new TurnDegrees(60));
-    	//addSequential(new DriveDistance(60, 0.5));
+    	
     }
 }

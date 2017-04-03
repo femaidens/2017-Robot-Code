@@ -39,7 +39,7 @@ public class DriveToPeg extends Command {
 	protected void initialize() {
 		//resets encoder positions when initialized
 		angle = Drivetrain.gyro.getAngle();
-		distance = Robot.d + 3.5; 
+		distance = Robot.d + 3.5; //3.5
 		Drivetrain.encoderLeft.reset();
 		Drivetrain.encoderRight.reset();
 		timer.start();
@@ -50,7 +50,7 @@ public class DriveToPeg extends Command {
 		//gets left and right distances
 		
 		System.out.println("Distance: " + distance);
-		if (Drivetrain.gyro.getAngle() < angle) {
+		/*if (Drivetrain.gyro.getAngle() < angle) {
 			Robot.drivetrain.frontRight.set(-rightVel + 0.1);
 			Robot.drivetrain.rearRight.set(-rightVel + 0.1);
 			Robot.drivetrain.frontLeft.set(leftVel);
@@ -62,7 +62,22 @@ public class DriveToPeg extends Command {
 			Robot.drivetrain.rearRight.set(-rightVel);
 			Robot.drivetrain.frontRight.set(-rightVel);
 			System.out.println("Right: "+Drivetrain.gyro.getAngle());
-		}
+		}*/
+		
+		//works for second robot?
+				if (Drivetrain.gyro.getAngle() < angle) {
+					Robot.drivetrain.frontRight.set(rightVel + 0.1);
+					Robot.drivetrain.rearRight.set(rightVel + 0.1);
+					Robot.drivetrain.frontLeft.set(-leftVel);
+					Robot.drivetrain.rearLeft.set(-leftVel);
+					System.out.println("Left:"  + Drivetrain.gyro.getAngle());
+				} else if (Drivetrain.gyro.getAngle() > angle) {
+					Robot.drivetrain.frontLeft.set(-leftVel - 0.1);
+					Robot.drivetrain.rearLeft.set(-leftVel- 0.1);
+					Robot.drivetrain.rearRight.set(rightVel);
+					Robot.drivetrain.frontRight.set(rightVel);
+					System.out.println("Right: "+Drivetrain.gyro.getAngle());
+				}
 	
 
 		distanceLeft = Drivetrain.encoderLeft.get();
