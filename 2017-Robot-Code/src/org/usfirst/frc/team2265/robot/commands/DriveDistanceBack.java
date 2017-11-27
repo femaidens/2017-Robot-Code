@@ -88,7 +88,7 @@ public class DriveDistanceBack extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		//if distance on either right or left is greater than what we want, robot stops
-		return ((distanceLeft * 12/236) < (distance ) || ((distanceRight* 12/236) < distance ));
+		return ((distanceLeft * 12/236) < (distance ) || ((distanceRight* 12/236) < distance ) || (DriveDistance.timer.get() < 10));
 	}
 
 	// Called once after isFinished returns true

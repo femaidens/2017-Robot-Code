@@ -9,24 +9,27 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurnDegrees extends Command {
 	double degrees;
+	public static boolean done;
     public TurnDegrees(double d) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	degrees = d-17;
+    	degrees = d;
+    	done = false;
     	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Drivetrain.gyro.reset();
+    	done = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Gyro: " + Drivetrain.gyro.getAngle());
-
+    	//System.out.println("Gyro: " + Drivetrain.gyro.getAngle());
+    	System.out.println("Turning");
 		if (degrees > 0) {
-			while (Drivetrain.gyro.getAngle() < degrees) {
+			while (Drivetrain.gyro.getAngle() < degrees && TurnDegrees.done == false) {
 
 				Drivetrain.frontRight.set(0.25);
 				Drivetrain.rearRight.set(0.25);
@@ -34,20 +37,23 @@ public class TurnDegrees extends Command {
 				Drivetrain.rearLeft.set(0.25);
 				
 			}
+			done = true;
 		} else {
-			while (Drivetrain.gyro.getAngle() > degrees) {
+			while (Drivetrain.gyro.getAngle() > degrees && TurnDegrees.done == false) {
 				Drivetrain.frontRight.set(-0.25);
 				Drivetrain.rearRight.set(-0.25);
 				Drivetrain.frontLeft.set(-0.25);
 				Drivetrain.rearLeft.set(-0.25);
 				
 			}
+			done = true;
 		}
+		done = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return done;
     }
 
     // Called once after isFinished returns true
@@ -64,5 +70,6 @@ public class TurnDegrees extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	done = true;
     }
 }

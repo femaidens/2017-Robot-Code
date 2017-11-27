@@ -27,7 +27,29 @@ public class RightAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	//addSequential(new DriveDistance(50.0, 0.675));
+
+    	addSequential(new DriveDistance(60.0, 0.4)); //99 originally
+    	addSequential(new TurnDegrees(-40)); //supposed to be -30
+    	
+       addSequential(new DriveDistance(48.0, 0.4));
+    	addSequential(new AutoAlign());
+    	System.out.println("Aligning");
+    	/*double distance = Robot.getDistanceFromPeg();
+    	System.out.println("Distance:" + Robot.getDistanceFromPeg());
+    	addSequential(new DriveToPeg(0.375));
+    	System.out.println("Driving Forward");*/
+    	addSequential(new DriveDistance(29.0, 0.675));
+    	/*addSequential(new ShiftChute(false));
+    	System.out.println("Dropping Gear");
+    	addSequential(new DriveDistanceBack(-12.0, -0.4));
+    	System.out.println("Driving Back");*/
+    	//addSequential(new ShiftChute(true));
+    	//addSequential(new TurnDegrees(60));
+    	//addSequential(new DriveDistance(60, 0.5));*/
+    	
+    	
+    	//IGNORE?
+    	/*//addSequential(new DriveDistance(50.0, 0.675));
     	addSequential(new DriveDistance(42.0, 0.675));
     	//System.out.println("Driving Forward");
     	addSequential(new TurnDegrees(-30));

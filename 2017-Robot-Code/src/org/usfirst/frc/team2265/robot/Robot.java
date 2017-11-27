@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2265.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,10 +19,13 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.CenterAuto;
+import org.usfirst.frc.team2265.robot.commands.DriveDistance;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2265.robot.commands.LeftAuto;
 import org.usfirst.frc.team2265.robot.commands.RightAuto;
+import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
@@ -53,23 +57,30 @@ public class Robot extends IterativeRobot {
 	public static int midX;
 	public static double distance, d;
 	public static boolean slow = false;
-
+	public static Timer timer;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
 		oi = new OI();
-		
+		timer = new Timer();
 		drivetrain = new Drivetrain();
 		climber = new Climber();
 		//Drivetrain.encoder.reset();
 		compressette = new Compressor();
 		i2c = new I2C(I2C.Port.kOnboard, 84);
 	    toSend = new byte[1];
+	   
 	    oi.bindButtons();
 	    distance = 3.0;
 	    slow = false;
+	    Drivetrain.gyro.calibrate();
+	    Drivetrain.gyro.setSensitivity(0.007);
+	    Drivetrain.gyro.reset();
+	    timer.reset();
+	    //Drivetrain.gyro.calibrate();
+	    
 	    
 		
 		
@@ -148,8 +159,8 @@ public class Robot extends IterativeRobot {
 		    			}
 		    
 		    		}).start();
-		    autonomousCommand = new RightAuto();
-		    //autonomousCommand = new CenterAuto();
+		    //autonomousCommand = new RightAuto();
+		    autonomousCommand = new CenterAuto();
 		    //autonomousCommand = new LeftAuto();
 	}
 	public static double getDistanceFromPeg(){
@@ -163,6 +174,8 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
+		Drivetrain.gyro.reset();
+		 timer.start();
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -172,6 +185,13 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+		if (timer.get() >= 15.0) {
+			autonomousCommand.cancel();
+			//AutoAlign.done = true;
+			//TurnDegrees.done = true;
+		}
+			
 	}
 
 	public void teleopInit() {
@@ -179,8 +199,13 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
+		//TurnDegrees.done = true;
+		if (autonomousCommand != null){
 			autonomousCommand.cancel();
+			//AutoAlign.done = true;
+			//TurnDegrees.done = true;
+		}
+		
 		//Robot.toSend[0] = 88;
 	}
 
@@ -197,6 +222,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		//System.out.println(autonomousCommand.isRunning());
 	}
 
 	/**

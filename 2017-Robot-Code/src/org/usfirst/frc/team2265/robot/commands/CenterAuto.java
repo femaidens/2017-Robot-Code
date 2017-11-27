@@ -4,9 +4,11 @@ import org.usfirst.frc.team2265.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+//drive straight 77 inches
 /**
  *
  */
+//alliance wall to peg distance is 6 ft 6 1/2 inches
 public class CenterAuto extends CommandGroup {
 	public static double d;
     public CenterAuto() {
@@ -28,7 +30,7 @@ public class CenterAuto extends CommandGroup {
         // arm.
     	
     	//addSequential(new DriveDistance(2.0, 1.0));
-    	addSequential(new DriveDistance(65.0, 1.0));
+    	addSequential(new DriveDistance(81.0, 0.25));
     	
       	//addSequential(new AutoAlign());
      
@@ -36,7 +38,7 @@ public class CenterAuto extends CommandGroup {
     	
     	addSequential(new ShiftChute(false));
     	
-    	addSequential(new DriveDistanceBack(-12.0, -0.4));
+    	addSequential(new DriveDistanceBack(-12.0, -0.25));
     	
     }
 }

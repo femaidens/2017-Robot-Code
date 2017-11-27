@@ -4,6 +4,7 @@ import org.usfirst.frc.team2265.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+//drive 8 feet 3 inches (99!) forward, turn, 29 in forward
 /**
  *
  */
@@ -29,21 +30,23 @@ public class LeftAuto extends CommandGroup {
     	
     	//addSequential(new DriveDistance(50.0, 0.675));
     	
-    	addSequential(new DriveDistance(42.0, 0.675));
+    	addSequential(new DriveDistance(99.0, 0.675));
     	addSequential(new TurnDegrees(60));
-       addSequential(new DriveDistance(8.0, 0.675));
-    	/*addSequential(new AutoAlign());
+    	
+       addSequential(new DriveDistance(48.0, 0.675));
+    	addSequential(new AutoAlign());
     	System.out.println("Aligning");
-    	double distance = Robot.getDistanceFromPeg();
+    	/*double distance = Robot.getDistanceFromPeg();
     	System.out.println("Distance:" + Robot.getDistanceFromPeg());
     	addSequential(new DriveToPeg(0.375));
-    	System.out.println("Driving Forward");
+    	System.out.println("Driving Forward");*/
+    	addSequential(new DriveDistance(29.0, 0.675));
     	addSequential(new ShiftChute(false));
     	System.out.println("Dropping Gear");
-    	addSequential(new DriveDistanceBack(-24, -0.4));
+    	addSequential(new DriveDistanceBack(-12.0, -0.4));
     	System.out.println("Driving Back");
-    	addSequential(new ShiftChute(true));
-    	addSequential(new TurnDegrees(60));
-    	addSequential(new DriveDistance(60, 0.5));*/
+    	//addSequential(new ShiftChute(true));
+    	//addSequential(new TurnDegrees(60));
+    	//addSequential(new DriveDistance(60, 0.5));*/
     }
 }

@@ -52,7 +52,7 @@ public class Drivetrain extends Subsystem {
 		double leftVal = OI.driveJoystick.getRawAxis(5);
 		double rightVal = OI.driveJoystick.getRawAxis(1);
 		 //System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " + encoderRight.get());
-		//System.out.println("Gyro: "+ gyro.getAngle());
+		System.out.println("Gyro: "+ gyro.getAngle());
 		//tankDrive.tankDrive(leftVal * 0.85, rightVal * 0.85);
 		tankDrive.tankDrive(leftVal, rightVal);
 	}
