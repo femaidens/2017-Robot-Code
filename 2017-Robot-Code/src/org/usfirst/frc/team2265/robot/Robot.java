@@ -25,6 +25,8 @@ import org.usfirst.frc.team2265.robot.commands.RightAuto;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team2265.robot.subsystems.GyroPIDDrive;
+import org.usfirst.frc.team2265.robot.subsystems.VelocityPIDDrive;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -53,6 +55,8 @@ public class Robot extends IterativeRobot {
 	public static int midX;
 	public static double distance, d;
 	public static boolean slow = false;
+	public static GyroPIDDrive gpidDrive;
+	public static VelocityPIDDrive vpidDrive;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -70,7 +74,8 @@ public class Robot extends IterativeRobot {
 	    oi.bindButtons();
 	    distance = 3.0;
 	    slow = false;
-	    
+	    gpidDrive = new GyroPIDDrive();
+	    vpidDrive = new VelocityPIDDrive();
 		
 		
 		// instantiate the command used for the autonomous period
