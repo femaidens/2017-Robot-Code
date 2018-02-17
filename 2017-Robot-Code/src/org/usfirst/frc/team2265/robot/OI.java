@@ -4,10 +4,10 @@ import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.Climb;
 import org.usfirst.frc.team2265.robot.commands.DriveDistance;
 import org.usfirst.frc.team2265.robot.commands.DriveDistanceBack;
-import org.usfirst.frc.team2265.robot.commands.GyroStraight;
+//import org.usfirst.frc.team2265.robot.commands.GyroStraight;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 import org.usfirst.frc.team2265.robot.commands.SwitchSpeed;
-import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
+//import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
+	public static Joystick launchpad = new Joystick(RobotMap.launchpadPort);
 
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
@@ -48,7 +49,15 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	public static Button cascadeUpButton = new JoystickButton(launchpad, 15);
+	public static Button cascadeDownButton = new JoystickButton(launchpad, 5);
+	public static Button pivotUpButton = new JoystickButton(launchpad, 14);
+	public static Button pivotDownButton = new JoystickButton(launchpad, 4);
+	public static Button servoUpButton = new JoystickButton(launchpad, 12);
+	public static Button servoDownButton = new JoystickButton(launchpad, 2);
+	public static Button switchSpeedButton = new JoystickButton(launchpad, 13);
 
+/*
 	public static Button climberButton = new JoystickButton(driveJoystick, 6);
 	public static Button compressorButton = new JoystickButton(driveJoystick, 3);
 	public static Button dropGear = new JoystickButton(driveJoystick, 2);
@@ -58,9 +67,17 @@ public class OI {
 	public static Button switchSpeed = new JoystickButton(driveJoystick, 7);
 	
 	
-
+*/
 	
 	public void bindButtons() {
+		cascadeUpButton.whileHeld(new Climb (0.8));
+		cascadeDownButton.whileHeld(new Climb (0.8));
+		pivotUpButton.whileHeld(new Climb (0.8));
+		pivotDownButton.whileHeld(new Climb (0.8));
+		servoUpButton.whileHeld(new Climb (0.8));
+		servoDownButton.whileHeld(new Climb (0.8));
+		switchSpeedButton.whileHeld(new Climb (0.8));
+		/*
 		climberButton.whileHeld(new Climb(1.0));
 		//climberButton.whileHeld(new TurnDegrees(45));
 		
@@ -70,7 +87,7 @@ public class OI {
 		align.toggleWhenPressed(new AutoAlign());
 		gyroStraight.whileHeld(new GyroStraight(0.4));
 		switchSpeed.whenPressed(new SwitchSpeed());
-
+*/
 		
 	}
 }

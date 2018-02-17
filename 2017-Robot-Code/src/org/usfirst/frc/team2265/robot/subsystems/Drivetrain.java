@@ -7,34 +7,35 @@ import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
-import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
  *
  */
 
 public class Drivetrain extends Subsystem {
-	public static AnalogGyro gyro = new AnalogGyro(RobotMap.gyroPort);
+	//public static AnalogGyro gyro = new AnalogGyro(RobotMap.gyroPort);
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands
-	// Initialize CANTalons
-	public static CANTalon frontLeft = new CANTalon(RobotMap.frontLeftPort);
-	public static CANTalon rearLeft = new CANTalon(RobotMap.rearLeftPort);
-	public static CANTalon frontRight = new CANTalon(RobotMap.frontRightPort);
-	public static CANTalon rearRight = new CANTalon(RobotMap.rearRightPort);
+	// Initialize TalonSRXs
+	public static TalonSRX frontLeft = new TalonSRX(RobotMap.frontLeftPort);
+	public static TalonSRX rearLeft = new TalonSRX(RobotMap.rearLeftPort);
+	public static TalonSRX frontRight = new TalonSRX(RobotMap.frontRightPort);
+	public static TalonSRX rearRight = new TalonSRX(RobotMap.rearRightPort);
 	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 	// Initialize solenoids
-	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+	//public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
 
 	// Initializing encoder
 	// public static Encoder encoderLeft = new Encoder(RobotMap.encPort1,
 	// RobotMap.encPort2);
 	// public static d encoderRight = new Encoder(RobotMap.encPort3,
 	// RobotMap.encPort4);
+	/*
 	public static Encoder encoderLeft = new Encoder(RobotMap.encPort1, RobotMap.encPort2, true,
 			Encoder.EncodingType.k1X);
 	public static Encoder encoderRight = new Encoder(RobotMap.encPort3, RobotMap.encPort4, false,
@@ -81,7 +82,7 @@ public class Drivetrain extends Subsystem {
 	 * 2; tankDrive.tankDrive(driveVal, driveVal);
 	 * 
 	 * }
-	 */
+	 
 	public void turnDegrees(double degrees) {
 		/*
 		 * double originalEncoderVal = encoderRight.get();
@@ -90,7 +91,7 @@ public class Drivetrain extends Subsystem {
 		 * rearLeft.set(0.25);
 		 * 
 		 * }
-		 */
+	
 		gyro.reset();
 
 		if (degrees > 0) {
@@ -127,7 +128,7 @@ public class Drivetrain extends Subsystem {
 			rearLeft.set(0);
 		}
 	}*/
-
+/*
 	public void autoAlign() { 
 		while ((!AutoAlign.done) &&(Robot.midX < 285 || Robot.midX > 315)) { 
 			if (Robot.midX < 285) { 
@@ -155,10 +156,11 @@ public class Drivetrain extends Subsystem {
 	  return; 
 	  
 	}
-
+	*/
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveTeleop());
 
 	}
+	
 }
