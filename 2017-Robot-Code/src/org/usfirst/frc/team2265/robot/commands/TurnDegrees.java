@@ -2,6 +2,8 @@ package org.usfirst.frc.team2265.robot.commands;
 
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -31,19 +33,19 @@ public class TurnDegrees extends Command {
 		if (degrees > 0) {
 			while (Drivetrain.gyro.getAngle() < degrees && TurnDegrees.done == false) {
 
-				Drivetrain.frontRight.set(0.25);
-				Drivetrain.rearRight.set(0.25);
-				Drivetrain.frontLeft.set(0.25);
-				Drivetrain.rearLeft.set(0.25);
+				Drivetrain.frontRight.set(ControlMode.PercentOutput,0.25);
+				Drivetrain.rearRight.set(ControlMode.PercentOutput,0.25);
+				Drivetrain.frontLeft.set(ControlMode.PercentOutput,0.25);
+				Drivetrain.rearLeft.set(ControlMode.PercentOutput,0.25);
 				
 			}
 			done = true;
 		} else {
 			while (Drivetrain.gyro.getAngle() > degrees && TurnDegrees.done == false) {
-				Drivetrain.frontRight.set(-0.25);
-				Drivetrain.rearRight.set(-0.25);
-				Drivetrain.frontLeft.set(-0.25);
-				Drivetrain.rearLeft.set(-0.25);
+				Drivetrain.frontRight.set(ControlMode.PercentOutput,-0.25);
+				Drivetrain.rearRight.set(ControlMode.PercentOutput,-0.25);
+				Drivetrain.frontLeft.set(ControlMode.PercentOutput,-0.25);
+				Drivetrain.rearLeft.set(ControlMode.PercentOutput,-0.25);
 				
 			}
 			done = true;
@@ -60,10 +62,10 @@ public class TurnDegrees extends Command {
     protected void end() {
     	System.out.println("Gyro: " + Drivetrain.gyro.getAngle());
     	Drivetrain.gyro.reset();
-    	Drivetrain.frontRight.set(0.0);
-		Drivetrain.rearRight.set(0.0);
-		Drivetrain.frontLeft.set(0.0);
-		Drivetrain.rearLeft.set(0.0);
+    	Drivetrain.frontRight.set(ControlMode.PercentOutput, 0.0);
+		Drivetrain.rearRight.set(ControlMode.PercentOutput, 0.0);
+		Drivetrain.frontLeft.set(ControlMode.PercentOutput, 0.0);
+		Drivetrain.rearLeft.set(ControlMode.PercentOutput, 0.0);
     	
     }
 

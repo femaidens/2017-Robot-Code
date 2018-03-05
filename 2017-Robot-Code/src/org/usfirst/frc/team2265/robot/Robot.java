@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+//import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,13 +19,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.CenterAuto;
-import org.usfirst.frc.team2265.robot.commands.DriveDistance;
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.LeftAuto;
-import org.usfirst.frc.team2265.robot.commands.RightAuto;
-import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
@@ -229,6 +223,6 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during test mode
 	 */
 	public void testPeriodic() {
-		LiveWindow.run();
+		//LiveWindow.run();
 	}
 }

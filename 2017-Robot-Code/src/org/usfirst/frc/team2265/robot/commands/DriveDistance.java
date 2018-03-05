@@ -3,9 +3,11 @@ package org.usfirst.frc.team2265.robot.commands;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -67,16 +69,16 @@ public class DriveDistance extends Command {
 		
 		//works for second robot?
 		if (Drivetrain.gyro.getAngle() < angle) {
-			Robot.drivetrain.frontRight.set(rightVel + 0.075);
-			Robot.drivetrain.rearRight.set(rightVel + 0.075);
-			Robot.drivetrain.frontLeft.set(-leftVel);
-			Robot.drivetrain.rearLeft.set(-leftVel);
+			Drivetrain.frontRight.set(ControlMode.PercentOutput,rightVel + 0.075);
+			Drivetrain.rearRight.set(ControlMode.PercentOutput,rightVel + 0.075);
+			Drivetrain.frontLeft.set(ControlMode.PercentOutput,-leftVel);
+			Drivetrain.rearLeft.set(ControlMode.PercentOutput,-leftVel);
 			System.out.println("Left:"  + Drivetrain.gyro.getAngle());
 		} else if (Drivetrain.gyro.getAngle() > angle) {
-			Robot.drivetrain.frontLeft.set(-leftVel - 0.075);
-			Robot.drivetrain.rearLeft.set(-leftVel- 0.075);
-			Robot.drivetrain.rearRight.set(rightVel);
-			Robot.drivetrain.frontRight.set(rightVel);
+			Drivetrain.frontLeft.set(ControlMode.PercentOutput,-leftVel - 0.075);
+			Drivetrain.rearLeft.set(ControlMode.PercentOutput,-leftVel- 0.075);
+			Drivetrain.rearRight.set(ControlMode.PercentOutput,rightVel);
+			Drivetrain.frontRight.set(ControlMode.PercentOutput,rightVel);
 			System.out.println("Right: "+Drivetrain.gyro.getAngle());
 		}
 	

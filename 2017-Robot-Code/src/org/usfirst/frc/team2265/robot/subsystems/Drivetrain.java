@@ -7,9 +7,14 @@ import org.usfirst.frc.team2265.robot.commands.DriveTeleop;
 import org.usfirst.frc.team2265.robot.OI;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.RobotMap;
-import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.RobotDrive;
+//import edu.wpi.first.wpilibj.TalonSRX;
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.TalonSRX;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 
@@ -22,13 +27,17 @@ public class Drivetrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands
 	// Initialize CANTalons
-	public static CANTalon frontLeft = new CANTalon(RobotMap.frontLeftPort);
-	public static CANTalon rearLeft = new CANTalon(RobotMap.rearLeftPort);
-	public static CANTalon frontRight = new CANTalon(RobotMap.frontRightPort);
-	public static CANTalon rearRight = new CANTalon(RobotMap.rearRightPort);
-	public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
+	  public static TalonSRX frontLeft = new TalonSRX(RobotMap.frontLeftPort);
+	  public static TalonSRX rearLeft = new TalonSRX(RobotMap.rearLeftPort);
+	  //public static SpeedControllerGroup leftMotors = new SpeedControllerGroup(frontLeft, rearLeft);
+
+	  public static TalonSRX frontRight = new TalonSRX(RobotMap.frontRightPort);
+	  public static TalonSRX rearRight = new TalonSRX(RobotMap.rearRightPort);
+	  //public static SpeedControllerGroup rightMotors = new SpeedControllerGroup(frontRight, rearRight);
+
+	  public static Joystick driveJoystick = new Joystick(RobotMap.driveJoyPort);
 	// Initialize solenoids
-	public static RobotDrive tankDrive = new RobotDrive(frontLeft, rearLeft, frontRight, rearRight);
+	//public static DifferentialDrive differentialDrive = new DifferentialDrive(leftMotors, rightMotors);
 
 	// Initializing encoder
 	// public static Encoder encoderLeft = new Encoder(RobotMap.encPort1,
@@ -41,7 +50,9 @@ public class Drivetrain extends Subsystem {
 			Encoder.EncodingType.k1X);
 
 	public static double constant = 8.6;
-
+	public static double setpoint = 0.0;
+	public static double turningValue = setpoint- gyro.getAngle();
+	
 	public Drivetrain() {
 		encoderLeft.setMaxPeriod(2);
 		encoderRight.setMaxPeriod(2);
@@ -54,7 +65,16 @@ public class Drivetrain extends Subsystem {
 		 //System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " + encoderRight.get());
 		System.out.println("Gyro: "+ gyro.getAngle());
 		//tankDrive.tankDrive(leftVal * 0.85, rightVal * 0.85);
-		tankDrive.tankDrive(leftVal, rightVal);
+		frontRight.set(ControlMode.PercentOutput,-rightVal);
+		rearRight.set(ControlMode.PercentOutput,-rightVal);
+		frontLeft.set(ControlMode.PercentOutput,leftVal);
+		rearLeft.set(ControlMode.PercentOutput,leftVal);
+		//differentialDrive.tankDrive(leftVal, rightVal);
+		System.out.println("front left" + frontLeft.getMotorOutputPercent());
+		System.out.println("front right" + frontRight.getMotorOutputPercent());
+		System.out.println("rear right" + rearRight.getMotorOutputPercent());
+		System.out.println("rear left" + rearLeft.getMotorOutputPercent());
+
 	}
 	
 	public void driveSlow() {
@@ -62,15 +82,24 @@ public class Drivetrain extends Subsystem {
 		double rightVal = OI.driveJoystick.getRawAxis(1);
 		 //System.out.println("leftVal: " + encoderLeft.get() + " rightVal: " + encoderRight.get());
 		//System.out.println("Gyro: "+ gyro.getAngle());
-		tankDrive.tankDrive(leftVal * 0.85, rightVal * 0.85);
+		//differentialDrive.tankDrive(leftVal * 0.85, rightVal * 0.85);
 		//tankDrive.tankDrive(leftVa''''''l, rightVal);
+		frontRight.set(ControlMode.PercentOutput,-rightVal*0.85);
+		rearRight.set(ControlMode.PercentOutput,-rightVal*0.85);
+		frontLeft.set(ControlMode.PercentOutput,leftVal*0.85);
+		rearLeft.set(ControlMode.PercentOutput,leftVal*0.85);
 	}
 	// auton
 	public void drive(double l, double r) {
-		frontRight.set(-r);
+		/*frontRight.set(-r);
 		rearRight.set(-r);
 		frontLeft.set(l);
-		rearLeft.set(l);
+		rearLeft.set(l);*/
+		frontRight.set(ControlMode.PercentOutput,-r);
+		rearRight.set(ControlMode.PercentOutput,-r);
+		frontLeft.set(ControlMode.PercentOutput,l);
+		rearLeft.set(ControlMode.PercentOutput,l);
+		//leftMotors.set(l);
 	}
 
 	// straight
@@ -96,21 +125,34 @@ public class Drivetrain extends Subsystem {
 		if (degrees > 0) {
 			while (gyro.getAngle() < degrees) {
 
-				frontRight.set(-0.25);
-				rearRight.set(-0.25);
-				frontLeft.set(-0.25);
-				rearLeft.set(-0.25);
+				frontRight.set(ControlMode.PercentOutput,-0.25);
+				rearRight.set(ControlMode.PercentOutput,-0.25);
+				frontLeft.set(ControlMode.PercentOutput,-0.25);
+				rearLeft.set(ControlMode.PercentOutput,-0.25);
+				/*rightMotors.set(-0.25);
+				leftMotors.set(0.25);*/
 			}
 		} else {
 			while (gyro.getAngle() > degrees) {
-				frontRight.set(0.25);
-				rearRight.set(0.25);
-				frontLeft.set(0.25);
-				rearLeft.set(0.25);
+				frontRight.set(ControlMode.PercentOutput,0.25);
+				rearRight.set(ControlMode.PercentOutput,0.25);
+				frontLeft.set(ControlMode.PercentOutput,0.25);
+				rearLeft.set(ControlMode.PercentOutput,0.25);
+				/*rightMotors.set(0.25);
+				leftMotors.set(0.25);*/
 			}
 		}
 
 	}
+	
+	
+	
+	/*public void set(double speed) {
+		leftMotors.set(speed);
+		rightMotors.set(speed);
+	}*/
+	
+	
 
 	/*public void turnDegreesLeft(double degrees) {
 		/*
@@ -131,16 +173,20 @@ public class Drivetrain extends Subsystem {
 	public void autoAlign() { 
 		while ((!AutoAlign.done) &&(Robot.midX < 285 || Robot.midX > 315)) { 
 			if (Robot.midX < 285) { 
-				frontRight.set(-0.125);
-				rearRight.set(-0.125); 
-				frontLeft.set(-0.125); 
-				rearLeft.set(-0.125);
+				frontRight.set(ControlMode.PercentOutput,-0.125);
+				rearRight.set(ControlMode.PercentOutput,-0.125); 
+				frontLeft.set(ControlMode.PercentOutput,-0.125); 
+				rearLeft.set(ControlMode.PercentOutput,-0.125);
+				/*rightMotors.set(-0.125);
+				leftMotors.set(-0.125);*/
 				System.out.println("<285"); //turns left 
 			} else if (Robot.midX > 315) {
-				frontRight.set(0.125); 
-				rearRight.set(0.125); 
-				frontLeft.set(0.125);
-				rearLeft.set(0.125);
+				frontRight.set(ControlMode.PercentOutput,0.125); 
+				rearRight.set(ControlMode.PercentOutput,0.125); 
+				frontLeft.set(ControlMode.PercentOutput,0.125);
+				rearLeft.set(ControlMode.PercentOutput,0.125);
+				/*rightMotors.set(0.125);
+				leftMotors.set(0.125);*/
 	  
 				//turns right 
 				System.out.println(">315"); } 
@@ -151,9 +197,14 @@ public class Drivetrain extends Subsystem {
 		}
 	 
 	  
-	  frontRight.set(0); rearRight.set(0); frontLeft.set(0); rearLeft.set(0);
+	  frontRight.set(ControlMode.PercentOutput,0); rearRight.set(ControlMode.PercentOutput,0); frontLeft.set(ControlMode.PercentOutput,0); rearLeft.set(ControlMode.PercentOutput,0);
+		/*rightMotors.set(0);
+		leftMotors.set(0);*/
 	  return; 
 	  
+	}
+	public void gyroPID() {
+		
 	}
 
 	public void initDefaultCommand() {

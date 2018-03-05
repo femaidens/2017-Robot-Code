@@ -3,6 +3,8 @@ package org.usfirst.frc.team2265.robot.commands;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -25,16 +27,16 @@ public class AutoAlign extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 			if (Robot.midX < 295) { //DON'T FORGET TO CHANGE BOTTOM!!!!!!!! 290 330
-				Drivetrain.frontRight.set(-0.125);
-				Drivetrain.rearRight.set(-0.125); 
-				Drivetrain.frontLeft.set(-0.125); 
-				Drivetrain.rearLeft.set(-0.125);
+				Drivetrain.frontRight.set(ControlMode.PercentOutput, -0.125);
+				Drivetrain.rearRight.set(ControlMode.PercentOutput,-0.125); 
+				Drivetrain.frontLeft.set(ControlMode.PercentOutput,-0.125); 
+				Drivetrain.rearLeft.set(ControlMode.PercentOutput,-0.125);
 				System.out.println("<285"); //turns left 
 			} else if (Robot.midX > 335) {
-				Drivetrain.frontRight.set(0.125); 
-				Drivetrain.rearRight.set(0.125); 
-				Drivetrain.frontLeft.set(0.125);
-				Drivetrain.rearLeft.set(0.125);
+				Drivetrain.frontRight.set(ControlMode.PercentOutput, 0.125); 
+				Drivetrain.rearRight.set(ControlMode.PercentOutput, 0.125); 
+				Drivetrain.frontLeft.set(ControlMode.PercentOutput, 0.125);
+				Drivetrain.rearLeft.set(ControlMode.PercentOutput, 0.125);
 	  
 				//turns right 
 				System.out.println(">323"); } 
@@ -55,10 +57,10 @@ public class AutoAlign extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Drivetrain.frontLeft.set(0);
-		Drivetrain.rearLeft.set(0);
-		Drivetrain.frontRight.set(0);
-		Drivetrain.rearRight.set(0);
+		Drivetrain.frontLeft.set(ControlMode.PercentOutput, 0);
+		Drivetrain.rearLeft.set(ControlMode.PercentOutput, 0);
+		Drivetrain.frontRight.set(ControlMode.PercentOutput, 0);
+		Drivetrain.rearRight.set(ControlMode.PercentOutput, 0);
 		
 	}
 

@@ -2,14 +2,10 @@ package org.usfirst.frc.team2265.robot;
 
 import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.Climb;
-import org.usfirst.frc.team2265.robot.commands.DriveDistance;
-import org.usfirst.frc.team2265.robot.commands.DriveDistanceBack;
 import org.usfirst.frc.team2265.robot.commands.GyroStraight;
 import org.usfirst.frc.team2265.robot.commands.ShiftChute;
 import org.usfirst.frc.team2265.robot.commands.SwitchSpeed;
 import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
-import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -56,7 +52,7 @@ public class OI {
 	public static Button align = new JoystickButton(driveJoystick, 8);
 	public static Button gyroStraight = new JoystickButton(driveJoystick, 5);
 	public static Button switchSpeed = new JoystickButton(driveJoystick, 7);
-	
+
 	
 
 	

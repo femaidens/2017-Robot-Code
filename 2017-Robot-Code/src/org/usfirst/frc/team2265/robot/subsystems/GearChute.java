@@ -3,7 +3,6 @@ package org.usfirst.frc.team2265.robot.subsystems;
 //creates imports
 import org.usfirst.frc.team2265.robot.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
