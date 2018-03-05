@@ -1,9 +1,5 @@
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.Climb;
-import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
-import org.usfirst.frc.team2265.robot.commands.DriveStraightEncoder;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -32,12 +28,7 @@ public class OI {
 	// creates and calls the bindButtons method (connects it to the 2 button)
 
 	public void bindButtons() {
-
 		//swap.whenPressed(new GearShift());
-		climberButton.toggleWhenPressed(new Climb(.9));
-		driveStraightForwardButton.whileHeld(new DriveStraightEncoder(.4));
-		driveStraightBackButton.whileHeld(new DriveStraightEncoder(-.4));
-		compressorButton.toggleWhenPressed(new ToggleCompressor());
 	}
 
 }

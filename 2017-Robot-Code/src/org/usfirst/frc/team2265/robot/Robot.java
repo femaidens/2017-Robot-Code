@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.Climber;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 
@@ -23,10 +23,9 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static Drivetrain drivetrain;
-	public static Compressor compressor; 
+	public static Compressor compressor;
+	public static final Drivetrain drivetrain = new Drivetrain();
 	Command autonomousCommand;
-	public static Climber climber;
 	
 
 	/**
@@ -35,8 +34,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
-		drivetrain = new Drivetrain();
-		climber = new Climber();
+
 		//Drivetrain.encoder.reset();
 		compressor = new Compressor();
 		oi.bindButtons();

@@ -27,6 +27,12 @@ public class RobotMap {
 	// Solenoid Ports
 	public static int transIn = 2;
 	public static int transOut = 3;
+	
+	// encoder port
+	public static int encPort1 = 0; // placeholder
+	public static int encPort2 = 0; // placeholder
+	public static int encPort3 = 0;
+	public static int encPort4 = 0;
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
