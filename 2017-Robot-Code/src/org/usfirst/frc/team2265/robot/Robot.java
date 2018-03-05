@@ -18,15 +18,8 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team2265.robot.commands.CenterAuto;
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.LeftAuto;
-import org.usfirst.frc.team2265.robot.commands.RightAuto;
-import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2265.robot.subsystems.Climber;
-import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team2265.robot.subsystems.GyroPIDDrive;
-import org.usfirst.frc.team2265.robot.subsystems.VelocityPIDDrive;
+
+
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -44,10 +37,8 @@ import edu.wpi.first.wpilibj.I2C;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	public static Drivetrain drivetrain;
-	public static Climber climber;
+
 	public static Compressor compressette; 
 	public static I2C i2c;
 	public static byte[] toSend;
@@ -55,8 +46,7 @@ public class Robot extends IterativeRobot {
 	public static int midX;
 	public static double distance, d;
 	public static boolean slow = false;
-	public static GyroPIDDrive gpidDrive;
-	public static VelocityPIDDrive vpidDrive;
+	
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -65,8 +55,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
-		drivetrain = new Drivetrain();
-		climber = new Climber();
+		
 		//Drivetrain.encoder.reset();
 		compressette = new Compressor();
 		i2c = new I2C(I2C.Port.kOnboard, 84);
@@ -74,93 +63,14 @@ public class Robot extends IterativeRobot {
 	    oi.bindButtons();
 	    distance = 3.0;
 	    slow = false;
-	    gpidDrive = new GyroPIDDrive();
-	    vpidDrive = new VelocityPIDDrive();
+	  
 		
 		
 		// instantiate the command used for the autonomous period
 		
-		 UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-		    camera.setResolution(640, 480);
-		    camera.setBrightness(0);
-		    CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
-		    CvSink cvSink = CameraServer.getInstance().getVideo();
-		    
-		    
-		    new Thread(() -> {
-		    			
-		    			Mat source = new Mat();
-		    			Mat image = new Mat();
-		    			Mat image2 = new Mat();
-		    
-		   			while (!Thread.interrupted()) {
-		    				cvSink.grabFrame(source);
-		    				Imgproc.cvtColor(source, image, Imgproc.COLOR_BGR2HSV, 0);
-		    				//outputStream.putFrame(image);
-		    				Imgproc.blur(image, image2, new Size(3, 3));
-		    				Scalar bigMinValues = new Scalar(50, 150, 100); // placeholder 72 160 200
-		    																// values
-		    				Scalar bigMaxValues = new Scalar(120, 255,255); // placeholder 72 160 200
-		    																	// values
-		    				Core.inRange(image2, bigMinValues, bigMaxValues, image);
-		    				
-		    				
-		    				ArrayList<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-		    				image.convertTo(image, CvType.CV_8UC1);
-		    				Mat mat = new Mat();
-		    				Imgproc.findContours(image, contours, mat, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-		    				Imgproc.drawContours(image, contours, -1, new Scalar(60, 255, 255), 2);
-		    				
-		    				//System.out.println(contours);
-		    				Iterator<MatOfPoint> contourItr = contours.iterator();
-		    				ArrayList<Double> area = new ArrayList<Double>();
-		   				while (contourItr.hasNext()) {
-		    					MatOfPoint p = contourItr.next();
-		    					area.add(Imgproc.contourArea(p));
-		   
-		    				}
-		   				ArrayList<Rect> rectList = new ArrayList<Rect>();
-		    				// ArrayList<Double> centerList = new ArrayList<Double>();
-		    
-		    				for (int i = 0; i < contours.size(); i++) {
-		    					MatOfPoint cPoint = contours.get(i);
-		    					Rect rect = Imgproc.boundingRect(cPoint);
-		    					rectList.add(rect);
-		    				}
-		    			
-		    				if (rectList.size() > 1){
-		    				Imgproc.rectangle(image, new Point(rectList.get(0).x, rectList.get(0).y),
-		    						new Point(rectList.get(0).x + rectList.get(1).width,
-		    								rectList.get(0).y - rectList.get(1).height),
-		    						new Scalar(179, 255, 255), 1); 
-		    					midX = (rectList.get(0).x + (rectList.get(1).x + rectList.get(1).width))/2;
-		    					//System.out.println("midX: " + midX);
-		    					Rect maxRect = rectList.get(0);
-		    			    	for(int i = 0; i<rectList.size();i++){
-		    			    		if(rectList.get(i).height> maxRect.height)
-		    			    			maxRect = rectList.get(i);
-		    			    	}
-		    			    	distance = -.0003502*(Math.pow(maxRect.height, 3)) +.085*(Math.pow(maxRect.height, 2)) - 6.98*maxRect.height+ 253.816;
-		    			    	d = distance;
-		    			    	//System.out.println("Distance from Peg (robot): "+ distance);
-		    			    
-		    				}
-		    				
-		    				outputStream.putFrame(image);
-		    				image.release();
-		    				image2.release();
-		    				source.release();
-		    			}
-		    
-		    		}).start();
-		    autonomousCommand = new RightAuto();
-		    //autonomousCommand = new CenterAuto();
-		    //autonomousCommand = new LeftAuto();
+		
 	}
-	public static double getDistanceFromPeg(){
-		System.out.println("Distance from peg:" + d);
-		return d;
-	}
+	
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();

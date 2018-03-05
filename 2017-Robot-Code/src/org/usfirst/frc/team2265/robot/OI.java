@@ -1,15 +1,6 @@
 package org.usfirst.frc.team2265.robot;
 
-import org.usfirst.frc.team2265.robot.commands.AutoAlign;
-import org.usfirst.frc.team2265.robot.commands.Climb;
-import org.usfirst.frc.team2265.robot.commands.DriveDistance;
-import org.usfirst.frc.team2265.robot.commands.DriveDistanceBack;
-import org.usfirst.frc.team2265.robot.commands.GyroStraight;
-import org.usfirst.frc.team2265.robot.commands.ShiftChute;
-import org.usfirst.frc.team2265.robot.commands.SwitchSpeed;
-import org.usfirst.frc.team2265.robot.commands.ToggleCompressor;
-import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
-import org.usfirst.frc.team2265.robot.commands.GyroDriveStraight;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -50,29 +41,14 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-	public static Button climberButton = new JoystickButton(driveJoystick, 6);
-	public static Button compressorButton = new JoystickButton(driveJoystick, 3);
-	public static Button dropGear = new JoystickButton(driveJoystick, 2);
-	public static Button reset = new JoystickButton(driveJoystick, 1);
-	public static Button align = new JoystickButton(driveJoystick, 8);
-	public static Button gyroStraight = new JoystickButton(driveJoystick, 5);
-	public static Button switchSpeed = new JoystickButton(driveJoystick, 7);
+
 	
 	
 
 	
 	public void bindButtons() {
 		//climberButton.whileHeld(new Climb(1.0));
-		//climberButton.whileHeld(new TurnDegrees(45));
-		climberButton.whenPressed(new GyroDriveStraight(25,.25));
 		
-		compressorButton.toggleWhenPressed(new ToggleCompressor());
-		dropGear.whenPressed(new ShiftChute(false));
-		reset.whenPressed(new ShiftChute(true));
-		align.toggleWhenPressed(new AutoAlign());
-		gyroStraight.whileHeld(new GyroStraight(0.4));
-		switchSpeed.whenPressed(new SwitchSpeed());
-
 		
 	}
 }
