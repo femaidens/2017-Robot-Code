@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2265.robot;
 
+import org.usfirst.frc.team2265.robot.commands.DriveDistance;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -26,8 +28,12 @@ public class OI {
 	public static Button driveStraightBackButton = new JoystickButton(driveJoystick, 6);
 	public static Button compressorButton = new JoystickButton(driveJoystick, 2); //is this being used?
 	// creates and calls the bindButtons method (connects it to the 2 button)
-
+	public static Button driveDistance = new JoystickButton(driveJoystick, 1);
+	
 	public void bindButtons() {
+		
+		driveDistance.whenPressed(new DriveDistance(20));
+	
 		//swap.whenPressed(new GearShift());
 	}
 

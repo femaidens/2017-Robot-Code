@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Compressor compressor;
-	public static final Drivetrain drivetrain = new Drivetrain();
+	public static Drivetrain drivetrain; 
 	Command autonomousCommand;
 	
 
@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		oi = new OI();
-
+		drivetrain = new Drivetrain();
 		//Drivetrain.encoder.reset();
 		compressor = new Compressor();
 		oi.bindButtons();
