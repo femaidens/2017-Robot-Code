@@ -13,19 +13,24 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class GearChute extends Subsystem {
 
 	// intializes doubleSolenoid for the gearChute
+	/*
 	public static DoubleSolenoid gearPistons = new DoubleSolenoid(RobotMap.gearPort1, RobotMap.gearPort2);
 	public static DoubleSolenoid basePistons = new DoubleSolenoid(RobotMap.basePort1, RobotMap.basePort2);
-
+*/
 	// Extends the piston
 	public static void extend() {
+		/*
 		gearPistons.set(DoubleSolenoid.Value.kForward);
 		basePistons.set(DoubleSolenoid.Value.kForward);
+		*/
 	}
 
 	// Retracts the piston
 	public static void retract() {
+		/*
 		gearPistons.set(DoubleSolenoid.Value.kReverse);
 		basePistons.set(DoubleSolenoid.Value.kReverse);
+		*/
 	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.

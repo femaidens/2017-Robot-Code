@@ -24,6 +24,7 @@ public class AutoAlign extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		/*
 			if (Robot.midX < 295) { //DON'T FORGET TO CHANGE BOTTOM!!!!!!!! 290 330
 				Drivetrain.frontRight.set(-0.125);
 				Drivetrain.rearRight.set(-0.125); 
@@ -66,5 +67,12 @@ public class AutoAlign extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		done = true;
+		*/
+	}
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

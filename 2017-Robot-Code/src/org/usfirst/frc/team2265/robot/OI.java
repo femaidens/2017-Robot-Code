@@ -49,6 +49,7 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	/*
 	public static Button cascadeUpButton = new JoystickButton(launchpad, 15);
 	public static Button cascadeDownButton = new JoystickButton(launchpad, 5);
 	public static Button pivotUpButton = new JoystickButton(launchpad, 14);
@@ -56,6 +57,16 @@ public class OI {
 	public static Button servoUpButton = new JoystickButton(launchpad, 12);
 	public static Button servoDownButton = new JoystickButton(launchpad, 2);
 	public static Button switchSpeedButton = new JoystickButton(launchpad, 13);
+	*/
+	
+	public static Button cascadeUpButton = new JoystickButton(launchpad, 15);
+	public static Button cascadeDownButton = new JoystickButton(launchpad, 5);
+	public static Button pivotUpButton = new JoystickButton(launchpad, 14);
+	public static Button pivotDownButton = new JoystickButton(launchpad, 4);
+	public static Button servoUpButton = new JoystickButton(launchpad, 12);
+	public static Button servoDownButton = new JoystickButton(launchpad, 2);
+	public static Button switchSpeedButton = new JoystickButton(launchpad, 13);
+
 
 /*
 	public static Button climberButton = new JoystickButton(driveJoystick, 6);

@@ -24,7 +24,7 @@ public class DriveAuton extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.drive(left,right);
+    	//Robot.drivetrain.drive(left,right);
     	//Drivetrain.encoder.get();
     }
 
@@ -35,7 +35,7 @@ public class DriveAuton extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.drive(0,0);
+    	//Robot.drivetrain.drive(0,0);
     }
 
     // Called when another command which requires one or more of the same

@@ -3,6 +3,8 @@ package org.usfirst.frc.team2265.robot.commands;
 import org.usfirst.frc.team2265.robot.Robot;
 import org.usfirst.frc.team2265.robot.subsystems.Drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -37,46 +39,47 @@ public class DriveDistanceBack extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		//resets encoder positions when initialized
-		angle = Drivetrain.gyro.getAngle();
+		/*angle = Drivetrain.gyro.getAngle();
 
 		Drivetrain.encoderLeft.reset();
 		Drivetrain.encoderRight.reset();
+		*/
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		//gets left and right distances
 		/*if (Drivetrain.gyro.getAngle() < angle) {
-			Drivetrain.frontRight.set(-rightVel + 0.0575);
-			Drivetrain.rearRight.set(-rightVel + 0.0575);
-			Drivetrain.frontLeft.set(leftVel);
-			Drivetrain.rearLeft.set(leftVel);
+			Drivetrain.frontRight.set(ControlMode.PercentOutput, -rightVel + 0.0575);
+			Drivetrain.rearRight.set(ControlMode.PercentOutput, -rightVel + 0.0575);
+			Drivetrain.frontLeft.set(ControlMode.PercentOutput, leftVel);
+			Drivetrain.rearLeft.set(ControlMode.PercentOutput, leftVel);
 		} else if (Drivetrain.gyro.getAngle() > angle) {
-			Drivetrain.frontLeft.set(leftVel - 0.0575);
-			Drivetrain.rearLeft.set(leftVel - 0.0575);
-			Drivetrain.rearRight.set(-rightVel);
-			Drivetrain.frontRight.set(-rightVel);
+			Drivetrain.frontLeft.set(ControlMode.PercentOutput, leftVel - 0.0575);
+			Drivetrain.rearLeft.set(ControlMode.PercentOutput, leftVel - 0.0575);
+			Drivetrain.rearRight.set(ControlMode.PercentOutput, -rightVel);
+			Drivetrain.frontRight.set(ControlMode.PercentOutput, -rightVel);
 		}*/
-		
+		/*
 		//works for second robot?
 				if (Drivetrain.gyro.getAngle() < angle) {
-					Robot.drivetrain.frontRight.set(rightVel + 0.1);
-					Robot.drivetrain.rearRight.set(rightVel + 0.1);
-					Robot.drivetrain.frontLeft.set(-leftVel);
-					Robot.drivetrain.rearLeft.set(-leftVel);
+					Robot.drivetrain.frontRight.set(ControlMode.PercentOutput, rightVel + 0.1);
+					Robot.drivetrain.rearRight.set(ControlMode.PercentOutput, rightVel + 0.1);
+					Robot.drivetrain.frontLeft.set(ControlMode.PercentOutput, -leftVel);
+					Robot.drivetrain.rearLeft.set(ControlMode.PercentOutput, -leftVel);
 					System.out.println("Left:"  + Drivetrain.gyro.getAngle());
 				} else if (Drivetrain.gyro.getAngle() > angle) {
-					Robot.drivetrain.frontLeft.set(-leftVel - 0.1);
-					Robot.drivetrain.rearLeft.set(-leftVel- 0.1);
-					Robot.drivetrain.rearRight.set(rightVel);
-					Robot.drivetrain.frontRight.set(rightVel);
+					Robot.drivetrain.frontLeft.set(ControlMode.PercentOutput, -leftVel - 0.1);
+					Robot.drivetrain.rearLeft.set(ControlMode.PercentOutput, -leftVel- 0.1);
+					Robot.drivetrain.rearRight.set(ControlMode.PercentOutput, rightVel);
+					Robot.drivetrain.frontRight.set(ControlMode.PercentOutput, rightVel);
 					System.out.println("Right: "+Drivetrain.gyro.getAngle());
 				}
 	
 
 		distanceLeft = Drivetrain.encoderLeft.get();
 		distanceRight = Drivetrain.encoderRight.get();
-		
+	*/	
 		//prints positions to console and smart dashboard
 	//	System.out.println("Left Encoder Distance" + distanceLeft * 12/236);
 	//	System.out.println("Right Encoder Distance" + distanceRight*12/236);
@@ -94,9 +97,11 @@ public class DriveDistanceBack extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		//stops motors and resets encoders
+		/*
 		Robot.drivetrain.drive(0, 0);
 		Drivetrain.encoderLeft.reset(); 
 		Drivetrain.encoderRight.reset(); //remove if we want to see how far the encoder has moved AFTER stopping
+		*/
 	}
 
 	// Called when another command which requires one or more of the same

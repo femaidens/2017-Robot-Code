@@ -20,7 +20,7 @@ public class TurnDegrees extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Drivetrain.gyro.reset();
+    //	Drivetrain.gyro.reset();
     	done = false;
     }
 
@@ -28,6 +28,7 @@ public class TurnDegrees extends Command {
     protected void execute() {
     	//System.out.println("Gyro: " + Drivetrain.gyro.getAngle());
     	System.out.println("Turning");
+    	/*
 		if (degrees > 0) {
 			while (Drivetrain.gyro.getAngle() < degrees && TurnDegrees.done == false) {
 
@@ -54,16 +55,19 @@ public class TurnDegrees extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return done;
+        */
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	/*
     	System.out.println("Gyro: " + Drivetrain.gyro.getAngle());
     	Drivetrain.gyro.reset();
     	Drivetrain.frontRight.set(0.0);
 		Drivetrain.rearRight.set(0.0);
 		Drivetrain.frontLeft.set(0.0);
 		Drivetrain.rearLeft.set(0.0);
+		*/
     	
     }
 
@@ -72,4 +76,10 @@ public class TurnDegrees extends Command {
     protected void interrupted() {
     	done = true;
     }
+
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

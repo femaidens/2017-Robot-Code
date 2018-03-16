@@ -22,9 +22,9 @@ import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.CenterAuto;
 import org.usfirst.frc.team2265.robot.commands.DriveDistance;
-import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2265.robot.commands.LeftAuto;
-import org.usfirst.frc.team2265.robot.commands.RightAuto;
+//import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
+//import org.usfirst.frc.team2265.robot.commands.LeftAuto;
+//import org.usfirst.frc.team2265.robot.commands.RightAuto;
 import org.usfirst.frc.team2265.robot.commands.TurnDegrees;
 import org.usfirst.frc.team2265.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2265.robot.subsystems.Climber;
@@ -73,12 +73,17 @@ public class Robot extends IterativeRobot {
 	    toSend = new byte[1];
 	   
 	    oi.bindButtons();
+	    
+	    /*
 	    distance = 3.0;
+	    
 	    slow = false;
+	    
 	    Drivetrain.gyro.calibrate();
 	    Drivetrain.gyro.setSensitivity(0.007);
 	    Drivetrain.gyro.reset();
 	    timer.reset();
+	    */
 	    //Drivetrain.gyro.calibrate();
 	    
 	    
@@ -174,7 +179,7 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		// schedule the autonomous command (example)
-		Drivetrain.gyro.reset();
+		//Drivetrain.gyro.reset();
 		 timer.start();
 		if (autonomousCommand != null)
 			autonomousCommand.start();

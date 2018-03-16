@@ -38,6 +38,7 @@ public class DriveDistance extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		/*
 		//resets encoder positions when initialized
 		
 		angle = Drivetrain.gyro.getAngle();
@@ -46,6 +47,7 @@ public class DriveDistance extends Command {
 		Drivetrain.encoderRight.reset();
 		timer.reset();
 		timer.start();
+		*/
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -66,6 +68,7 @@ public class DriveDistance extends Command {
 		}*/
 		
 		//works for second robot?
+		/*
 		if (Drivetrain.gyro.getAngle() < angle) {
 			Robot.drivetrain.frontRight.set(rightVel + 0.075);
 			Robot.drivetrain.rearRight.set(rightVel + 0.075);
@@ -83,7 +86,7 @@ public class DriveDistance extends Command {
 
 		distanceLeft = Drivetrain.encoderLeft.get();
 		distanceRight = Drivetrain.encoderRight.get();
-		
+	*/	
 		//prints positions to console and smart dashboard
 		//System.out.println("Left Encoder Distance" + distanceLeft * 12/236);
 		//System.out.println("Right Encoder Distance" + distanceRight*12/236);
@@ -101,9 +104,11 @@ public class DriveDistance extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		//stops motors and resets encoders
+		/*
 		Robot.drivetrain.drive(0, 0);
 		Drivetrain.encoderLeft.reset(); 
 		Drivetrain.encoderRight.reset(); //remove if we want to see how far the encoder has moved AFTER stopping
+		*/
 	}
 
 	// Called when another command which requires one or more of the same
