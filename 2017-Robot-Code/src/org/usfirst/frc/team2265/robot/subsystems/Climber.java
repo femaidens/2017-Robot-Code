@@ -2,7 +2,10 @@ package org.usfirst.frc.team2265.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team2265.robot.RobotMap;
-import com.ctre.CANTalon;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
  
 public class Climber extends Subsystem {
 
@@ -12,22 +15,24 @@ public class Climber extends Subsystem {
 
 	// Talon that controls climber motor
 
-   	public static CANTalon climberTalon = new CANTalon(RobotMap.climberPort1);
-   	public static CANTalon climberTalon2 = new CANTalon(RobotMap.climberPort2);
-	
+   	
+   	public static TalonSRX climberTalon2 = new TalonSRX(RobotMap.climberPort2);
+   	public static TalonSRX climberTalon = new TalonSRX(RobotMap.climberPort1);
+   	
+   	
 	public Climber() {
 	}
 
 	// Sets speed for climber motor
 
 	public void spin(double speed) {
-		climberTalon.set(speed);
-		climberTalon2.set(-speed);
+		climberTalon.set(ControlMode.PercentOutput,speed);
+		climberTalon2.set(ControlMode.PercentOutput, -speed);
 	}
 
 	public void stop() {
-		climberTalon.set(0.0);
-		climberTalon2.set(0.0);
+		climberTalon.set(ControlMode.PercentOutput, 0.0);
+		climberTalon2.set(ControlMode.PercentOutput, 0.0);
 	}
 
 	public void initDefaultCommand() {
