@@ -22,6 +22,7 @@ import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team2265.robot.commands.AutoAlign;
 import org.usfirst.frc.team2265.robot.commands.CenterAuto;
 import org.usfirst.frc.team2265.robot.commands.DriveDistance;
+import org.usfirst.frc.team2265.robot.commands.TimerTest;
 //import org.usfirst.frc.team2265.robot.commands.ExampleCommand;
 //import org.usfirst.frc.team2265.robot.commands.LeftAuto;
 //import org.usfirst.frc.team2265.robot.commands.RightAuto;
@@ -165,8 +166,9 @@ public class Robot extends IterativeRobot {
 		    
 		    		}).start();
 		    //autonomousCommand = new RightAuto();
-		    autonomousCommand = new CenterAuto();
+		    //autonomousCommand = new CenterAuto();
 		    //autonomousCommand = new LeftAuto();
+		    autonomousCommand = new TimerTest();
 	}
 	public static double getDistanceFromPeg(){
 		System.out.println("Distance from peg:" + d);
