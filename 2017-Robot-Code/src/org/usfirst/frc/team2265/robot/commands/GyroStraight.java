@@ -69,7 +69,7 @@ public class GyroStraight extends Command {
 			Drivetrain.rearLeft.set(ControlMode.PercentOutput,-leftVel- 0.1);
 			Drivetrain.rearRight.set(ControlMode.PercentOutput,rightVel);
 			Drivetrain.frontRight.set(ControlMode.PercentOutput,rightVel);
-			System.out.println("Right: "+Drivetrain.gyro.getAngle());
+			System.out.println("Right: "+ Drivetrain.gyro.getAngle());
 		}
 	}
 
